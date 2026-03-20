@@ -1,50 +1,50 @@
-# /status - 团队状态汇总
+# /status - Team Status Summary
 
-查看团队各成员工作状态
+View work status of all team members
 
-## 使用方式
+## Usage
 
 ```
-/status           # 查看全部状态
-/status design    # 查看设计状态
-/status dev       # 查看开发状态
-/status test      # 查看测试状态
+/status           # View all status
+/status design    # View design status
+/status dev       # View development status
+/status test      # View testing status
 ```
 
-## 执行步骤
+## Execution Steps
 
-### 1. 读取共享状态
-读取 `../shared/status.json`
+### 1. Read Shared Status
+Read `../shared/status.json`
 
-### 2. 汇总各成员状态
+### 2. Summarize Team Member Status
 
 ```markdown
-# 团队状态汇总 - YYYY-MM-DD HH:MM
+# Team Status Summary - YYYY-MM-DD HH:MM
 
-## 设计 (艾拉)
-| 任务 | 状态 | 更新时间 |
-|------|------|----------|
-| [任务名] | 进行中/已完成/待开始 | [时间] |
+## Design (Ella)
+| Task | Status | Last Updated |
+|------|--------|-------------|
+| [task name] | In Progress/Completed/Pending | [time] |
 
-## 开发 (贾维斯)
-| 任务 | 状态 | 更新时间 |
-|------|------|----------|
-| [任务名] | 进行中/已完成/待开始 | [时间] |
+## Development (Jarvis)
+| Task | Status | Last Updated |
+|------|--------|-------------|
+| [task name] | In Progress/Completed/Pending | [time] |
 
-## 测试 (凯尔)
-| 任务 | 状态 | 更新时间 |
-|------|------|----------|
-| [任务名] | 进行中/已完成/待开始 | [时间] |
+## Testing (Kyle)
+| Task | Status | Last Updated |
+|------|--------|-------------|
+| [task name] | In Progress/Completed/Pending | [time] |
 
-## 待处理通知
-[列出未处理的通知]
+## Pending Notifications
+[list unprocessed notifications]
 
-## 阻塞点
-[如有阻塞，列出并建议解决方案]
+## Blocking Points
+[if any blockages exist, list them and suggest solutions]
 ```
 
-### 3. 风险预警
-如发现以下情况，主动提醒：
-- 任务长时间无更新
-- 依赖关系阻塞
-- 资源冲突
+### 3. Risk Alerts
+Proactively remind if the following situations are detected:
+- Tasks with no updates for extended periods
+- Dependency blockages
+- Resource conflicts

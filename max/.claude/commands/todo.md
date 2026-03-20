@@ -1,59 +1,59 @@
-# /todo - 待办事项管理
+# /todo - Todo Management
 
-管理个人和项目待办事项
+Manage personal and project todo items
 
-## 使用方式
+## Usage
 
 ```
-/todo                      # 查看所有待办
-/todo add [内容]           # 添加待办
-/todo done [ID]            # 完成待办
-/todo project [项目名]     # 查看项目待办
+/todo                      # View all todos
+/todo add [content]        # Add todo
+/todo done [ID]            # Complete todo
+/todo project [project]    # View project todos
 ```
 
-## 待办格式
+## Todo Format
 
 ```markdown
-# 待办事项
+# Todo Items
 
-## 个人事务
-- [ ] #P001 [事项] - 截止: [日期]
-- [x] #P002 [已完成事项] - 完成: [日期]
+## Personal Tasks
+- [ ] #P001 [task] - Due: [date]
+- [x] #P002 [completed task] - Completed: [date]
 
-## 项目: [项目名]
-- [ ] #T001 [任务] - 负责人: [人] - 截止: [日期]
-- [ ] #T002 [任务] - 负责人: [人] - 截止: [日期]
+## Project: [project name]
+- [ ] #T001 [task] - Assignee: [person] - Due: [date]
+- [ ] #T002 [task] - Assignee: [person] - Due: [date]
 
-## 今日重点
-1. [最重要的事项]
-2. [次重要的事项]
+## Today's Priorities
+1. [most important task]
+2. [second most important task]
 ```
 
-## 优先级标记
+## Priority Markers
 
-| 标记 | 含义 |
-|------|------|
-| 🔴 | 紧急重要 |
-| 🟡 | 重要不紧急 |
-| 🔵 | 紧急不重要 |
-| ⚪ | 不紧急不重要 |
+| Marker | Meaning |
+|--------|---------|
+| 🔴 | Urgent & Important |
+| 🟡 | Important but Not Urgent |
+| 🔵 | Urgent but Not Important |
+| ⚪ | Not Urgent & Not Important |
 
-## 查看待办
+## View Todos
 
 ```markdown
-# 待办事项 - YYYY-MM-DD
+# Todo Items - YYYY-MM-DD
 
-## 今日待办 (X项)
-- [ ] 🔴 #P001 [紧急事项]
-- [ ] 🟡 #T003 [重要事项]
+## Today's Todos (X items)
+- [ ] 🔴 #P001 [urgent task]
+- [ ] 🟡 #T003 [important task]
 
-## 本周待办 (X项)
-- [ ] #T004 [任务] - 截止: 周五
+## This Week's Todos (X items)
+- [ ] #T004 [task] - Due: Friday
 
-## 已逾期 (X项)
-- [ ] ⚠️ #T002 [逾期任务] - 原定: [日期]
+## Overdue (X items)
+- [ ] ⚠️ #T002 [overdue task] - Originally due: [date]
 ```
 
-## 存储位置
+## Storage Location
 
-待办事项存储到 `../shared/tasks/todos.md`
+Todo items are stored to `../shared/tasks/todos.md`

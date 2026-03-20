@@ -1,78 +1,78 @@
-# /style - 风格提取
+# /style - Style Extraction
 
-根据参考图片提取设计风格，生成设计规范
+Extract design style from reference images and generate design specifications
 
-## 使用方式
+## Usage
 
 ```
-/style [图片路径或描述]
-/style 参考这张图的风格
-/style 简约现代风格
+/style [image path or description]
+/style reference this image's style
+/style minimalist modern style
 ```
 
-## 执行步骤
+## Execution Steps
 
-### 1. 分析参考
-- 如果是图片：分析视觉元素
-- 如果是描述：理解风格关键词
+### 1. Analyze Reference
+- If image: Analyze visual elements
+- If description: Understand style keywords
 
-### 2. 提取设计元素
+### 2. Extract Design Elements
 
-#### 颜色分析
+#### Color Analysis
 ```markdown
-## 颜色提取
+## Color Extraction
 
-### 主色调
-| 颜色 | 色值 | 使用场景 | 占比 |
+### Main Colors
+| Color | Hex Value | Usage Scenario | Ratio |
 |------|------|----------|------|
-| 品牌蓝 | #1890FF | 按钮、强调 | 20% |
-| 深灰 | #333333 | 主要文字 | 30% |
-| 浅灰 | #F5F5F5 | 背景 | 40% |
+| Brand Blue | #1890FF | Buttons, emphasis | 20% |
+| Dark Gray | #333333 | Main text | 30% |
+| Light Gray | #F5F5F5 | Background | 40% |
 
-### 辅助色
-| 颜色 | 色值 | 使用场景 |
+### Secondary Colors
+| Color | Hex Value | Usage Scenario |
 |------|------|----------|
-| 成功 | #52C41A | 成功状态 |
-| 警告 | #FAAD14 | 警告提示 |
-| 错误 | #FF4D4F | 错误状态 |
+| Success | #52C41A | Success state |
+| Warning | #FAAD14 | Warning alerts |
+| Error | #FF4D4F | Error state |
 ```
 
-#### 字体分析
+#### Typography Analysis
 ```markdown
-## 字体提取
+## Typography Extraction
 
-| 层级 | 字号 | 字重 | 行高 | 用途 |
+| Level | Size | Weight | Line Height | Purpose |
 |------|------|------|------|------|
-| H1 | 28px | 600 | 1.4 | 页面标题 |
-| H2 | 20px | 500 | 1.4 | 区块标题 |
-| Body | 14px | 400 | 1.6 | 正文 |
-| Caption | 12px | 400 | 1.4 | 辅助文字 |
+| H1 | 28px | 600 | 1.4 | Page titles |
+| H2 | 20px | 500 | 1.4 | Section titles |
+| Body | 14px | 400 | 1.6 | Body text |
+| Caption | 12px | 400 | 1.4 | Helper text |
 ```
 
-#### 圆角/阴影
+#### Border Radius/Shadow
 ```markdown
-## 形状与效果
+## Shape & Effects
 
-| 元素 | 圆角 | 阴影 |
+| Element | Border Radius | Shadow |
 |------|------|------|
-| 卡片 | 8px | 0 2px 8px rgba(0,0,0,0.1) |
-| 按钮 | 4px | none |
-| 输入框 | 4px | none |
-| 弹窗 | 12px | 0 4px 16px rgba(0,0,0,0.15) |
+| Card | 8px | 0 2px 8px rgba(0,0,0,0.1) |
+| Button | 4px | none |
+| Input | 4px | none |
+| Modal | 12px | 0 4px 16px rgba(0,0,0,0.15) |
 ```
 
-### 3. 输出风格规范
+### 3. Output Style Guide
 
-存储到 `../shared/designs/style-guide.md`
+Store to `../shared/designs/style-guide.md`
 
-### 4. 应用建议
-说明如何将此风格应用到具体页面
+### 4. Application Suggestions
+Explain how to apply this style to specific pages
 
-## 常见风格关键词
+## Common Style Keywords
 
-| 风格 | 特征 |
+| Style | Characteristics |
 |------|------|
-| 简约现代 | 大量留白、扁平化、无衬线字体 |
-| 科技感 | 深色背景、渐变、光效 |
-| 温暖亲和 | 暖色调、圆角、插画 |
-| 专业商务 | 冷色调、规整布局、严谨 |
+| Minimalist Modern | Lots of whitespace, flat design, sans-serif fonts |
+| Tech-focused | Dark backgrounds, gradients, light effects |
+| Warm & Friendly | Warm colors, rounded corners, illustrations |
+| Professional Business | Cool colors, structured layout, formal |

@@ -1,95 +1,95 @@
-# /suggest - 产品建议
+# /suggest - Product Suggestions
 
-提供产品方向和优先级建议
+Provide product direction and priority recommendations
 
-## 使用方式
+## Usage
 
 ```
-/suggest [需求或问题描述]
-/suggest priority [功能列表]
-/suggest review [PRD文件]
+/suggest [requirement or problem description]
+/suggest priority [feature list]
+/suggest review [PRD file]
 ```
 
-## 需求评估
+## Requirement Assessment
 
 ```markdown
-# 需求评估 - [需求名称]
+# Requirement Assessment - [requirement name]
 
-## 需求概述
-[简要描述]
+## Requirement Overview
+[brief description]
 
-## 评估维度
+## Assessment Dimensions
 
-### 用户价值 ⭐⭐⭐⭐⭐
-[分析用户价值]
+### User Value ⭐⭐⭐⭐⭐
+[analyze user value]
 
-### 业务价值 ⭐⭐⭐⭐☆
-[分析业务价值]
+### Business Value ⭐⭐⭐⭐☆
+[analyze business value]
 
-### 实现成本 ⭐⭐⭐☆☆
-[评估开发成本]
+### Implementation Cost ⭐⭐⭐☆☆
+[assess development cost]
 
-### 风险评估 ⭐⭐☆☆☆
-[识别潜在风险]
+### Risk Assessment ⭐⭐☆☆☆
+[identify potential risks]
 
-## 建议
-**优先级**: P0/P1/P2/P3
-**建议**: [是否做/如何做/替代方案]
-**理由**: [决策依据]
+## Recommendation
+**Priority**: P0/P1/P2/P3
+**Suggestion**: [whether to do/how to do/alternative solutions]
+**Rationale**: [decision basis]
 ```
 
-## 优先级排序
+## Priority Ranking
 
 ```markdown
-# 功能优先级排序
+# Feature Priority Ranking
 
-## 评估矩阵
+## Assessment Matrix
 
-| 功能 | 用户价值 | 业务价值 | 成本 | 总分 | 优先级 |
-|------|----------|----------|------|------|--------|
-| [功能A] | 5 | 4 | 2 | 7 | P0 |
-| [功能B] | 3 | 3 | 4 | 2 | P2 |
+| Feature | User Value | Business Value | Cost | Total Score | Priority |
+|---------|------------|----------------|------|-------------|----------|
+| [Feature A] | 5 | 4 | 2 | 7 | P0 |
+| [Feature B] | 3 | 3 | 4 | 2 | P2 |
 
-评分规则:
-- 用户价值: 1-5分
-- 业务价值: 1-5分
-- 成本: 1-5分 (越低越好)
-- 总分 = 用户价值 + 业务价值 - 成本
+Scoring Rules:
+- User Value: 1-5 points
+- Business Value: 1-5 points
+- Cost: 1-5 points (lower is better)
+- Total Score = User Value + Business Value - Cost
 
-## 建议排期
+## Recommended Schedule
 
-### 第一期 (P0)
-1. [功能A] - 核心功能，必须做
+### Phase 1 (P0)
+1. [Feature A] - Core feature, must do
 
-### 第二期 (P1)
-1. [功能C] - 重要功能，优先做
+### Phase 2 (P1)
+1. [Feature C] - Important feature, priority
 
-### 后续迭代 (P2+)
-1. [功能B] - 可以延后
+### Subsequent Iterations (P2+)
+1. [Feature B] - Can be delayed
 ```
 
-## PRD评审
+## PRD Review
 
 ```markdown
-# PRD评审 - [文档名]
+# PRD Review - [document name]
 
-## 评审结论: ✅ 通过 / ⚠️ 需修改 / ❌ 不通过
+## Review Conclusion: ✅ Approved / ⚠️ Needs Revision / ❌ Not Approved
 
-## 优点
-1. [值得肯定的地方]
+## Strengths
+1. [commendable aspects]
 
-## 问题与建议
+## Issues and Suggestions
 
-### 问题1: [问题描述]
-**影响**: [影响范围]
-**建议**: [修改建议]
+### Issue 1: [issue description]
+**Impact**: [impact scope]
+**Suggestion**: [revision suggestion]
 
-### 问题2: [问题描述]
+### Issue 2: [issue description]
 ...
 
-## 遗漏项
-- [ ] [需要补充的内容]
+## Missing Items
+- [ ] [content that needs to be added]
 
-## 下一步
-[建议的后续行动]
+## Next Steps
+[suggested follow-up actions]
 ```

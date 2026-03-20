@@ -1,161 +1,161 @@
-# aiGroup技能分发配置
+# aiGroup Skills Distribution Configuration
 
-> **声明**：本项目集成的技能包来自多个开源社区和SkillsMP技能市场，我们感谢所有原作者的贡献。所有技能均标注了来源、作者和许可证信息，请遵守相应的使用条款。
+> **Statement**: The skill packages integrated in this project come from multiple open source communities and the SkillsMP skills marketplace. We thank all original authors for their contributions. All skills are marked with source, author, and license information. Please comply with corresponding usage terms.
 
-## 🎯 技能分配策略
+## 🎯 Skill Allocation Strategy
 
-### 👨‍💼 麦克斯 (Max) - 项目管理技能
-**技能目录**: `max/skills/`
+### 👨‍💼 Max - Project Management Skills
+**Skills Directory**: `max/skills/`
 
-#### 📦 CCPM项目管理系统
-- **路径**: `max/skills/ccpm/`
-- **功能**: GitHub Issues集成、项目跟踪
-- **使用**: `claude --project max → /skill ccpm-status`
+#### 📦 CCPM Project Management System
+- **Path**: `max/skills/ccpm/`
+- **Function**: GitHub Issues integration, project tracking
+- **Usage**: `claude --project max → /skill ccmp-status`
 
-#### 🎨 PM Claude技能集
-- **路径**: `max/skills/pm-claude-skills/`
-- **功能**: PRD生成、会议记录、需求分析
-- **时间节省**: 8-9小时/周
-- **使用**: `claude --project max → /skill generate-prd`
+#### 🎨 PM Claude Skill Set
+- **Path**: `max/skills/pm-claude-skills/`
+- **Function**: PRD generation, meeting notes, requirements analysis
+- **Time Savings**: 8-9 hours/week
+- **Usage**: `claude --project max → /skill generate-prd`
 
-#### 📜 快速工具
-- **路径**: `max/skills/max-skills.sh`
-- **功能**: 交互式技能选择菜单
-- **使用**: `./max/skills/max-skills.sh`
+#### 📜 Quick Tools
+- **Path**: `max/skills/max-skills.sh`
+- **Function**: Interactive skill selection menu
+- **Usage**: `./max/skills/max-skills.sh`
 
-### 🎨 艾拉 (Ella) - 设计技能
-**技能目录**: `ella/skills/`
+### 🎨 Ella - Design Skills
+**Skills Directory**: `ella/skills/`
 
-#### 🖼️ 高级前端技能
-- **路径**: `ella/skills/senior-frontend/`
-- **功能**: UI/UX设计、前端开发指导
-- **特长**: React/Vue组件设计、响应式布局
-- **使用**: `claude --project ella → /skill ui-design`
+#### 🖼️ Advanced Frontend Skills
+- **Path**: `ella/skills/senior-frontend/`
+- **Function**: UI/UX design, frontend development guidance
+- **Specialties**: React/Vue component design, responsive layout
+- **Usage**: `claude --project ella → /skill ui-design`
 
-### ⚡ 贾维斯 (Jarvis) - 开发技能
-**技能目录**: `jarvis/skills/`
+### ⚡ Jarvis - Development Skills
+**Skills Directory**: `jarvis/skills/`
 
-#### 🏗️ Claude Simone框架
-- **路径**: `jarvis/skills/claude-simone/`
-- **功能**: AI辅助开发项目管理
-- **特长**: 开发流程优化、团队协作
+#### 🏗️ Claude Simone Framework
+- **Path**: `jarvis/skills/claude-simone/`
+- **Function**: AI-assisted development project management
+- **Specialties**: Development workflow optimization, team collaboration
 
-#### 👥 工程团队技能集
-- **路径**: `jarvis/skills/engineering-team/`
-- **包含技能**:
-  - senior-backend (后端开发)
-  - senior-fullstack (全栈开发)
-  - senior-architect (系统架构)
-  - code-reviewer (代码审查)
-  - senior-devops (运维部署)
-  - tech-stack-evaluator (技术选型)
-- **使用**: `claude --project jarvis → /skill code-review`
+#### 👥 Engineering Team Skill Set
+- **Path**: `jarvis/skills/engineering-team/`
+- **Included Skills**:
+  - senior-backend (Backend development)
+  - senior-fullstack (Full-stack development)
+  - senior-architect (System architecture)
+  - code-reviewer (Code review)
+  - senior-devops (DevOps deployment)
+  - tech-stack-evaluator (Technology selection)
+- **Usage**: `claude --project jarvis → /skill code-review`
 
-### 🔍 凯尔 (Kyle) - 测试技能
-**技能目录**: `kyle/skills/`
+### 🔍 Kyle - Testing Skills
+**Skills Directory**: `kyle/skills/`
 
-#### 🧪 高级QA技能
-- **路径**: `kyle/skills/senior-qa/`
-- **功能**: 测试策略、质量保证、验收测试
-- **特长**: 自动化测试、性能测试
+#### 🧪 Advanced QA Skills
+- **Path**: `kyle/skills/senior-qa/`
+- **Function**: Testing strategy, quality assurance, acceptance testing
+- **Specialties**: Automated testing, performance testing
 
-#### 📋 TDD指导
-- **路径**: `kyle/skills/tdd-guide/`
-- **功能**: 测试驱动开发指导
-- **特长**: 单元测试、集成测试设计
-- **使用**: `claude --project kyle → /skill tdd-testing`
+#### 📋 TDD Guidance
+- **Path**: `kyle/skills/tdd-guide/`
+- **Function**: Test-driven development guidance
+- **Specialties**: Unit testing, integration test design
+- **Usage**: `claude --project kyle → /skill tdd-testing`
 
-## 🚀 使用方式
+## 🚀 Usage Methods
 
-### 启动特定AI并使用技能
+### Launch Specific AI and Use Skills
 ```bash
-# 麦克斯项目管理
+# Max project management
 claude --project max
 /skills list
 /skill project-status
 
-# 艾拉UI设计
+# Ella UI design
 claude --project ella
 /skills list
 /skill ui-design
 
-# 贾维斯开发
+# Jarvis development
 claude --project jarvis
 /skills list
 /skill code-review
 
-# 凯尔测试
+# Kyle testing
 claude --project kyle
 /skills list
 /skill qa-testing
 ```
 
-### 技能路径配置
-各AI会自动检测其`skills/`目录下的技能，无需额外配置。
+### Skill Path Configuration
+Each AI automatically detects skills in its `skills/` directory, no additional configuration needed.
 
-## 📊 技能分配统计
+## 📊 Skill Allocation Statistics
 
-| AI成员 | 技能数量 | 主要领域 | 预期效益 |
-|--------|---------|----------|----------|
-| 麦克斯 | 2个系统 + 工具 | 项目管理、产品规划 | 8-9小时/周节省 |
-| 艾拉 | 1个技能集 | UI/UX设计、前端 | 设计效率提升 |
-| 贾维斯 | 2个框架 + 多技能 | 全栈开发、架构 | 开发质量提升 |
-| 凯尔 | 2个技能集 | 质量保证、测试 | 测试覆盖率提升 |
+| AI Member | Skill Count | Main Areas | Expected Benefits |
+|-----------|-------------|------------|-------------------|
+| Max | 2 systems + tools | Project management, product planning | 8-9 hours/week saved |
+| Ella | 1 skill set | UI/UX design, frontend | Design efficiency improvement |
+| Jarvis | 2 frameworks + multi-skills | Full-stack development, architecture | Development quality improvement |
+| Kyle | 2 skill sets | Quality assurance, testing | Test coverage improvement |
 
-## 📝 技能来源与引用
+## 📝 Skill Sources and References
 
-### 麦克斯技能来源
-- **CCPM项目管理系统**
-  - 来源：[automazeio/ccpm](https://github.com/automazeio/ccpm)
-  - 作者：automaze.io
-  - 许可证：MIT License
+### Max Skill Sources
+- **CCPM Project Management System**
+  - Source: [automazeio/ccpm](https://github.com/automazeio/ccpm)
+  - Author: automaze.io
+  - License: MIT License
 
-- **PM Claude技能集**
-  - 来源：[mohitagw15856/pm-claude-skills](https://github.com/mohitagw15856/pm-claude-skills)
-  - 作者：mohitagw15856
-  - 许可证：MIT License
+- **PM Claude Skill Set**
+  - Source: [mohitagw15856/pm-claude-skills](https://github.com/mohitagw15856/pm-claude-skills)
+  - Author: mohitagw15856
+  - License: MIT License
 
-### 艾拉技能来源
-- **Senior Frontend技能包**
-  - 来源：SkillsMP技能市场 - 前端开发专家技能包
-  - 作者：aiGroup团队定制
-  - 许可证：MIT License
+### Ella Skill Sources
+- **Senior Frontend Skill Package**
+  - Source: SkillsMP Skills Market - Frontend Development Expert Skill Package
+  - Author: aiGroup team customization
+  - License: MIT License
 
-### 贾维斯技能来源
-- **Claude Simone框架**
-  - 来源：[Helmi/claude-simone](https://github.com/Helmi/claude-simone)
-  - 作者：Helmi
-  - 许可证：查看原仓库
+### Jarvis Skill Sources
+- **Claude Simone Framework**
+  - Source: [Helmi/claude-simone](https://github.com/Helmi/claude-simone)
+  - Author: Helmi
+  - License: See original repository
 
-- **工程团队技能集**
-  - 来源：[alirezarezvani/claude-skills/engineering-team](https://github.com/alirezarezvani/claude-skills/engineering-team)
-  - 作者：alirezarezvani
-  - 许可证：查看原仓库
+- **Engineering Team Skill Set**
+  - Source: [alirezarezvani/claude-skills/engineering-team](https://github.com/alirezarezvani/claude-skills/engineering-team)
+  - Author: alirezarezvani
+  - License: See original repository
 
-### 凯尔技能来源
-- **Senior QA技能包**
-  - 来源：SkillsMP技能市场 - 高级QA工程师技能包
-  - 作者：aiGroup团队定制
-  - 许可证：MIT License
+### Kyle Skill Sources
+- **Senior QA Skill Package**
+  - Source: SkillsMP Skills Market - Senior QA Engineer Skill Package
+  - Author: aiGroup team customization
+  - License: MIT License
 
-- **TDD指导技能包**
-  - 来源：SkillsMP技能市场 - TDD测试驱动开发指南
-  - 作者：aiGroup团队定制
-  - 许可证：MIT License
+- **TDD Guidance Skill Package**
+  - Source: SkillsMP Skills Market - TDD Test-Driven Development Guide
+  - Author: aiGroup team customization
+  - License: MIT License
 
-## 🔧 维护说明
+## 🔧 Maintenance Instructions
 
-- 各AI的技能独立管理，不会相互干扰
-- 技能更新只影响对应AI
-- 可以独立为每个AI添加新技能
-- 符合职责边界原则
-- 所有技能均标注了来源和许可证信息
+- Each AI's skills are independently managed without interference
+- Skill updates only affect the corresponding AI
+- New skills can be added independently for each AI
+- Complies with responsibility boundary principles
+- All skills are marked with source and license information
 
-## ⚠️ 注意事项
+## ⚠️ Notes
 
-- 技能仅在对应AI项目中可用
-- 跨AI使用技能需要切换项目
-- 确保技能与AI职责匹配
-- 定期更新和维护技能库
-- 遵守各技能的许可证要求
-- 引用外部技能时保持来源标注
+- Skills are only available within the corresponding AI project
+- Cross-AI skill usage requires project switching
+- Ensure skills match AI responsibilities
+- Regularly update and maintain skill libraries
+- Comply with license requirements for each skill
+- Maintain source attribution when referencing external skills

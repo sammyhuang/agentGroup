@@ -1,130 +1,130 @@
-# /convert - 文档结构化转换
+# /convert - Document Structured Conversion
 
-将原始文档转换为AI友好的结构化格式，同时提取业务词典
+Convert raw documents to AI-friendly structured format while extracting business dictionary
 
-## 使用方式
+## Usage
 
 ```
-/convert [文档路径或内容]
-/convert prd [文档]     # 转为PRD格式
-/convert ui [文档]      # 转为UI格式
-/convert api [文档]     # 转为API格式
+/convert [document path or content]
+/convert prd [document]     # Convert to PRD format
+/convert ui [document]      # Convert to UI format
+/convert api [document]     # Convert to API format
 ```
 
-## 输出内容
+## Output Content
 
-### 1. 结构化文档（主体）
-按对应模板格式输出
+### 1. Structured Document (Main body)
+Output according to corresponding template format
 
-### 2. 业务词典（自动提取）
-从文档中提取业务术语及其含义
+### 2. Business Dictionary (Auto-extracted)
+Extract business terms and their meanings from documents
 
-## 业务词典提取规则
+## Business Dictionary Extraction Rules
 
-### 提取来源
-1. **名词解释章节** - 最准确，优先提取
-2. **首次出现的专有名词** - 带引号或加粗的术语
-3. **缩写和全称** - 如 "DMS（经销商管理系统）"
-4. **状态/等级定义** - 如 "H级线索表示低意向"
-5. **业务实体** - 如 "一网"、"二网"、"吉行驿"
+### Extraction Sources
+1. **Terminology sections** - Most accurate, priority extraction
+2. **First occurrence of proper nouns** - Terms in quotes or bold
+3. **Abbreviations and full forms** - e.g. "DMS (Dealer Management System)"
+4. **Status/level definitions** - e.g. "H-level leads indicate low intent"
+5. **Business entities** - e.g. "Tier 1", "Tier 2", "JiXingYi"
 
-### 提取格式
+### Extraction Format
 ```markdown
-## 业务词典
+## Business Dictionary
 
-| 术语 | 含义 | 来源 |
+| Term | Meaning | Source |
 |------|------|------|
-| 吉行驿 | 支持全品牌共同经营的二网模式 | 名词解释 |
-| 二网 | 二级经销商网络，归属于一网 | 名词解释 |
-| 一网 | 一级经销商（主网） | 上下文推断 |
-| H级线索 | 低意向潜客 | 4.5章节 |
+| JiXingYi | Multi-brand co-operating Tier 2 network mode | Terminology |
+| Tier 2 | Secondary dealer network, belongs to Tier 1 | Terminology |
+| Tier 1 | Primary dealer (main network) | Context inference |
+| H-level leads | Low-intent prospects | Section 4.5 |
 ```
 
-### 置信度标记
-- ✅ 文档明确定义
-- ⚠️ 上下文推断（需人工确认）
-- ❓ 不确定（需人工补充）
+### Confidence Markers
+- ✅ Clearly defined in document
+- ⚠️ Context inference (needs manual confirmation)
+- ❓ Uncertain (needs manual supplement)
 
-## 执行步骤
+## Execution Steps
 
-### 1. 识别文档类型
-根据内容自动判断或使用用户指定的类型
+### 1. Identify Document Type
+Auto-determine based on content or use user-specified type
 
-### 2. 提取业务词典
+### 2. Extract Business Dictionary
 ```
-扫描文档
+Scan document
     ↓
-找"名词解释"章节 → 直接提取
+Find "terminology" sections → Direct extraction
     ↓
-找专有名词（加粗/引号/首次定义）→ 提取术语+上下文
+Find proper nouns (bold/quotes/first definition) → Extract terms + context
     ↓
-找缩写说明 → 提取全称
+Find abbreviation explanations → Extract full forms
     ↓
-找状态/等级定义 → 提取含义
+Find status/level definitions → Extract meanings
     ↓
-生成业务词典表格
+Generate business dictionary table
 ```
 
-### 3. 结构化转换
-按模板转换主体内容（删冗余、提要点、图转文）
+### 3. Structured Conversion
+Convert main content according to template (remove redundancy, extract key points, convert images to text)
 
-### 4. 输出结果
+### 4. Output Results
 ```markdown
-# [文档标题]
+# [Document Title]
 
 ## META
 ...
 
-## 业务词典
-| 术语 | 含义 | 置信度 | 来源 |
+## Business Dictionary
+| Term | Meaning | Confidence | Source |
 |------|------|--------|------|
-| xxx | xxx | ✅ | 名词解释 |
-| xxx | xxx | ⚠️ | 上下文推断 |
+| xxx | xxx | ✅ | Terminology |
+| xxx | xxx | ⚠️ | Context inference |
 
 ---
 
-[结构化的主体内容]
+[Structured main content]
 
 ---
 
-## AI开发指引
-> 开发此PRD功能时注意：
-> 1. 先理解上述业务词典中的术语
-> 2. 术语在代码中保持一致命名
+## AI Development Guidelines
+> When developing features from this PRD, note:
+> 1. First understand the terms in the business dictionary above
+> 2. Keep consistent naming of terms in code
 ```
 
-## 示例
+## Example
 
-**输入**: G助手3.3.16-吉行驿支持.pdf
+**Input**: G-Assistant-3.3.16-JiXingYi-Support.pdf
 
-**输出**:
+**Output**:
 ```markdown
-# PRD: G助手3.3.16
+# PRD: G Assistant 3.3.16
 
 ## META
-名称: G助手3.3.16-吉行驿支持
+Name: G Assistant 3.3.16 - JiXingYi Support
 ...
 
-## 业务词典
+## Business Dictionary
 
-| 术语 | 含义 | 置信度 | 来源 |
+| Term | Meaning | Confidence | Source |
 |------|------|--------|------|
-| 吉行驿 | 支持全品牌共同经营的全新销售模式二网，可与多个一网(4-5家)绑定授权 | ✅ | 名词解释 |
-| 普通二网 | 原正常二网，只归属于一家一网，授权仅来源于归属一网 | ✅ | 名词解释 |
-| 一网 | 一级经销商网络 | ⚠️ | 上下文推断 |
-| 二网 | 二级经销商网络 | ⚠️ | 上下文推断 |
-| DMS | 经销商管理系统，提供授权数据接口 | ⚠️ | 5.DMS相关改造 |
+| JiXingYi | New sales model Tier 2 network supporting multi-brand co-operation, can bind with multiple Tier 1 dealers (4-5 companies) | ✅ | Terminology |
+| Regular Tier 2 | Original normal Tier 2, belongs to only one Tier 1, authorization only from belonging Tier 1 | ✅ | Terminology |
+| Tier 1 | Primary dealer network | ⚠️ | Context inference |
+| Tier 2 | Secondary dealer network | ⚠️ | Context inference |
+| DMS | Dealer Management System, provides authorization data interface | ⚠️ | Section 5.DMS Related Changes |
 
 ---
 
-[PRD主体内容]
+[PRD main content]
 ```
 
-## 存储位置
+## Storage Location
 
-转换后的文档存储到：
+Converted documents stored to:
 ```
-../shared/docs/[文档名].md
+../shared/docs/[document-name].md
 ```
 
-业务词典作为文档的一部分，不单独存储。
+Business dictionary is part of the document, not stored separately.

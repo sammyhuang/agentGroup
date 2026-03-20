@@ -1,15 +1,15 @@
-# /notify-jarvis - 通知贾维斯
+# /notify-jarvis - Notify Jarvis
 
-向贾维斯发送通知（需用户确认）
+Send notification to Jarvis (requires user confirmation)
 
-## 使用方式
-/notify-jarvis [消息内容]
+## Usage
+/notify-jarvis [message content]
 
-## 执行步骤
+## Execution Steps
 
-1. 先询问用户确认："确定要通知贾维斯吗？"
+1. First ask user for confirmation: "Are you sure you want to notify Jarvis?"
 
-2. 用户确认后，更新 `../shared/status.json`:
+2. After user confirmation, update `../shared/status.json`:
 ```json
 {
   "notifications": [
@@ -17,16 +17,16 @@
       "from": "kyle",
       "to": "jarvis",
       "type": "review_result|bug_report|message",
-      "task": "任务名称",
-      "files": ["审查报告路径"],
-      "message": "消息内容",
-      "timestamp": "ISO时间戳",
+      "task": "task name",
+      "files": ["review report path"],
+      "message": "message content",
+      "timestamp": "ISO timestamp",
       "read": false
     }
   ],
-  "current_task": "当前任务",
-  "last_updated": "ISO时间戳"
+  "current_task": "current task",
+  "last_updated": "ISO timestamp"
 }
 ```
 
-3. 告知用户："已通知贾维斯，请让他查看 /status"
+3. Inform user: "Jarvis has been notified, please ask him to check /status"

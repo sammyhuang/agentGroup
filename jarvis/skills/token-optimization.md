@@ -1,322 +1,322 @@
-# Token优化技能 - 开发领域
+# Token Optimization Skill - Development Domain
 
-**版本**: v1.2
-**更新日期**: 2026-02-12
-**作者**: 贾维斯 (Jarvis)
-**优化目标**: 开发过程token使用量减少60%以上
-
----
-
-## 核心原则
-
-**目标：** 节省 60% token 消耗，保持 100% 代码准确性
-
-## 一、智能文件读取（节省 ~35%）
-
-### 现有做法 ❌
-```
-Read: App.vue (完整800行，~8000 tokens)
-```
-
-### 优化做法 ✅
-```
-1. Grep: "toggleAudioPlay" files_with_matches  # 先定位
-2. Read: App.vue offset=200 limit=60           # 精准读取
-```
-
-### 使用场景
-- 🔍 **Bug修复** - 先搜索定位，再精读代码
-- 🎯 **功能开发** - 找到相关组件后精确读取
-- ⚡ **代码分析** - 避免读取无关部分
+**Version**: v1.2
+**Update Date**: 2026-02-12
+**Author**: Jarvis
+**Optimization Goal**: Reduce token usage by 60%+ in development process
 
 ---
 
-## 二、减少冗余说明（节省 ~25%）
+## Core Principles
 
-### 现有做法 ❌
+**Objective:** Save 60% token consumption, maintain 100% code accuracy
+
+## 1. Intelligent File Reading (Save ~35%)
+
+### Current Practice ❌
 ```
-搞定，已配置默认模型：
-
-| 角色 | 配置文件 | 模型 |
-|------|----------|------|
-| 贾维斯 | jarvis/.claude/settings.local.json | Opus 4.5 |
-| 凯尔 | kyle/.claude/settings.local.json | Sonnet 4 |
-
-下次启动时会自动使用对应模型，无需手动指定...
+Read: App.vue (complete 800 lines, ~8000 tokens)
 ```
 
-### 优化做法 ✅
+### Optimized Practice ✅
 ```
-已配置团队默认 Sonnet 4，下次启动生效。
+1. Grep: "toggleAudioPlay" files_with_matches  # Locate first
+2. Read: App.vue offset=200 limit=60           # Precise reading
 ```
 
-### 保留的关键信息
-- ✅ 技术实现要点
-- ✅ 错误处理逻辑
-- ✅ 代码修改确认
-- ❌ 详细表格展示
-- ❌ 重复说明
+### Use Cases
+- 🔍 **Bug Fixing** - Search and locate first, then read code precisely
+- 🎯 **Feature Development** - Precise reading after finding relevant components
+- ⚡ **Code Analysis** - Avoid reading irrelevant parts
 
 ---
 
-## 三、工具使用优化（节省 ~20%）
+## 2. Reduce Redundant Explanations (Save ~25%)
 
-### 文件操作链
+### Current Practice ❌
 ```
-优化前：Bash ls → Read 完整 → Edit → Read 验证
-优化后：Glob 定位 → Grep 搜索 → Read 精准 → Edit 修改
+Done, configured default models:
+
+| Role | Configuration File | Model |
+|------|-------------------|-------|
+| Jarvis | jarvis/.claude/settings.local.json | Opus 4.5 |
+| Kyle | kyle/.claude/settings.local.json | Sonnet 4 |
+
+Next startup will automatically use corresponding models, no manual specification needed...
 ```
 
-### 具体优化
-- **定位文件**: 用 `Glob` 而非 `Bash ls`
-- **搜索代码**: 用 `Grep` 精准定位
-- **读取文件**: 用 `offset/limit` 参数
-- **跳过验证**: 相信工具正确性，不重复读取
+### Optimized Practice ✅
+```
+Configured team default Sonnet 4, effective on next startup.
+```
+
+### Key Information to Retain
+- ✅ Technical implementation points
+- ✅ Error handling logic
+- ✅ Code modification confirmation
+- ❌ Detailed table displays
+- ❌ Repetitive explanations
 
 ---
 
-## 四、批量操作（节省 ~15%）
+## 3. Tool Usage Optimization (Save ~20%)
 
-### 现有做法 ❌
+### File Operation Chain
 ```
-5个按钮，分5次处理：
-1. 修改返回按钮
-2. 修改设置按钮
-3. 修改麦克风按钮
-4. 修改发送按钮
-5. 修改播放按钮
+Before optimization: Bash ls → Read complete → Edit → Read verification
+After optimization: Glob locate → Grep search → Read precise → Edit modify
 ```
 
-### 优化做法 ✅
-```
-一次性处理所有按钮修改：
-1. 读取设计稿，理解所有需求
-2. 一次 Edit 完成多个按钮修改
-3. 整体验证效果
-```
+### Specific Optimizations
+- **Locate Files**: Use `Glob` instead of `Bash ls`
+- **Search Code**: Use `Grep` for precise location
+- **Read Files**: Use `offset/limit` parameters
+- **Skip Verification**: Trust tool correctness, avoid repetitive reading
 
 ---
 
-## 五、响应简化策略
+## 4. Batch Operations (Save ~15%)
 
-### 信息层级
+### Current Practice ❌
 ```
-必要信息：技术方案 + 关键实现 + 错误处理
-可选信息：详细步骤 + 表格展示 + 背景说明
-冗余信息：重复确认 + 过度解释
+5 buttons, processed 5 times separately:
+1. Modify back button
+2. Modify settings button
+3. Modify microphone button
+4. Modify send button
+5. Modify play button
 ```
 
-### 回复模板
+### Optimized Practice ✅
 ```
-[功能实现] - 简洁说明做了什么
-[技术要点] - 核心实现逻辑
-[注意事项] - 关键错误处理
+Process all button modifications at once:
+1. Read design specs, understand all requirements
+2. Complete multiple button modifications in one Edit
+3. Verify overall effect
 ```
 
 ---
 
-## 六、保持不变的质量标准
+## 5. Response Simplification Strategy
 
-### 绝不妥协的部分 🔒
-- ✅ 代码逻辑分析完整性
-- ✅ Bug 修复验证充分性
-- ✅ 边界情况考虑全面性
-- ✅ 错误处理健壮性
-- ✅ 技术方案正确性
+### Information Hierarchy
+```
+Essential information: Technical solution + Key implementation + Error handling
+Optional information: Detailed steps + Table displays + Background explanation
+Redundant information: Repetitive confirmation + Over-explanation
+```
+
+### Response Template
+```
+[Feature Implementation] - Concise explanation of what was done
+[Technical Points] - Core implementation logic
+[Notes] - Key error handling
+```
 
 ---
 
-## 七、模型选择策略 (v1.2新增)
+## 6. Unchanging Quality Standards
 
-### 基础模型选择决策树
-
-```
-开发任务评估
-├─ 标准化操作? → Haiku
-├─ 需要技术判断? → Sonnet
-├─ 需要架构创新? → Opus (确认)
-└─ 不确定? → 选择Sonnet (安全选择)
-```
-
-### Haiku适用场景 (30-40%使用率)
-- 标准化文件操作 (读写、复制、移动)
-- 简单文本替换和格式化
-- 基础配置文件生成 (.gitignore, package.json)
-- 标准Git操作 (add, commit, push)
-- 简单信息查询和数据提取
-
-### Sonnet适用场景 (50-60%使用率)
-- 系统架构和流程设计
-- Bug诊断和问题分析
-- 复杂代码实现和重构
-- 技术方案评估和选型
-- 需要逻辑分析和技术判断的任务
-- 性能优化和代码审查
-
-### Opus适用场景 (5-10%使用率，需确认)
-- 架构设计与重构
-- 复杂性能优化
-- 技术方案深度评估
-- 复杂业务逻辑实现
-
-### 质量优先原则
-
-1. **重要性评估**: 任务对项目的影响程度 > 单次成本节省
-2. **输出质量要求**: 需要准确性和深度的选择更强模型
-3. **用户体验**: 代码质量和解决方案完整性优先
-4. **长期效益**: 质量好的代码能减少返工，长期更省成本
+### Never Compromise Parts 🔒
+- ✅ Code logic analysis completeness
+- ✅ Bug fix verification adequacy
+- ✅ Boundary case consideration comprehensiveness
+- ✅ Error handling robustness
+- ✅ Technical solution correctness
 
 ---
 
-## 八、Task多模型优化策略 (v1.2新增)
+## 7. Model Selection Strategy (v1.2 Addition)
 
-### 开发任务分解模式
+### Basic Model Selection Decision Tree
 
-#### 三阶段分解示例
 ```
-阶段1: 代码信息收集 → Task(model="haiku")
-阶段2: 技术分析实现 → Task(model="sonnet")
-阶段3: 代码格式验证 → Task(model="haiku")
+Development Task Assessment
+├─ Standardized operation? → Haiku
+├─ Need technical judgment? → Sonnet
+├─ Need architectural innovation? → Opus (confirmation)
+└─ Uncertain? → Choose Sonnet (safe choice)
 ```
 
-### 实际案例对比
+### Haiku Use Cases (30-40% usage rate)
+- Standardized file operations (read, write, copy, move)
+- Simple text replacement and formatting
+- Basic configuration file generation (.gitignore, package.json)
+- Standard Git operations (add, commit, push)
+- Simple information queries and data extraction
 
-**❌ 传统方式 (10000+ tokens)**:
+### Sonnet Use Cases (50-60% usage rate)
+- System architecture and process design
+- Bug diagnosis and problem analysis
+- Complex code implementation and refactoring
+- Technical solution evaluation and selection
+- Tasks requiring logical analysis and technical judgment
+- Performance optimization and code review
+
+### Opus Use Cases (5-10% usage rate, needs confirmation)
+- Architecture design and refactoring
+- Complex performance optimization
+- Deep technical solution evaluation
+- Complex business logic implementation
+
+### Quality-First Principles
+
+1. **Importance Assessment**: Task impact on project > single-time cost savings
+2. **Output Quality Requirements**: Choose stronger model for accuracy and depth needs
+3. **User Experience**: Code quality and solution completeness priority
+4. **Long-term Benefits**: Good quality code reduces rework, saves more cost long-term
+
+---
+
+## 8. Task Multi-Model Optimization Strategy (v1.2 Addition)
+
+### Development Task Decomposition Pattern
+
+#### Three-Stage Decomposition Example
+```
+Stage 1: Code information collection → Task(model="haiku")
+Stage 2: Technical analysis implementation → Task(model="sonnet")
+Stage 3: Code format verification → Task(model="haiku")
+```
+
+### Real Case Comparison
+
+**❌ Traditional Approach (10000+ tokens)**:
 ```python
-Task(prompt="实现完整的用户认证系统并生成文档")
+Task(prompt="Implement complete user authentication system and generate documentation")
 ```
 
-**✅ 分解优化 (4300 tokens, 节省57%)**:
+**✅ Decomposed Optimization (4300 tokens, 57% savings)**:
 ```python
-Task(model="haiku", prompt="创建项目目录和基础文件结构")
-Task(model="haiku", prompt="生成配置文件和依赖管理")
-Task(model="sonnet", prompt="设计认证架构和实现核心逻辑")
-Task(model="haiku", prompt="验证代码格式和依赖完整性")
+Task(model="haiku", prompt="Create project directory and basic file structure")
+Task(model="haiku", prompt="Generate configuration files and dependency management")
+Task(model="sonnet", prompt="Design authentication architecture and implement core logic")
+Task(model="haiku", prompt="Verify code format and dependency completeness")
 ```
 
-**节省原理**：
-- 文件操作不需要技术分析能力 → Haiku够用
-- 核心架构和逻辑保持质量 → Sonnet保证
-- 格式验证纯粹自动化 → Haiku即可
+**Savings Principle**:
+- File operations don't need technical analysis capability → Haiku sufficient
+- Core architecture and logic maintain quality → Sonnet guaranteed
+- Format verification is purely automated → Haiku adequate
 
-### Task模型选择决策矩阵
+### Task Model Selection Decision Matrix
 
-| 子任务类型 | 推荐模型 | Token节省 | 质量影响 | 适用场景示例 |
-|------------|----------|-----------|----------|--------------|
-| 文件操作/数据提取 | Haiku | 70-80% | 无影响 | 创建文件、提取配置 |
-| 简单验证/格式检查 | Haiku | 70-80% | 无影响 | 检查语法、验证格式 |
-| 标准化代码生成 | Haiku | 70-80% | 无影响 | 配置文件、模板代码 |
-| Bug诊断/技术分析 | Sonnet | 基准 | 保证质量 | 问题诊断、方案设计 |
-| 架构设计/代码实现 | Sonnet | 基准 | 保证质量 | 系统设计、核心功能 |
-| 复杂架构/性能优化 | Opus | -3-5倍 | 显著提升 | 架构重构、深度优化 |
+| Subtask Type | Recommended Model | Token Savings | Quality Impact | Use Case Examples |
+|-------------|------------------|---------------|----------------|-------------------|
+| File operations/Data extraction | Haiku | 70-80% | No impact | Create files, extract config |
+| Simple validation/Format check | Haiku | 70-80% | No impact | Check syntax, verify format |
+| Standardized code generation | Haiku | 70-80% | No impact | Config files, template code |
+| Bug diagnosis/Technical analysis | Sonnet | Baseline | Quality guarantee | Problem diagnosis, solution design |
+| Architecture design/Code implementation | Sonnet | Baseline | Quality guarantee | System design, core functionality |
+| Complex architecture/Performance optimization | Opus | -3-5x | Significant improvement | Architecture refactoring, deep optimization |
 
-### 质量保证机制
+### Quality Assurance Mechanism
 
-**核心原则**: 质量优先，合理优化
+**Core Principle**: Quality first, reasonable optimization
 
-**质量保证检查点**:
-1. **关键业务逻辑必须用Sonnet+**
-   - 涉及产品核心功能的实现
-   - 影响系统安全的代码
-   - 复杂的算法和数据处理
+**Quality Assurance Checkpoints**:
+1. **Critical business logic must use Sonnet+**
+   - Implementation involving product core functionality
+   - Code affecting system security
+   - Complex algorithms and data processing
 
-2. **用户直接交互的输出保证质量**
-   - 核心功能实现
-   - Bug修复方案
-   - 技术方案文档
+2. **User-direct interaction outputs guarantee quality**
+   - Core functionality implementation
+   - Bug fix solutions
+   - Technical solution documentation
 
-3. **内部处理步骤可适度优化**
-   - 配置文件生成
-   - 简单文件操作
-   - 格式化和验证
+3. **Internal processing steps can be moderately optimized**
+   - Configuration file generation
+   - Simple file operations
+   - Formatting and validation
 
 ---
 
-## 九、Opus使用确认机制
+## 9. Opus Usage Confirmation Mechanism
 
-### 场景说明
-- **Opus优势**: 处理复杂架构设计、性能优化、系统重构时代码质量和效率更高
-- **必要性判断**: 当开发涉及架构性决策、复杂算法优化、技术方案评估时需要Opus
+### Scenario Description
+- **Opus Advantages**: Higher code quality and efficiency when handling complex architecture design, performance optimization, and system refactoring
+- **Necessity Judgment**: Opus is needed when development involves architectural decisions, complex algorithm optimization, and technical solution evaluation
 
-### 确认流程
+### Confirmation Process
 
-#### 第1步：识别Opus场景
-在以下情况需要使用更强大的模型：
-- 架构设计与重构（影响整体技术方向）
-- 复杂性能优化（涉及多个优化维度）
-- 技术方案评估（需要深度技术判断）
-- 复杂业务逻辑实现（高难度编码问题）
+#### Step 1: Identify Opus Scenarios
+Use more powerful model in the following situations:
+- Architecture design and refactoring (affecting overall technical direction)
+- Complex performance optimization (involving multiple optimization dimensions)
+- Technical solution evaluation (requiring deep technical judgment)
+- Complex business logic implementation (high-difficulty coding problems)
 
-#### 第2步：向用户确认
+#### Step 2: User Confirmation
 ```
-检测到当前任务涉及复杂的架构/性能问题。
-建议使用Opus进行更深度的技术分析和优化。
-请确认：
-[ 选项A ] 仅本次使用Opus（推荐，成本低）
-[ 选项B ] 整个会话使用Opus（持续深度开发支持）
-[ 选项C ] 降级使用Sonnet（快速完成，可能优化空间不足）
+Detected that current task involves complex architecture/performance issues.
+Recommend using Opus for deeper technical analysis and optimization.
+Please confirm:
+[ Option A ] Use Opus for this time only (recommended, low cost)
+[ Option B ] Use Opus for entire session (continuous deep development support)
+[ Option C ] Downgrade to Sonnet (quick completion, may lack optimization space)
 ```
 
-#### 第3步：处理用户决策
+#### Step 3: Handle User Decision
 
-**用户选A或B**：
-- 激活Opus进行深度技术分析
-- 提供更完整的架构设计和优化方案
+**User chooses A or B**:
+- Activate Opus for deep technical analysis
+- Provide more complete architecture design and optimization solutions
 
-**用户选C或拒绝**：
-- 降级使用Sonnet处理
-- 说明可能影响：
-  - 架构设计可能不够优雅
-  - 性能优化可能不够彻底
-  - 代码可扩展性可能受限
+**User chooses C or refuses**:
+- Downgrade to Sonnet processing
+- Explain potential impacts:
+  - Architecture design may not be elegant enough
+  - Performance optimization may not be thorough enough
+  - Code scalability may be limited
 
-### 降级影响说明
+### Downgrade Impact Description
 
-| 场景 | Opus优势 | 降级到Sonnet的风险 |
-|------|---------|------------------|
-| 架构设计 | 深度的系统思维 | 架构可能不够精妙 |
-| 性能优化 | 多维度优化思路 | 优化可能不够全面 |
-| 复杂逻辑 | 完整的实现方案 | 代码可能有遗漏 |
-| 技术选型 | 全面的方案对比 | 判断可能片面 |
+| Scenario | Opus Advantage | Risk of Downgrading to Sonnet |
+|----------|---------------|-------------------------------|
+| Architecture Design | Deep system thinking | Architecture may not be sophisticated enough |
+| Performance Optimization | Multi-dimensional optimization approaches | Optimization may not be comprehensive enough |
+| Complex Logic | Complete implementation solutions | Code may have omissions |
+| Technology Selection | Comprehensive solution comparison | Judgment may be biased |
 
-### 使用原则
+### Usage Principles
 
-- ✅ **主动询问** - 识别到Opus场景时必须先向用户确认
-- ✅ **明确说明** - 说清楚两种模型的技术深度差异
-- ✅ **尊重选择** - 用户拒绝则立即降级，不坚持
-- ✅ **成本意识** - 建议"仅本次"而非"整个会话"
+- ✅ **Proactive Inquiry** - Must confirm with user first when Opus scenario is identified
+- ✅ **Clear Explanation** - Clarify the technical depth difference between two models
+- ✅ **Respect Choice** - If user refuses, immediately downgrade, don't insist
+- ✅ **Cost Awareness** - Suggest "this time only" rather than "entire session"
 
 ---
 
-## 十、使用指南
+## 10. Usage Guide
 
-### 简单任务
-- 使用所有优化策略
-- 简化回复格式
-- 精准工具使用
+### Simple Tasks
+- Use all optimization strategies
+- Simplify response format
+- Precise tool usage
 
-### 复杂任务
-- 保持详细分析
-- 适度使用优化
-- 确保理解准确
+### Complex Tasks
+- Maintain detailed analysis
+- Use optimization moderately
+- Ensure accurate understanding
 
-### 判断标准
+### Judgment Criteria
 ```
-简单：修改样式、简单Bug、配置调整
-复杂：新功能开发、架构调整、复杂逻辑
+Simple: Style modifications, simple bugs, configuration adjustments
+Complex: New feature development, architecture adjustments, complex logic
 ```
 
 ---
 
-## 预期效果
+## Expected Effects
 
-- **Token 节省**: 60% ↓
-- **响应速度**: 40% ↑
-- **代码质量**: 保持 100%
-- **用户体验**: 信息更精炼
+- **Token Savings**: 60% ↓
+- **Response Speed**: 40% ↑
+- **Code Quality**: Maintain 100%
+- **User Experience**: More streamlined information
 
 ---
 
-*此优化方法在保证代码准确性前提下，大幅降低 Token 消耗，提升工作效率。*
+*This optimization method significantly reduces token consumption and improves work efficiency while ensuring code accuracy.*
 
-**应用指南**: 这是开发领域的Token优化策略v1.2版本，包含基础优化、模型选择和Task分解三层优化策略。建议从基础策略开始应用，逐步掌握高级技巧。
+**Application Guide**: This is version 1.2 of token optimization strategy for the development domain, containing three levels of optimization strategies: basic optimization, model selection, and Task decomposition. It's recommended to start with basic strategies and gradually master advanced techniques.

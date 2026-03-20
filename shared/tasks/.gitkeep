@@ -1,9 +1,9 @@
-# 任务管理目录
+# Task Management Directory
 
-此目录用于存储：
-- projects.md - 项目概览（麦克斯维护）
-- todos.md - 待办事项（麦克斯维护）
-- meetings.md - 会议记录（麦克斯维护）
-- bugs.md - Bug追踪（凯尔维护）
+This directory is used to store:
+- projects.md - Project overview (Max maintains)
+- todos.md - Todo items (Max maintains)
+- meetings.md - Meeting records (Max maintains)
+- bugs.md - Bug tracking (Kyle maintains)
 
-这些文件在项目使用过程中会自动生成。
+These files are automatically generated during project use.

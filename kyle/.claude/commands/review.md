@@ -1,43 +1,43 @@
-# /review - 代码审查
+# /review - Code Review
 
-对指定代码进行全面审查
+Conduct comprehensive review of specified code
 
-## 使用方式
-/review [文件路径或目录]
+## Usage
+/review [file path or directory]
 
-## 执行步骤
+## Execution Steps
 
-1. 读取目标代码文件
+1. Read target code files
 
-2. 按以下维度审查：
+2. Review according to the following dimensions:
 
-### 代码规范
-- [ ] 命名规范（变量、函数、类）
-- [ ] 代码结构和组织
-- [ ] 注释完整性和准确性
-- [ ] 代码风格一致性
+### Code Standards
+- [ ] Naming conventions (variables, functions, classes)
+- [ ] Code structure and organization
+- [ ] Comment completeness and accuracy
+- [ ] Code style consistency
 
-### 逻辑正确性
-- [ ] 业务逻辑是否正确
-- [ ] 边界条件处理
-- [ ] 错误处理机制
-- [ ] 空值/异常处理
+### Logic Correctness
+- [ ] Business logic correctness
+- [ ] Boundary condition handling
+- [ ] Error handling mechanisms
+- [ ] Null/exception handling
 
-### 安全性
-- [ ] 输入验证
-- [ ] SQL注入/XSS防护
-- [ ] 敏感信息处理
-- [ ] 权限控制
+### Security
+- [ ] Input validation
+- [ ] SQL injection/XSS protection
+- [ ] Sensitive information handling
+- [ ] Permission controls
 
-### 可维护性
-- [ ] 代码复杂度
-- [ ] 重复代码
-- [ ] 依赖合理性
-- [ ] 可测试性
+### Maintainability
+- [ ] Code complexity
+- [ ] Duplicate code
+- [ ] Dependency reasonableness
+- [ ] Testability
 
-3. 输出审查报告，分类问题：
-   - 🔴 严重（必须修复）
-   - 🟡 一般（建议修复）
-   - 🔵 建议（可选优化）
+3. Output review report, categorizing issues:
+   - 🔴 Critical (must fix)
+   - 🟡 General (recommended fix)
+   - 🔵 Suggestions (optional optimization)
 
-4. 询问是否通知贾维斯修复
+4. Ask whether to notify Jarvis for fixes

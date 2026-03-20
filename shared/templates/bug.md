@@ -1,62 +1,62 @@
-# BUG 结构化模板
+# BUG Structured Template
 
-> 简洁高效的Bug报告格式
+> Concise and efficient bug reporting format
 
 ---
 
-## BUG-[YYYYMMDD]-[序号]
+## BUG-[YYYYMMDD]-[Number]
 
 ```yaml
-标题: [一句话描述]
-级别: P0紧急|P1高|P2中|P3低
-状态: 待修|修复中|待验|已关
-发现: [姓名] @ YYYY-MM-DD
-指派: [开发姓名]
+Title: [One-line description]
+Level: P0 Critical|P1 High|P2 Medium|P3 Low
+Status: Pending|Fixing|Testing|Closed
+Discovered: [Name] @ YYYY-MM-DD
+Assigned: [Developer Name]
 ```
 
-### 现象
-<!-- 发生了什么 -->
-[简述问题现象]
+### Symptoms
+<!-- What happened -->
+[Brief description of the problem symptoms]
 
-### 复现
+### Reproduction
 ```
-环境: [浏览器/系统/版本]
-账号: [测试账号，如有]
-步骤:
-1. [操作1]
-2. [操作2]
-3. [操作3]
-结果: [实际结果]
-期望: [期望结果]
-```
-
-### 证据
-<!-- 截图描述或日志关键行 -->
-```
-[错误日志/截图描述]
+Environment: [Browser/System/Version]
+Account: [Test account, if any]
+Steps:
+1. [Action 1]
+2. [Action 2]
+3. [Action 3]
+Result: [Actual result]
+Expected: [Expected result]
 ```
 
-### 影响
+### Evidence
+<!-- Screenshot description or key log lines -->
+```
+[Error logs/Screenshot description]
+```
+
+### Impact
 ```yaml
-范围: [影响的功能/用户群]
-频率: 必现|偶现(X/10)
+Scope: [Affected functions/user groups]
+Frequency: Always|Sometimes(X/10)
 ```
 
-### 修复
-<!-- 修复后填写 -->
+### Fix
+<!-- Fill after fixing -->
 ```yaml
-原因: [根本原因]
-方案: [修复方案]
-文件: [修改的文件]
-验证: [如何验证]
+Cause: [Root cause]
+Solution: [Fix solution]
+Files: [Modified files]
+Verification: [How to verify]
 ```
 
 ---
 
 <!--
-模板使用:
-- P0: 阻塞核心流程，立即修复
-- P1: 功能异常，当天修复
-- P2: 体验问题，本周修复
-- P3: 优化建议，排期处理
+Template usage:
+- P0: Blocks core processes, fix immediately
+- P1: Function anomaly, fix same day
+- P2: Experience issue, fix this week
+- P3: Optimization suggestion, schedule for later
 -->

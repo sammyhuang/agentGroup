@@ -1,68 +1,68 @@
-# 会议纪要 结构化模板
+# Meeting Minutes Structured Template
 
-> 快速记录会议要点
+> Quick recording of meeting key points
 
 ---
 
 ## META
 ```yaml
-主题: [会议主题]
-时间: YYYY-MM-DD HH:mm (时长Xmin)
-主持: [姓名]
-参会: [姓名1], [姓名2], [姓名3]
-类型: 周会|评审|同步|头脑风暴
+Topic: [Meeting topic]
+Time: YYYY-MM-DD HH:mm (Duration X min)
+Host: [Name]
+Attendees: [Name1], [Name2], [Name3]
+Type: Weekly|Review|Sync|Brainstorm
 ```
 
-## 议题
+## Agenda
 
-### 1. [议题1]
+### 1. [Agenda Item 1]
 ```yaml
-汇报人: [姓名]
-结论: [一句话结论]
+Presenter: [Name]
+Conclusion: [One-line conclusion]
 ```
-要点:
-- [要点1]
-- [要点2]
+Key Points:
+- [Point 1]
+- [Point 2]
 
-### 2. [议题2]
+### 2. [Agenda Item 2]
 ```yaml
-汇报人: [姓名]
-结论: [一句话结论]
+Presenter: [Name]
+Conclusion: [One-line conclusion]
 ```
-要点:
-- [要点1]
-- [要点2]
+Key Points:
+- [Point 1]
+- [Point 2]
 
-## 决议
-<!-- 会议形成的决定 -->
-| 序号 | 决议内容 | 备注 |
-|------|---------|------|
+## Decisions
+<!-- Decisions made during the meeting -->
+| No. | Decision Content | Notes |
+|-----|------------------|-------|
 | D1 | xxx | xxx |
 | D2 | xxx | xxx |
 
-## 待办
-<!-- 会后行动项 -->
-| 序号 | 事项 | 负责人 | 截止 |
-|------|------|--------|------|
-| T1 | xxx | 张三 | MM-DD |
-| T2 | xxx | 李四 | MM-DD |
+## Action Items
+<!-- Post-meeting action items -->
+| No. | Item | Owner | Due Date |
+|-----|------|-------|----------|
+| T1 | xxx | John | MM-DD |
+| T2 | xxx | Jane | MM-DD |
 
-## 遗留
-<!-- 未解决需下次讨论 -->
-- [ ] [问题1]
-- [ ] [问题2]
+## Carry-over
+<!-- Unresolved items for next discussion -->
+- [ ] [Issue 1]
+- [ ] [Issue 2]
 
-## 下次会议
+## Next Meeting
 ```yaml
-时间: YYYY-MM-DD HH:mm
-议题: [预定议题]
+Time: YYYY-MM-DD HH:mm
+Agenda: [Scheduled agenda items]
 ```
 
 ---
 
 <!--
-记录原则:
-1. 只记结论，不记讨论过程
-2. 每个待办必须有负责人+截止日
-3. 决议用肯定句，不用"可能""考虑"
+Recording principles:
+1. Only record conclusions, not discussion process
+2. Each action item must have owner + due date
+3. Use definitive statements for decisions, not "maybe" or "consider"
 -->

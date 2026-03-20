@@ -1,15 +1,15 @@
 #!/usr/bin/env node
 
 /**
- * Max 自我反省执行脚本
+ * Max Self-Reflection Execution Script
  *
- * 功能：
- * 1. 分析当前会话中的错误
- * 2. 生成反思报告
- * 3. 自动更新CLAUDE.md文件
- * 4. 记录学习成果到reflection-log.json
+ * Functions:
+ * 1. Analyze errors in current session
+ * 2. Generate reflection reports
+ * 3. Automatically update CLAUDE.md file
+ * 4. Record learning outcomes to reflection-log.json
  *
- * 用法：
+ * Usage:
  *   node execute-reflection.js analyze <error-type> <description>
  *   node execute-reflection.js report
  *   node execute-reflection.js update-rules <error-id>
@@ -20,7 +20,7 @@
 const fs = require('fs');
 const path = require('path');
 
-// 路径配置
+// Path configuration
 const BASE_DIR = path.resolve(__dirname, '..');
 const PATHS = {
   reflectionLog: path.join(BASE_DIR, 'memory', 'reflection-log.json'),
@@ -29,7 +29,7 @@ const PATHS = {
   violationsLog: path.join(BASE_DIR, 'memory', 'violations.log'),
 };
 
-// 确保目录存在
+// Ensure directory exists
 function ensureDir(filePath) {
   const dir = path.dirname(filePath);
   if (!fs.existsSync(dir)) {
@@ -37,25 +37,25 @@ function ensureDir(filePath) {
   }
 }
 
-// 读取JSON文件（带默认值）
+// Read JSON file (with default value)
 function readJson(filePath, defaultValue) {
   try {
     if (fs.existsSync(filePath)) {
       return JSON.parse(fs.readFileSync(filePath, 'utf8'));
     }
   } catch (e) {
-    console.error(`[WARN] 读取 ${filePath} 失败: ${e.message}`);
+    console.error(`[WARN] Failed to read ${filePath}: ${e.message}`);
   }
   return defaultValue;
 }
 
-// 写入JSON文件
+// Write JSON file
 function writeJson(filePath, data) {
   ensureDir(filePath);
   fs.writeFileSync(filePath, JSON.stringify(data, null, 2), 'utf8');
 }
 
-// 生成错误ID
+// Generate error ID
 function generateErrorId() {
   const now = new Date();
   const date = now.toISOString().slice(0, 10).replace(/-/g, '');
@@ -63,33 +63,33 @@ function generateErrorId() {
   return `ERR-${date}-${seq}`;
 }
 
-// 获取当前日期时间
+// Get current date time
 function nowISO() {
   return new Date().toISOString();
 }
 
-// ==================== 核心功能 ====================
+// ==================== Core Functions ====================
 
 /**
- * 分析错误并记录
+ * Analyze errors and record
  */
 function analyzeError(errorType, description, context = {}) {
   const patterns = readJson(PATHS.reflectionPatterns, { error_categories: {}, historical_errors: [] });
   const log = readJson(PATHS.reflectionLog, { errors: [], stats: {}, last_review: null });
 
-  // 解析错误类型
+  // Parse error type
   const [mainType, subType] = parseErrorType(errorType);
   const category = patterns.error_categories[mainType];
 
   if (!category) {
-    console.error(`[ERROR] 未知错误类型: ${errorType}`);
-    console.log('可用类型: E-TOKEN, E-AUTH, E-SCOPE, E-FLOW, E-LOGIC, E-TOOL');
+    console.error(`[ERROR] Unknown error type: ${errorType}`);
+    console.log('Available types: E-TOKEN, E-AUTH, E-SCOPE, E-FLOW, E-LOGIC, E-TOOL');
     process.exit(1);
   }
 
   const errorId = generateErrorId();
 
-  // 构建错误记录
+  // Build error record
   const errorRecord = {
     id: errorId,
     date: nowISO(),
@@ -97,7 +97,7 @@ function analyzeError(errorType, description, context = {}) {
     severity: category.severity,
     description: description,
     context: {
-      task_description: context.task || '未提供',
+      task_description: context.task || 'Not provided',
       estimated_tokens: context.estimated || null,
       actual_tokens: context.actual || null,
       deviation_ratio: (context.estimated && context.actual)
@@ -114,27 +114,27 @@ function analyzeError(errorType, description, context = {}) {
     lessons_learned: null,
   };
 
-  // 自动填充Token偏差分析
+  // Auto-fill token deviation analysis
   if (mainType === 'E-TOKEN' && context.estimated && context.actual) {
     const ratio = context.actual / context.estimated;
     errorRecord.root_cause = ratio > 1.5
-      ? `Token预估偏低${((ratio - 1) * 100).toFixed(0)}%，可能原因：任务复杂度低估、未考虑多文件累积消耗、校准系数未应用`
-      : `Token预估偏高${((1 - ratio) * 100).toFixed(0)}%，可能原因：任务实际比预期简单`;
+      ? `Token estimation ${((ratio - 1) * 100).toFixed(0)}% too low, possible causes: task complexity underestimation, multi-file cumulative consumption not considered, calibration coefficient not applied`
+      : `Token estimation ${((1 - ratio) * 100).toFixed(0)}% too high, possible cause: task was simpler than expected`;
 
-    errorRecord.resolution.prevention = `更新校准系数，当前偏差比: ${ratio.toFixed(2)}x`;
+    errorRecord.resolution.prevention = `Update calibration coefficient, current deviation ratio: ${ratio.toFixed(2)}x`;
   }
 
-  // 自动填充授权违规分析
+  // Auto-fill authorization violation analysis
   if (mainType === 'E-AUTH') {
-    errorRecord.root_cause = '授权检查步骤被跳过或未正确执行';
-    errorRecord.resolution.immediate = '立即停止操作，向用户道歉并请求授权';
-    errorRecord.resolution.prevention = '在操作执行前增加强制授权验证检查点';
+    errorRecord.root_cause = 'Authorization check step was skipped or not executed properly';
+    errorRecord.resolution.immediate = 'Stop operation immediately, apologize to user and request authorization';
+    errorRecord.resolution.prevention = 'Add mandatory authorization verification checkpoint before operation execution';
   }
 
-  // 记录到日志
+  // Log to file
   log.errors.push(errorRecord);
 
-  // 更新统计
+  // Update statistics
   if (!log.stats[mainType]) {
     log.stats[mainType] = { count: 0, last_occurrence: null };
   }
@@ -143,56 +143,56 @@ function analyzeError(errorType, description, context = {}) {
 
   writeJson(PATHS.reflectionLog, log);
 
-  // 同时记录到patterns的historical_errors
+  // Also record to patterns historical_errors
   patterns.historical_errors.push(errorRecord);
   writeJson(PATHS.reflectionPatterns, patterns);
 
-  // 输出反思报告
+  // Output reflection report
   console.log('');
   console.log('='.repeat(60));
-  console.log('  自我反思报告');
+  console.log('  Self-Reflection Report');
   console.log('='.repeat(60));
   console.log('');
-  console.log(`错误ID:   ${errorId}`);
-  console.log(`类型:     ${errorType} (${category.name})`);
-  console.log(`严重度:   ${category.severity}`);
-  console.log(`描述:     ${description}`);
-  console.log(`时间:     ${errorRecord.date}`);
+  console.log(`Error ID:   ${errorId}`);
+  console.log(`Type:       ${errorType} (${category.name})`);
+  console.log(`Severity:   ${category.severity}`);
+  console.log(`Description: ${description}`);
+  console.log(`Time:       ${errorRecord.date}`);
   console.log('');
 
   if (errorRecord.context.deviation_ratio) {
-    console.log(`Token偏差: 预估${context.estimated} vs 实际${context.actual} (${errorRecord.context.deviation_ratio}x)`);
+    console.log(`Token deviation: estimated ${context.estimated} vs actual ${context.actual} (${errorRecord.context.deviation_ratio}x)`);
     console.log('');
   }
 
   if (errorRecord.root_cause) {
-    console.log(`根本原因: ${errorRecord.root_cause}`);
+    console.log(`Root cause: ${errorRecord.root_cause}`);
     console.log('');
   }
 
-  // 查找改进模板
+  // Find improvement template
   const templateKey = Object.keys(patterns.improvement_templates || {}).find(
     k => patterns.improvement_templates[k].applies_to === mainType
   );
   if (templateKey) {
     const template = patterns.improvement_templates[templateKey].template;
-    console.log('建议改进措施:');
-    console.log(`  即时修复:   ${template.immediate_action}`);
-    console.log(`  规则更新:   ${template.rule_update}`);
-    console.log(`  检测增强:   ${template.detection_enhancement}`);
-    console.log(`  预防措施:   ${template.prevention}`);
+    console.log('Suggested Improvement Measures:');
+    console.log(`  Immediate fix:    ${template.immediate_action}`);
+    console.log(`  Rule update:      ${template.rule_update}`);
+    console.log(`  Detection enhancement: ${template.detection_enhancement}`);
+    console.log(`  Prevention measure: ${template.prevention}`);
     console.log('');
   }
 
   console.log('='.repeat(60));
-  console.log(`记录已保存到: ${PATHS.reflectionLog}`);
+  console.log(`Record saved to: ${PATHS.reflectionLog}`);
   console.log('');
 
   return errorId;
 }
 
 /**
- * 生成统计报告
+ * Generate statistics report
  */
 function generateStats() {
   const log = readJson(PATHS.reflectionLog, { errors: [], stats: {} });
@@ -200,31 +200,31 @@ function generateStats() {
 
   console.log('');
   console.log('='.repeat(60));
-  console.log('  错误统计报告');
+  console.log('  Error Statistics Report');
   console.log('='.repeat(60));
   console.log('');
 
   const totalErrors = log.errors.length;
-  console.log(`总错误数: ${totalErrors}`);
+  console.log(`Total errors: ${totalErrors}`);
   console.log('');
 
   if (totalErrors === 0) {
-    console.log('暂无错误记录。');
+    console.log('No error records yet.');
     return;
   }
 
-  // 按类型统计
-  console.log('按类型分布:');
+  // Statistics by type
+  console.log('Distribution by type:');
   console.log('-'.repeat(40));
   for (const [type, data] of Object.entries(log.stats)) {
     const cat = patterns.error_categories[type];
     const catName = (cat && cat.name) ? cat.name : type;
-    const lastOcc = data.last_occurrence ? data.last_occurrence.slice(0, 10) : '未知';
-    console.log(`  ${type} (${catName}): ${data.count}次 | 最近: ${lastOcc}`);
+    const lastOcc = data.last_occurrence ? data.last_occurrence.slice(0, 10) : 'Unknown';
+    console.log(`  ${type} (${catName}): ${data.count} times | Latest: ${lastOcc}`);
   }
   console.log('');
 
-  // 按严重度统计
+  // Statistics by severity
   const severityCounts = { critical: 0, high: 0, medium: 0, low: 0 };
   log.errors.forEach(err => {
     const mainType = err.category.split('-').slice(0, 2).join('-');
@@ -234,29 +234,29 @@ function generateStats() {
       severityCounts[severity]++;
     }
   });
-  console.log('按严重度分布:');
+  console.log('Distribution by severity:');
   console.log('-'.repeat(40));
-  console.log(`  严重(critical): ${severityCounts.critical}`);
-  console.log(`  高(high):       ${severityCounts.high}`);
-  console.log(`  中(medium):     ${severityCounts.medium}`);
-  console.log(`  低(low):        ${severityCounts.low}`);
+  console.log(`  Critical: ${severityCounts.critical}`);
+  console.log(`  High:     ${severityCounts.high}`);
+  console.log(`  Medium:   ${severityCounts.medium}`);
+  console.log(`  Low:      ${severityCounts.low}`);
   console.log('');
 
-  // 未解决的错误
+  // Unresolved errors
   const pending = log.errors.filter(e => e.status === 'pending_analysis');
   if (pending.length > 0) {
-    console.log(`待分析错误: ${pending.length}条`);
+    console.log(`Pending analysis errors: ${pending.length}`);
     pending.forEach(e => {
       console.log(`  - ${e.id}: ${e.description}`);
     });
     console.log('');
   }
 
-  // Token偏差趋势
+  // Token deviation trend
   const tokenErrors = log.errors.filter(e => e.category.startsWith('E-TOKEN') && e.context.deviation_ratio);
   if (tokenErrors.length > 0) {
     const avgDeviation = tokenErrors.reduce((sum, e) => sum + parseFloat(e.context.deviation_ratio), 0) / tokenErrors.length;
-    console.log(`Token估算平均偏差比: ${avgDeviation.toFixed(2)}x`);
+    console.log(`Token estimation average deviation ratio: ${avgDeviation.toFixed(2)}x`);
     console.log('');
   }
 
@@ -264,40 +264,40 @@ function generateStats() {
 }
 
 /**
- * 生成完整反思报告
+ * Generate complete reflection report
  */
 function generateReport() {
   const log = readJson(PATHS.reflectionLog, { errors: [], stats: {} });
 
   console.log('');
   console.log('='.repeat(60));
-  console.log('  完整反思报告');
+  console.log('  Complete Reflection Report');
   console.log('='.repeat(60));
   console.log('');
 
   if (log.errors.length === 0) {
-    console.log('暂无错误记录。');
+    console.log('No error records yet.');
     return;
   }
 
   log.errors.forEach((err, idx) => {
-    console.log(`--- 错误 #${idx + 1} ---`);
+    console.log(`--- Error #${idx + 1} ---`);
     console.log(`ID:       ${err.id}`);
-    console.log(`日期:     ${err.date}`);
-    console.log(`类型:     ${err.category}`);
-    console.log(`严重度:   ${err.severity}`);
-    console.log(`描述:     ${err.description}`);
-    console.log(`状态:     ${err.status}`);
+    console.log(`Date:     ${err.date}`);
+    console.log(`Type:     ${err.category}`);
+    console.log(`Severity: ${err.severity}`);
+    console.log(`Description: ${err.description}`);
+    console.log(`Status:   ${err.status}`);
 
     if (err.root_cause) {
-      console.log(`根因:     ${err.root_cause}`);
+      console.log(`Root cause: ${err.root_cause}`);
     }
     if (err.lessons_learned) {
-      console.log(`教训:     ${err.lessons_learned}`);
+      console.log(`Lessons:  ${err.lessons_learned}`);
     }
 
     if (err.context.deviation_ratio) {
-      console.log(`Token偏差: ${err.context.deviation_ratio}x (预估${err.context.estimated_tokens} / 实际${err.context.actual_tokens})`);
+      console.log(`Token deviation: ${err.context.deviation_ratio}x (estimated ${err.context.estimated_tokens} / actual ${err.context.actual_tokens})`);
     }
 
     console.log('');
@@ -307,7 +307,7 @@ function generateReport() {
 }
 
 /**
- * Token估算校准
+ * Token estimation calibration
  */
 function calibrateTokens(estimated, actual) {
   const patterns = readJson(PATHS.reflectionPatterns, { calibration_data: {} });
@@ -318,19 +318,19 @@ function calibrateTokens(estimated, actual) {
 
   console.log('');
   console.log('='.repeat(60));
-  console.log('  Token估算校准');
+  console.log('  Token Estimation Calibration');
   console.log('='.repeat(60));
   console.log('');
-  console.log(`预估值:   ${estimated} tokens`);
-  console.log(`实际值:   ${actual} tokens`);
-  console.log(`偏差比:   ${ratio.toFixed(2)}x`);
-  console.log(`偏差率:   ${((ratio - 1) * 100).toFixed(1)}%`);
+  console.log(`Estimated: ${estimated} tokens`);
+  console.log(`Actual:    ${actual} tokens`);
+  console.log(`Ratio:     ${ratio.toFixed(2)}x`);
+  console.log(`Deviation rate: ${((ratio - 1) * 100).toFixed(1)}%`);
   console.log('');
 
   if (ratio > 1.5) {
-    console.log('诊断: 严重低估 - 需要提高校准系数');
+    console.log('Diagnosis: Severe underestimation - need to increase calibration coefficient');
     console.log('');
-    console.log('建议校准调整:');
+    console.log('Suggested calibration adjustment:');
 
     const baselines = calibration.task_type_baselines || {};
     for (const [type, data] of Object.entries(baselines)) {
@@ -338,74 +338,74 @@ function calibrateTokens(estimated, actual) {
       console.log(`  ${type}: ${data.coefficient} -> ${newCoeff.toFixed(2)}`);
     }
   } else if (ratio < 0.5) {
-    console.log('诊断: 严重高估 - 可以降低校准系数');
+    console.log('Diagnosis: Severe overestimation - can reduce calibration coefficient');
   } else {
-    console.log('诊断: 估算在合理范围内');
+    console.log('Diagnosis: Estimation within reasonable range');
   }
 
   console.log('');
   console.log('='.repeat(60));
 
-  // 如果严重偏差，自动记录错误
+  // If severe deviation, automatically record error
   if (ratio > 1.5 || ratio < 0.5) {
     const errorType = ratio > 1.5 ? 'E-TOKEN-LOW' : 'E-TOKEN-HIGH';
-    const desc = `Token估算偏差: 预估${estimated}, 实际${actual} (${ratio.toFixed(2)}x)`;
+    const desc = `Token estimation deviation: estimated ${estimated}, actual ${actual} (${ratio.toFixed(2)}x)`;
     analyzeError(errorType, desc, { estimated, actual });
   }
 }
 
 /**
- * 更新CLAUDE.md中的学习记录
+ * Update learning records in CLAUDE.md
  */
 function updateClaudeMd(errorId) {
   const log = readJson(PATHS.reflectionLog, { errors: [] });
   const error = log.errors.find(e => e.id === errorId);
 
   if (!error) {
-    console.error(`[ERROR] 未找到错误记录: ${errorId}`);
+    console.error(`[ERROR] Error record not found: ${errorId}`);
     process.exit(1);
   }
 
-  // 读取当前CLAUDE.md
+  // Read current CLAUDE.md
   let claudeContent = fs.readFileSync(PATHS.claudeMd, 'utf8');
 
-  // 检查是否已有学习记录章节
-  const learningHeader = '## 学习记录（自我反省系统自动维护）';
+  // Check if learning records section exists
+  const learningHeader = '## Learning Records (Automatically maintained by self-reflection system)';
   if (!claudeContent.includes(learningHeader)) {
-    // 在文件末尾添加学习记录章节
+    // Add learning records section at end of file
     claudeContent += `\n\n${learningHeader}\n\n`;
   }
 
-  // 构建新的学习条目
+  // Build new learning entry
   const date = error.date.slice(0, 10);
   const entry = [
     `### ${date} - ${error.id}`,
-    `**错误**: ${error.category} - ${error.description}`,
-    `**根因**: ${error.root_cause || '待分析'}`,
-    `**新规则**: ${(error.resolution && error.resolution.rule_added) ? error.resolution.rule_added : '待制定'}`,
-    `**预防**: ${(error.resolution && error.resolution.prevention) ? error.resolution.prevention : '待制定'}`,
-    `**状态**: ${error.status}`,
+    `**Error**: ${error.category} - ${error.description}`,
+    `**Root Cause**: ${error.root_cause || 'Pending analysis'}`,
+    `**New Rule**: ${(error.resolution && error.resolution.rule_added) ? error.resolution.rule_added : 'To be determined'}`,
+    `**Prevention**: ${(error.resolution && error.resolution.prevention) ? error.resolution.prevention : 'To be determined'}`,
+    `**Status**: ${error.status}`,
     '',
   ].join('\n');
 
-  // 在学习记录章节末尾添加
+  // Add to end of learning records section
   const headerIndex = claudeContent.indexOf(learningHeader);
   const insertPos = headerIndex + learningHeader.length + 2;
   claudeContent = claudeContent.slice(0, insertPos) + entry + '\n' + claudeContent.slice(insertPos);
 
   fs.writeFileSync(PATHS.claudeMd, claudeContent, 'utf8');
 
-  // 更新错误状态
+  // Update error status
   error.status = 'rule_updated';
   writeJson(PATHS.reflectionLog, log);
 
   console.log('');
-  console.log(`CLAUDE.md 已更新 - 添加学习记录: ${errorId}`);
-  console.log(`错误状态已更新为: rule_updated`);
+  console.log(`CLAUDE.md updated - added learning record: ${errorId}`);
+  console.log(`Error status updated to: rule_updated`);
   console.log('');
 }
 
-// ==================== 辅助函数 ====================
+// ==================== Helper Functions ====================
 
 function parseErrorType(errorType) {
   const parts = errorType.split('-');
@@ -416,52 +416,52 @@ function parseErrorType(errorType) {
 
 function printUsage() {
   console.log(`
-Max 自我反省执行脚本
+Max Self-Reflection Execution Script
 ====================
 
-用法:
+Usage:
   node execute-reflection.js <command> [arguments]
 
-命令:
-  analyze <error-type> <description>    分析并记录错误
-    可选参数（通过环境变量传递）:
-      ESTIMATED=<num>  预估token数
-      ACTUAL=<num>     实际token数
+Commands:
+  analyze <error-type> <description>    Analyze and record error
+    Optional parameters (passed via environment variables):
+      ESTIMATED=<num>  Estimated token count
+      ACTUAL=<num>     Actual token count
 
-  report                                 生成完整反思报告
+  report                                 Generate complete reflection report
 
-  stats                                  显示错误统计
+  stats                                  Display error statistics
 
-  calibrate <estimated> <actual>         Token估算校准
+  calibrate <estimated> <actual>         Token estimation calibration
 
-  update-rules <error-id>               将错误学习成果更新到CLAUDE.md
+  update-rules <error-id>               Update error learning outcomes to CLAUDE.md
 
-错误类型:
-  E-TOKEN-LOW    Token严重低估
-  E-TOKEN-HIGH   Token严重高估
-  E-TOKEN-MISS   未进行Token估算
-  E-AUTH-OPUS    Opus未授权使用
-  E-AUTH-GIT     Git操作未授权
-  E-AUTH-BOUNDARY 职责越界
-  E-SCOPE-OVER   过度设计
-  E-SCOPE-UNDER  交付不足
-  E-FLOW-SKIP    检查点跳过
-  E-FLOW-ORDER   检查点顺序错误
-  E-LOGIC-ANALYSIS 分析推理错误
-  E-LOGIC-DECISION 决策错误
-  E-TOOL-WRONG   工具选择错误
-  E-TOOL-MISUSE  工具参数错误
+Error types:
+  E-TOKEN-LOW    Severe token underestimation
+  E-TOKEN-HIGH   Severe token overestimation
+  E-TOKEN-MISS   No token estimation performed
+  E-AUTH-OPUS    Unauthorized Opus usage
+  E-AUTH-GIT     Unauthorized Git operations
+  E-AUTH-BOUNDARY Responsibility boundary violation
+  E-SCOPE-OVER   Over-engineering
+  E-SCOPE-UNDER  Under-delivery
+  E-FLOW-SKIP    Checkpoint skipping
+  E-FLOW-ORDER   Checkpoint sequence error
+  E-LOGIC-ANALYSIS Analysis reasoning error
+  E-LOGIC-DECISION Decision error
+  E-TOOL-WRONG   Tool selection error
+  E-TOOL-MISUSE  Tool parameter error
 
-示例:
-  node execute-reflection.js analyze E-TOKEN-LOW "估算3000实际17000"
-  ESTIMATED=3000 ACTUAL=17000 node execute-reflection.js analyze E-TOKEN-LOW "描述"
+Examples:
+  node execute-reflection.js analyze E-TOKEN-LOW "estimated 3000 actual 17000"
+  ESTIMATED=3000 ACTUAL=17000 node execute-reflection.js analyze E-TOKEN-LOW "description"
   node execute-reflection.js calibrate 3000 17000
   node execute-reflection.js stats
   node execute-reflection.js update-rules ERR-20260219-001
   `);
 }
 
-// ==================== 主入口 ====================
+// ==================== Main Entry ====================
 
 function main() {
   const args = process.argv.slice(2);
@@ -476,7 +476,7 @@ function main() {
   switch (command) {
     case 'analyze': {
       if (args.length < 3) {
-        console.error('[ERROR] 用法: analyze <error-type> <description>');
+        console.error('[ERROR] Usage: analyze <error-type> <description>');
         process.exit(1);
       }
       const errorType = args[1];
@@ -500,7 +500,7 @@ function main() {
 
     case 'calibrate': {
       if (args.length < 3) {
-        console.error('[ERROR] 用法: calibrate <estimated> <actual>');
+        console.error('[ERROR] Usage: calibrate <estimated> <actual>');
         process.exit(1);
       }
       calibrateTokens(parseInt(args[1]), parseInt(args[2]));
@@ -509,7 +509,7 @@ function main() {
 
     case 'update-rules': {
       if (args.length < 2) {
-        console.error('[ERROR] 用法: update-rules <error-id>');
+        console.error('[ERROR] Usage: update-rules <error-id>');
         process.exit(1);
       }
       updateClaudeMd(args[1]);
@@ -517,7 +517,7 @@ function main() {
     }
 
     default:
-      console.error(`[ERROR] 未知命令: ${command}`);
+      console.error(`[ERROR] Unknown command: ${command}`);
       printUsage();
       process.exit(1);
   }

@@ -1,7 +1,7 @@
 {
   "meta": {
     "version": "1.0.0",
-    "description": "事件驱动的团队通知系统",
+    "description": "Event-driven team notification system",
     "notification_retention_days": 30
   },
   "notifications": [
@@ -12,22 +12,22 @@
       "type": "task_assignment",
       "from": "max",
       "to": "jarvis",
-      "subject": "紧急Bug修复任务",
+      "subject": "Urgent Bug Fix Task",
       "content": {
         "task_id": "bug_20260213_001",
         "file": "frontend/src/components/LoginForm.vue",
-        "issue": "登录按钮在特定场景下无响应",
-        "expected_behavior": "点击登录按钮应触发验证并提交",
-        "hint": "检查 handleLogin 方法的事件绑定"
+        "issue": "Login button is unresponsive in specific scenarios",
+        "expected_behavior": "Clicking the login button should trigger validation and submit",
+        "hint": "Check the event binding of the handleLogin method"
       },
       "actions": [
         {
-          "label": "查看任务",
+          "label": "View Task",
           "action": "read_file",
           "target": "../shared/tasks/todos.md"
         },
         {
-          "label": "确认接收",
+          "label": "Confirm Receipt",
           "action": "update_status",
           "target": "../shared/status.json"
         }
@@ -43,29 +43,29 @@
       "type": "review_request",
       "from": "jarvis",
       "to": "kyle",
-      "subject": "新功能开发完成，请求测试",
+      "subject": "New feature development completed, requesting testing",
       "content": {
-        "feature": "用户注册流程优化",
+        "feature": "User registration process optimization",
         "files_changed": [
           "frontend/src/views/Register.vue",
           "backend/api/auth.js"
         ],
         "test_checklist": [
-          "验证邮箱格式检查",
-          "测试密码强度提示",
-          "确认验证码发送功能",
-          "检查注册成功后的跳转"
+          "Verify email format validation",
+          "Test password strength prompts",
+          "Confirm verification code sending function",
+          "Check redirect after successful registration"
         ],
         "deployment_branch": "feature/register-optimization"
       },
       "actions": [
         {
-          "label": "开始测试",
+          "label": "Start Testing",
           "action": "update_status",
           "target": "../shared/status.json"
         },
         {
-          "label": "查看代码",
+          "label": "View Code",
           "action": "git_checkout",
           "target": "feature/register-optimization"
         }
@@ -81,21 +81,21 @@
       "type": "information",
       "from": "max",
       "to": "all",
-      "subject": "每周团队会议提醒",
+      "subject": "Weekly team meeting reminder",
       "content": {
         "meeting_time": "2026-02-14T15:00:00Z",
         "agenda": [
-          "上周工作回顾",
-          "本周任务分配",
-          "技术难点讨论",
-          "Token使用情况通报"
+          "Last week's work review",
+          "This week's task assignment",
+          "Technical challenges discussion",
+          "Token usage report"
         ],
-        "location": "线上会议室",
-        "preparation": "请各位提前准备工作总结"
+        "location": "Online meeting room",
+        "preparation": "Please prepare work summaries in advance"
       },
       "actions": [
         {
-          "label": "确认参加",
+          "label": "Confirm Attendance",
           "action": "update_calendar",
           "target": "../shared/tasks/meetings.md"
         }
@@ -103,7 +103,6 @@
       "read_by": [],
       "acknowledged_by": [],
       "expires_at": "2026-02-14T15:00:00Z"
-    }
     },
     {
       "id": "notif_004",
@@ -112,27 +111,27 @@
       "type": "technical_research",
       "from": "max",
       "to": "jarvis",
-      "subject": "Claude Code技术调研 - Agent成本控制项目",
+      "subject": "Claude Code Technical Research - Agent Cost Control Project",
       "content": {
-        "project": "Agent成本控制产品开发",
+        "project": "Agent cost control product development",
         "research_scope": [
-          "Claude Code网络流量分析",
-          "代理兼容性测试",
-          "配置机制研究",
-          "计费方式验证"
+          "Claude Code network traffic analysis",
+          "Proxy compatibility testing",
+          "Configuration mechanism research",
+          "Billing method verification"
         ],
-        "expected_duration": "2-3天",
-        "deliverable": "技术可行性报告",
-        "priority_reason": "技术方案依赖调研结果"
+        "expected_duration": "2-3 days",
+        "deliverable": "Technical feasibility report",
+        "priority_reason": "Technical solution depends on research results"
       },
       "actions": [
         {
-          "label": "查看详细任务",
+          "label": "View Detailed Task",
           "action": "read_file",
           "target": "../shared/tasks/claude_code_research.md"
         },
         {
-          "label": "开始调研",
+          "label": "Start Research",
           "action": "update_status",
           "target": "../shared/status.json"
         }
@@ -148,30 +147,30 @@
       "type": "bug_fix_urgent",
       "from": "max",
       "to": "jarvis",
-      "subject": "🚨 紧急：用户反馈登录Bug需要立即修复",
+      "subject": "🚨 Urgent: User reported login bug needs immediate fix",
       "content": {
         "bug_id": "login_btn_20260223_001",
-        "user_request": "用户直接要求修复登录按钮bug",
+        "user_request": "User directly requested login button bug fix",
         "file": "frontend/src/components/LoginForm.vue",
-        "issue": "登录按钮在特定场景下无响应",
-        "expected_behavior": "点击登录按钮应触发验证并提交",
-        "debug_hint": "重点检查 handleLogin 方法的事件绑定",
-        "impact": "影响用户登录体验，需要优先处理",
-        "estimated_time": "1-2小时"
+        "issue": "Login button is unresponsive in specific scenarios",
+        "expected_behavior": "Clicking the login button should trigger validation and submit",
+        "debug_hint": "Focus on checking event binding in handleLogin method",
+        "impact": "Affects user login experience, requires priority handling",
+        "estimated_time": "1-2 hours"
       },
       "actions": [
         {
-          "label": "开始修复",
+          "label": "Start Fix",
           "action": "update_status",
           "target": "../shared/status.json",
           "payload": {
-            "task": "登录按钮bug修复",
-            "status": "进行中",
+            "task": "Login button bug fix",
+            "status": "In Progress",
             "assignee": "jarvis"
           }
         },
         {
-          "label": "查看文件",
+          "label": "View File",
           "action": "read_file",
           "target": "frontend/src/components/LoginForm.vue"
         }

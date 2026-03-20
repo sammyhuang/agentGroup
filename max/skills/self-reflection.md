@@ -1,18 +1,18 @@
-# 自我反省 Skill (Self-Reflection)
+# Self-Reflection Skill
 
-**作者**: 麦克斯 (Max) - 项目经理
-**版本**: v1.0
-**创建日期**: 2026-02-19
-**目的**: 从错误中学习，持续自我升级，防止同类错误再次发生
+**Author**: Max - Project Manager
+**Version**: v1.0
+**Created**: 2026-02-19
+**Purpose**: Learn from mistakes, continuously self-upgrade, prevent similar errors from recurring
 
 ---
 
-## 1. Skill 目的
+## 1. Skill Purpose
 
-自我反省系统让 Max 能够：
-- 在会话中检测自身错误（Token估算偏差、授权违规、逻辑错误等）
-- 对错误进行结构化根因分析
-- 生成可执行的改进措施
+The self-reflection system enables Max to:
+- Detect self-errors during sessions (token estimation deviations, authorization violations, logic errors, etc.)
+- Perform structured root cause analysis of errors
+- Generate actionable improvement measures
 - 将学习成果持久化到 CLAUDE.md 和记忆文件
 - 建立错误模式库，预防同类错误
 

@@ -1,36 +1,36 @@
-# 结构化文档模板
+# Structured Document Templates
 
-将原始文档转化为AI友好的结构化格式，减少token消耗，加速理解。
+Convert original documents to AI-friendly structured format, reduce token consumption, accelerate understanding.
 
-## 核心原则
+## Core Principles
 
-1. **去冗余** - 删除套话、重复内容、无效信息
-2. **结构化** - 用固定格式组织，便于解析
-3. **符号化** - 用符号代替长描述（如 ✅❌⚠️）
-4. **图转文** - 图片转为关键信息描述
-5. **层级化** - 重要信息前置，细节后置
+1. **Remove Redundancy** - Delete boilerplate, repeated content, invalid information
+2. **Structure** - Organize with fixed format for easy parsing
+3. **Symbolize** - Use symbols instead of long descriptions (like ✅❌⚠️)
+4. **Image to Text** - Convert images to key information descriptions
+5. **Hierarchical** - Important information first, details later
 
-## 模板列表
+## Template List
 
-| 模板 | 用途 | 文件 |
-|------|------|------|
-| PRD | 产品需求文档 | `prd.md` |
-| UI | 界面设计说明 | `ui.md` |
-| API | 接口文档 | `api.md` |
-| BUG | Bug报告 | `bug.md` |
-| MEETING | 会议纪要 | `meeting.md` |
-| GENERIC | 通用文档 | `generic.md` |
+| Template | Purpose | File |
+|----------|---------|------|
+| PRD | Product Requirements Document | `prd.md` |
+| UI | Interface Design Description | `ui.md` |
+| API | Interface Documentation | `api.md` |
+| BUG | Bug Report | `bug.md` |
+| MEETING | Meeting Minutes | `meeting.md` |
+| GENERIC | General Document | `generic.md` |
 
-## 使用方式
+## Usage
 
-1. 选择对应模板
-2. 按模板格式填写/转换内容
-3. 交给贾维斯或凯尔处理
+1. Select corresponding template
+2. Fill/convert content according to template format
+3. Hand over to Jarvis or Kyle for processing
 
-## Token节省预估
+## Token Savings Estimation
 
-| 文档类型 | 原始 | 结构化后 | 节省 |
-|---------|------|---------|------|
+| Document Type | Original | After Structuring | Savings |
+|--------------|----------|-------------------|---------|
 | PRD | ~3000 | ~800 | 73% |
-| UI说明 | ~2000 | ~500 | 75% |
-| 会议纪要 | ~1500 | ~400 | 73% |
+| UI Description | ~2000 | ~500 | 75% |
+| Meeting Minutes | ~1500 | ~400 | 73% |

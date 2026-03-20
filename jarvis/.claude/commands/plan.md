@@ -1,51 +1,51 @@
-# /plan - 制定技术方案
+# /plan - Create Technical Solution
 
-根据PRD或需求输出技术方案
+Output technical solution based on PRD or requirements
 
-## 使用方式
-/plan [PRD文件路径或需求描述]
+## Usage
+/plan [PRD file path or requirement description]
 
-## 执行步骤
+## Execution Steps
 
-1. 阅读PRD/需求，理解功能要求
+1. Read PRD/requirements, understand functional requirements
 
-2. 分析技术选型和实现方案
+2. Analyze technology selection and implementation approach
 
-3. 输出技术方案文档，包含：
+3. Output technical solution document containing:
 ```markdown
-# 技术方案 - [功能名称]
+# Technical Solution - [Feature Name]
 
-## 1. 需求概述
-简述PRD核心要求
+## 1. Requirements Overview
+Brief description of PRD core requirements
 
-## 2. 技术选型
-- 前端: xxx
-- 后端: xxx
-- 数据库: xxx
-- 其他: xxx
+## 2. Technology Selection
+- Frontend: xxx
+- Backend: xxx
+- Database: xxx
+- Others: xxx
 
-## 3. 架构设计
-整体架构说明 + 图示（如需要）
+## 3. Architecture Design
+Overall architecture explanation + diagrams (if needed)
 
-## 4. 接口设计
-### API列表
-| 接口 | 方法 | 说明 |
+## 4. Interface Design
+### API List
+| Interface | Method | Description |
 |-----|------|-----|
 
-### 接口详情
+### Interface Details
 ...
 
-## 5. 数据结构
-表结构/模型定义
+## 5. Data Structure
+Table structure/model definitions
 
-## 6. 实现步骤
+## 6. Implementation Steps
 1. xxx
 2. xxx
 
-## 7. 风险评估
-潜在问题和应对方案
+## 7. Risk Assessment
+Potential issues and response plans
 ```
 
-4. 存储到 `../shared/tasks/plans/` 目录
+4. Store to `../shared/tasks/plans/` directory
 
-5. 询问用户是否调整或开始开发
+5. Ask user if adjustments needed or start development

@@ -1,25 +1,25 @@
-# /dev - 开始开发任务
+# /dev - Start Development Task
 
-根据技术方案或需求开始编码
+Start coding based on technical solution or requirements
 
-## 使用方式
-/dev [任务描述或方案文件]
+## Usage
+/dev [task description or solution file]
 
-## 执行步骤
+## Execution Steps
 
-1. 确认开发任务和目标
+1. Confirm development task and objectives
 
-2. 如有技术方案，阅读并遵循
+2. If technical solution exists, read and follow it
 
-3. 开始编码：
-   - 遵循项目代码规范
-   - 添加必要注释
-   - 处理边界情况
-   - 实现错误处理
+3. Start coding:
+   - Follow project code standards
+   - Add necessary comments
+   - Handle edge cases
+   - Implement error handling
 
-4. 完成后汇报：
-   - 实现了哪些功能
-   - 修改了哪些文件
-   - 注意事项
+4. Report after completion:
+   - What features were implemented
+   - Which files were modified
+   - Important notes
 
-5. 询问用户是否需要凯尔验收
+5. Ask user if Kyle's acceptance testing is needed

@@ -1,47 +1,47 @@
 #!/bin/bash
 
 ################################################################################
-# 通知检查脚本 - 智能缓存版本
-# 用途: AI会话启动时检查是否有新通知
-# 使用: ./check_notifications.sh <AI_NAME>
-# 示例: ./check_notifications.sh max
+# Notification Check Script - Smart Cache Version
+# Purpose: Check for new notifications when AI session starts
+# Usage: ./check_notifications.sh <AI_NAME>
+# Example: ./check_notifications.sh max
 ################################################################################
 
-# 配置
-AI_NAME="${1:-max}"  # 第一个参数为AI名称，默认max
+# Configuration
+AI_NAME="${1:-max}"  # First parameter is AI name, default max
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 SHARED_DIR="$(dirname "$SCRIPT_DIR")"
 NOTIFICATION_FILE="$SHARED_DIR/notifications.json"
 CACHE_FILE="$SHARED_DIR/.notification_cache.json"
 
-# 颜色输出
+# Color output
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
 BLUE='\033[0;34m'
 NC='\033[0m' # No Color
 
-# 输出函数
+# Output functions
 info() { echo -e "${BLUE}[INFO]${NC} $1"; }
 success() { echo -e "${GREEN}[SUCCESS]${NC} $1"; }
 warning() { echo -e "${YELLOW}[WARNING]${NC} $1"; }
 error() { echo -e "${RED}[ERROR]${NC} $1"; }
 
-# 检查依赖
+# Check dependencies
 if ! command -v jq &> /dev/null; then
-    error "jq未安装，请先安装: brew install jq"
+    error "jq not installed, please install first: brew install jq"
     exit 1
 fi
 
-# 检查文件存在性
+# Check file existence
 if [ ! -f "$NOTIFICATION_FILE" ]; then
-    error "通知文件不存在: $NOTIFICATION_FILE"
+    error "Notification file does not exist: $NOTIFICATION_FILE"
     exit 1
 fi
 
 if [ ! -f "$CACHE_FILE" ]; then
-    warning "缓存文件不存在，创建新缓存"
-    # 创建默认缓存
+    warning "Cache file does not exist, creating new cache"
+    # Create default cache
     cat > "$CACHE_FILE" <<EOF
 {
   "meta": {
@@ -59,7 +59,7 @@ if [ ! -f "$CACHE_FILE" ]; then
 EOF
 fi
 
-# 获取文件mtime（跨平台）
+# Get file mtime (cross-platform)
 get_mtime() {
     local file="$1"
     if [[ "$OSTYPE" == "darwin"* ]]; then
@@ -69,30 +69,30 @@ get_mtime() {
     fi
 }
 
-# 主逻辑
-info "检查通知更新 (AI: $AI_NAME)"
+# Main logic
+info "Checking notification updates (AI: $AI_NAME)"
 echo ""
 
-# 1. 获取当前mtime
+# 1. Get current mtime
 CURRENT_MTIME=$(get_mtime "$NOTIFICATION_FILE")
-info "当前文件mtime: $CURRENT_MTIME"
+info "Current file mtime: $CURRENT_MTIME"
 
-# 2. 读取缓存mtime
+# 2. Read cached mtime
 CACHED_MTIME=$(jq -r ".ai_agents.$AI_NAME.last_notification_mtime // 0" "$CACHE_FILE")
-info "缓存mtime: $CACHED_MTIME"
+info "Cached mtime: $CACHED_MTIME"
 
-# 3. 比较判断
+# 3. Compare and decide
 if [ "$CURRENT_MTIME" -gt "$CACHED_MTIME" ]; then
-    success "检测到新通知！"
+    success "New notifications detected!"
     echo ""
 
-    # 4. 读取并过滤通知
-    info "读取未读通知..."
+    # 4. Read and filter notifications
+    info "Reading unread notifications..."
 
-    # 过滤条件：
-    # - to 字段为当前AI或"all"
-    # - read_by 数组不包含当前AI
-    # - 未过期
+    # Filter conditions:
+    # - to field is current AI or "all"
+    # - read_by array does not contain current AI
+    # - Not expired
     CURRENT_ISO=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
 
     UNREAD_NOTIFICATIONS=$(jq --arg ai "$AI_NAME" --arg now "$CURRENT_ISO" '
@@ -107,48 +107,48 @@ if [ "$CURRENT_MTIME" -gt "$CACHED_MTIME" ]; then
     if [ "$UNREAD_COUNT" -gt 0 ]; then
         echo ""
         echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-        echo "  📬 您有 $UNREAD_COUNT 条未读通知"
+        echo "  📬 You have $UNREAD_COUNT unread notifications"
         echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
         echo ""
 
-        # 显示通知摘要
+        # Display notification summary
         echo "$UNREAD_NOTIFICATIONS" | jq -r '.[] |
             "【\(.priority | ascii_upcase)】\(.subject)\n" +
-            "  发送者: \(.from)\n" +
-            "  时间: \(.timestamp)\n" +
-            "  类型: \(.type)\n" +
+            "  From: \(.from)\n" +
+            "  Time: \(.timestamp)\n" +
+            "  Type: \(.type)\n" +
             "  ID: \(.id)\n"'
 
         echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
         echo ""
-        info "请使用 Read 工具查看详细内容: $NOTIFICATION_FILE"
+        info "Please use Read tool to view detailed content: $NOTIFICATION_FILE"
     else
-        success "无未读通知（所有通知已读或已过期）"
+        success "No unread notifications (all notifications read or expired)"
     fi
 
-    # 5. 更新缓存
-    info "更新缓存..."
+    # 5. Update cache
+    info "Updating cache..."
     CURRENT_TIMESTAMP=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
 
     jq --arg ai "$AI_NAME" \
        --arg ts "$CURRENT_TIMESTAMP" \
        --argjson mtime "$CURRENT_MTIME" \
        --argjson count "$UNREAD_COUNT" \
-       ".ai_agents[$ai].last_check_timestamp = \$ts |
-        .ai_agents[$ai].last_notification_mtime = \$mtime |
-        .ai_agents[$ai].unread_count = \$count |
+       ".ai_agents[\$ai].last_check_timestamp = \$ts |
+        .ai_agents[\$ai].last_notification_mtime = \$mtime |
+        .ai_agents[\$ai].unread_count = \$count |
         .file_mtimes.\"notifications.json\" = \$mtime" \
        "$CACHE_FILE" > "$CACHE_FILE.tmp" && mv "$CACHE_FILE.tmp" "$CACHE_FILE"
 
-    success "缓存已更新"
+    success "Cache updated"
 
-    # 返回状态码：1表示有新通知
+    # Return status code: 1 indicates new notifications
     exit 1
 else
-    success "无新通知（文件未修改）"
+    success "No new notifications (file not modified)"
     echo ""
-    info "上次检查: $(jq -r ".ai_agents.$AI_NAME.last_check_timestamp" "$CACHE_FILE")"
+    info "Last check: $(jq -r ".ai_agents.$AI_NAME.last_check_timestamp" "$CACHE_FILE")"
 
-    # 返回状态码：0表示无新通知
+    # Return status code: 0 indicates no new notifications
     exit 0
 fi

@@ -1,116 +1,116 @@
-# 通用文档 结构化模板
+# Generic Document Structured Template
 
-> 将任意文档转化为AI友好格式
+> Convert any document to AI-friendly format
 
 ---
 
 ## META
 ```yaml
-标题: [文档标题]
-类型: [文档类型]
-来源: [原始文档名/链接]
-作者: [作者]
-日期: YYYY-MM-DD
-摘要: [一句话概述，<50字]
+Title: [Document title]
+Type: [Document type]
+Source: [Original document name/link]
+Author: [Author]
+Date: YYYY-MM-DD
+Summary: [One-line overview, <50 words]
 ```
 
-## 核心信息
-<!-- 文档最重要的3-5个要点 -->
+## Core Information
+<!-- 3-5 most important points of the document -->
 
-### 要点1: [标题]
-[内容，保持简洁]
+### Point 1: [Title]
+[Content, keep concise]
 
-### 要点2: [标题]
-[内容，保持简洁]
+### Point 2: [Title]
+[Content, keep concise]
 
-### 要点3: [标题]
-[内容，保持简洁]
+### Point 3: [Title]
+[Content, keep concise]
 
-## 详细内容
+## Detailed Content
 
-### 章节1: [标题]
+### Section 1: [Title]
 ```yaml
-目的: [本章节目的]
+Purpose: [Purpose of this section]
 ```
-- [要点1]
-- [要点2]
-- [要点3]
+- [Point 1]
+- [Point 2]
+- [Point 3]
 
-### 章节2: [标题]
+### Section 2: [Title]
 ```yaml
-目的: [本章节目的]
+Purpose: [Purpose of this section]
 ```
-- [要点1]
-- [要点2]
+- [Point 1]
+- [Point 2]
 
-## 数据/表格
-<!-- 关键数据提取 -->
+## Data/Tables
+<!-- Key data extraction -->
 
-| 维度 | 数值 | 说明 |
-|------|------|------|
+| Dimension | Value | Description |
+|-----------|-------|-------------|
 | xxx | xxx | xxx |
 
-## 图片说明
-<!-- 将图片转为文字描述 -->
+## Image Descriptions
+<!-- Convert images to text descriptions -->
 
-### 图1: [图片标题]
+### Figure 1: [Image title]
 ```yaml
-类型: 流程图|架构图|截图|图表
-描述: [图片内容描述]
-关键信息:
-  - [信息1]
-  - [信息2]
+Type: Flowchart|Architecture|Screenshot|Chart
+Description: [Image content description]
+Key Information:
+  - [Info 1]
+  - [Info 2]
 ```
 
-### 图2: [图片标题]
+### Figure 2: [Image title]
 ```yaml
-类型: xxx
-描述: xxx
+Type: xxx
+Description: xxx
 ```
 
-## 结论/行动
-<!-- 文档的结论或需要的行动 -->
+## Conclusions/Actions
+<!-- Document conclusions or required actions -->
 
-结论:
-- [结论1]
-- [结论2]
+Conclusions:
+- [Conclusion 1]
+- [Conclusion 2]
 
-行动:
-- [ ] [行动1]
-- [ ] [行动2]
+Actions:
+- [ ] [Action 1]
+- [ ] [Action 2]
 
-## 附录
-<!-- 需要保留的原始信息 -->
-- 原文链接: [URL]
-- 相关文档: [文档名]
+## Appendix
+<!-- Original information that needs to be retained -->
+- Original link: [URL]
+- Related documents: [Document names]
 
 ---
 
 <!--
-转换指南:
+Conversion guide:
 
-【删除】
-- 寒暄语、客套话
-- "的"、"了"、"进行"等虚词
-- 重复内容
-- 无信息量的过渡句
+【DELETE】
+- Greetings, pleasantries
+- Filler words and redundant expressions
+- Repeated content
+- Transition sentences without information
 
-【保留】
-- 数字、日期、金额
-- 人名、产品名、专有名词
-- 结论性语句
-- 规则、约束条件
+【KEEP】
+- Numbers, dates, amounts
+- Names, product names, proper nouns
+- Conclusive statements
+- Rules, constraints
 
-【转化】
-- 长段落 → 要点列表
-- 模糊描述 → 具体数值
-- 图片 → 关键信息描述
-- 表格 → 简化保留关键列
+【TRANSFORM】
+- Long paragraphs → Bullet lists
+- Vague descriptions → Specific values
+- Images → Key information descriptions
+- Tables → Simplified key columns only
 
-【符号约定】
-✅ 已完成/是
-❌ 未完成/否
-⚠️ 警告/注意
-📌 重要
-🔗 链接/关联
+【SYMBOL CONVENTIONS】
+✅ Completed/Yes
+❌ Incomplete/No
+⚠️ Warning/Attention
+📌 Important
+🔗 Link/Related
 -->

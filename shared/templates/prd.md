@@ -1,98 +1,98 @@
-# PRD 结构化模板
+# PRD Structured Template
 
-> 将产品需求文档转化为此格式
+> Convert product requirement documents to this format
 
 ---
 
 ## META
 ```yaml
-名称: [功能名称]
-版本: v1.0
-作者: [PM姓名]
-日期: YYYY-MM-DD
-状态: 草稿|评审中|已定稿
-优先级: P0|P1|P2
+Name: [Feature name]
+Version: v1.0
+Author: [PM name]
+Date: YYYY-MM-DD
+Status: Draft|Under Review|Finalized
+Priority: P0|P1|P2
 ```
 
-## 背景
-<!-- 1-2句话说明为什么做 -->
-[问题/机会描述]
+## Background
+<!-- 1-2 sentences explaining why we're doing this -->
+[Problem/opportunity description]
 
-## 目标
-<!-- 用指标量化 -->
-- 目标1: [具体指标]
-- 目标2: [具体指标]
+## Objectives
+<!-- Quantify with metrics -->
+- Objective 1: [Specific metrics]
+- Objective 2: [Specific metrics]
 
-## 用户
+## Users
 ```yaml
-角色: [用户类型]
-场景: [使用场景]
-痛点: [核心痛点]
+Role: [User type]
+Scenario: [Use case]
+Pain Point: [Core pain point]
 ```
 
-## 功能清单
-<!-- 用编号便于追踪 -->
-| ID | 功能 | 优先级 | 说明 |
-|----|------|--------|------|
+## Feature List
+<!-- Use numbering for tracking -->
+| ID | Feature | Priority | Description |
+|----|---------|----------|-------------|
 | F1 | xxx | P0 | xxx |
 | F2 | xxx | P1 | xxx |
 
-## 功能详情
+## Feature Details
 
-### F1: [功能名]
+### F1: [Feature Name]
 ```yaml
-入口: [从哪里进入]
-前置: [前置条件]
+Entry: [How to access]
+Prerequisites: [Preconditions]
 ```
 
-**流程**:
-1. 用户 → [动作]
-2. 系统 → [响应]
-3. 用户 → [动作]
+**Flow**:
+1. User → [Action]
+2. System → [Response]
+3. User → [Action]
 
-**规则**:
-- R1: [业务规则]
-- R2: [业务规则]
+**Rules**:
+- R1: [Business rule]
+- R2: [Business rule]
 
-**异常**:
-- E1: [异常情况] → [处理方式]
+**Exceptions**:
+- E1: [Exception case] → [Handling method]
 
 ---
 
-### F2: [功能名]
-<!-- 同上格式 -->
+### F2: [Feature Name]
+<!-- Same format as above -->
 
-## 数据
+## Data
 ```yaml
-输入: [需要的数据]
-输出: [产生的数据]
-存储: [存储要求]
+Input: [Required data]
+Output: [Generated data]
+Storage: [Storage requirements]
 ```
 
-## 非功能
+## Non-functional
 ```yaml
-性能: [响应时间/并发要求]
-安全: [权限/加密要求]
-兼容: [浏览器/设备要求]
+Performance: [Response time/concurrency requirements]
+Security: [Permission/encryption requirements]
+Compatibility: [Browser/device requirements]
 ```
 
-## 里程碑
-| 阶段 | 日期 | 交付物 |
-|------|------|--------|
-| 开发 | MM-DD | xxx |
-| 测试 | MM-DD | xxx |
-| 上线 | MM-DD | xxx |
+## Milestones
+| Phase | Date | Deliverables |
+|-------|------|--------------|
+| Development | MM-DD | xxx |
+| Testing | MM-DD | xxx |
+| Launch | MM-DD | xxx |
 
-## 开放问题
-- [ ] Q1: [待确认问题]
-- [ ] Q2: [待确认问题]
+## Open Issues
+- [ ] Q1: [Question to be confirmed]
+- [ ] Q2: [Question to be confirmed]
 
 ---
 
 <!--
-转换指南:
-1. 删除所有"的"、"了"、"进行"等虚词
-2. 图片转为文字描述关键元素
-3. 长段落拆成要点列表
-4. 重复内容只保留一处
+Conversion guide:
+1. Remove all filler words and redundant expressions
+2. Convert images to text descriptions of key elements
+3. Break long paragraphs into bullet lists
+4. Keep repeated content in only one place
 -->

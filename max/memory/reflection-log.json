@@ -5,18 +5,18 @@
       "date": "2026-02-19T06:55:10.485Z",
       "category": "E-TOKEN-LOW",
       "severity": "high",
-      "description": "Token估算严重低估 - 估算3000实际17000",
+      "description": "Severe token estimation underestimation - estimated 3000 actual 17000",
       "context": {
-        "task_description": "创建自我反省系统",
+        "task_description": "Create self-reflection system",
         "estimated_tokens": 3000,
         "actual_tokens": 17000,
         "deviation_ratio": "5.67"
       },
-      "root_cause": "Token预估偏低467%，可能原因：任务复杂度低估、未考虑多文件累积消耗、校准系数未应用",
+      "root_cause": "Token estimation 467% too low, possible causes: task complexity underestimation, multi-file cumulative consumption not considered, calibration coefficient not applied",
       "resolution": {
         "immediate": null,
         "rule_added": null,
-        "prevention": "更新校准系数，当前偏差比: 5.67x"
+        "prevention": "Update calibration coefficient, current deviation ratio: 5.67x"
       },
       "status": "pending_analysis",
       "lessons_learned": null
@@ -26,18 +26,18 @@
       "date": "2026-02-19T06:55:10.583Z",
       "category": "E-AUTH-OPUS",
       "severity": "critical",
-      "description": "未经授权使用Opus模型",
+      "description": "Unauthorized use of Opus model",
       "context": {
-        "task_description": "未提供",
+        "task_description": "Not provided",
         "estimated_tokens": null,
         "actual_tokens": null,
         "deviation_ratio": null
       },
-      "root_cause": "授权检查步骤被跳过或未正确执行",
+      "root_cause": "Authorization check step was skipped or not executed properly",
       "resolution": {
-        "immediate": "立即停止操作，向用户道歉并请求授权",
+        "immediate": "Stop operation immediately, apologize to user and request authorization",
         "rule_added": null,
-        "prevention": "在操作执行前增加强制授权验证检查点"
+        "prevention": "Add mandatory authorization verification checkpoint before operation execution"
       },
       "status": "pending_analysis",
       "lessons_learned": null
@@ -47,18 +47,18 @@
       "date": "2026-02-19T06:56:22.539Z",
       "category": "E-TOKEN-LOW",
       "severity": "high",
-      "description": "Token估算偏差: 预估3000, 实际17000 (5.67x)",
+      "description": "Token estimation deviation: estimated 3000, actual 17000 (5.67x)",
       "context": {
-        "task_description": "未提供",
+        "task_description": "Not provided",
         "estimated_tokens": 3000,
         "actual_tokens": 17000,
         "deviation_ratio": "5.67"
       },
-      "root_cause": "Token预估偏低467%，可能原因：任务复杂度低估、未考虑多文件累积消耗、校准系数未应用",
+      "root_cause": "Token estimation 467% too low, possible causes: task complexity underestimation, multi-file cumulative consumption not considered, calibration coefficient not applied",
       "resolution": {
         "immediate": null,
         "rule_added": null,
-        "prevention": "更新校准系数，当前偏差比: 5.67x"
+        "prevention": "Update calibration coefficient, current deviation ratio: 5.67x"
       },
       "status": "pending_analysis",
       "lessons_learned": null
@@ -68,18 +68,18 @@
       "date": "2026-02-19T06:58:28.457Z",
       "category": "E-AUTH-OPUS",
       "severity": "critical",
-      "description": "2026-02-19对话中未经授权直接在Task工具中设置model=opus，违反了CLAUDE.md中的授权确认机制",
+      "description": "In 2026-02-19 conversation, directly set model=opus in Task tool without authorization, violating the authorization confirmation mechanism in CLAUDE.md",
       "context": {
-        "task_description": "未提供",
+        "task_description": "Not provided",
         "estimated_tokens": null,
         "actual_tokens": null,
         "deviation_ratio": null
       },
-      "root_cause": "授权检查步骤被跳过或未正确执行",
+      "root_cause": "Authorization check step was skipped or not executed properly",
       "resolution": {
-        "immediate": "立即停止操作，向用户道歉并请求授权",
+        "immediate": "Stop operation immediately, apologize to user and request authorization",
         "rule_added": null,
-        "prevention": "在操作执行前增加强制授权验证检查点"
+        "prevention": "Add mandatory authorization verification checkpoint before operation execution"
       },
       "status": "pending_analysis",
       "lessons_learned": null

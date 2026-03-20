@@ -1,15 +1,15 @@
-# 通知缓存机制 - 实战演示
+# Notification Caching Mechanism - Practical Demonstration
 
-**场景**: 展示完整的通知发送、检查、读取流程
-**演示日期**: 2026-02-13
+**Scenario**: Showcase complete notification sending, checking, and reading workflow
+**Demo Date**: 2026-02-13
 
 ---
 
-## 场景1: 麦克斯分配任务给贾维斯
+## Scenario 1: Max Assigns Task to Jarvis
 
-### 步骤1: 麦克斯发送通知
+### Step 1: Max Sends Notification
 
-**操作**: 编辑 `notifications.json`，添加新通知
+**Operation**: Edit `notifications.json`, add new notification
 
 ```json
 {
@@ -19,23 +19,23 @@
   "type": "task_assignment",
   "from": "max",
   "to": "jarvis",
-  "subject": "优化数据库查询性能",
+  "subject": "Optimize Database Query Performance",
   "content": {
     "task_id": "perf_20260213_001",
     "file": "backend/api/users.js",
-    "issue": "getUserList接口响应时间超过3秒",
-    "current_behavior": "每次查询都执行全表扫描，导致响应缓慢",
-    "expected_behavior": "响应时间应在500ms以内",
-    "hint": "建议在user_id和created_at字段添加索引"
+    "issue": "getUserList API response time exceeds 3 seconds",
+    "current_behavior": "Each query performs full table scan, causing slow response",
+    "expected_behavior": "Response time should be within 500ms",
+    "hint": "Recommend adding indexes on user_id and created_at fields"
   },
   "actions": [
     {
-      "label": "查看代码",
+      "label": "View Code",
       "action": "read_file",
       "target": "backend/api/users.js"
     },
     {
-      "label": "确认接收",
+      "label": "Confirm Receipt",
       "action": "update_status",
       "target": "../shared/status.json"
     }
@@ -46,84 +46,84 @@
 }
 ```
 
-**结果**:
-- `notifications.json` 的 mtime 自动更新
-- 下次贾维斯启动会话时会检测到变化
+**Result**:
+- `notifications.json` mtime automatically updates
+- Next time Jarvis starts a session, changes will be detected
 
 ---
 
-### 步骤2: 贾维斯启动会话并检查
+### Step 2: Jarvis Starts Session and Checks
 
-**执行脚本**:
+**Execute Script**:
 ```bash
 /Users/yuhao/Desktop/yezannnnn/aiGroup/shared/scripts/check_notifications_simple.sh jarvis
 ```
 
-**输出**:
+**Output**:
 ```
-[INFO] AI通知检查 - jarvis
+[INFO] AI Notification Check - jarvis
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-[INFO] 通知文件最后修改: 2026-02-13 21:00:15
-[INFO] 上次检查时间: 2026-02-13 12:00:00
+[INFO] Notification file last modified: 2026-02-13 21:00:15
+[INFO] Last check time: 2026-02-13 12:00:00
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  📬 检测到通知文件有更新！
+  📬 Notification file update detected!
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-[✓] 建议读取通知文件: /Users/yuhao/Desktop/yezannnnn/aiGroup/shared/notifications.json
+[✓] Recommend reading notification file: /Users/yuhao/Desktop/yezannnnn/aiGroup/shared/notifications.json
 
-[INFO] 缓存已更新
+[INFO] Cache updated
 ```
 
-**脚本返回**: Exit code 1（有新通知）
+**Script Returns**: Exit code 1 (new notifications available)
 
 ---
 
-### 步骤3: 贾维斯读取并处理通知
+### Step 3: Jarvis Reads and Processes Notification
 
-**使用Read工具**:
+**Using Read Tool**:
 ```
 Read /Users/yuhao/Desktop/yezannnnn/aiGroup/shared/notifications.json
 ```
 
-**过滤逻辑** (在AI内部处理):
+**Filtering Logic** (processed internally by AI):
 ```javascript
-// 伪代码
+// Pseudo code
 notifications.filter(n =>
-  (n.to === "jarvis" || n.to === "all") &&  // 目标是自己或全体
-  !n.read_by.includes("jarvis") &&          // 未读
-  new Date(n.expires_at) > new Date()       // 未过期
+  (n.to === "jarvis" || n.to === "all") &&  // Target is self or all
+  !n.read_by.includes("jarvis") &&          // Unread
+  new Date(n.expires_at) > new Date()       // Not expired
 )
 ```
 
-**找到的通知**:
+**Found Notification**:
 ```
-【HIGH】优化数据库查询性能
-  发送者: max
-  时间: 2026-02-13T21:00:00Z
-  类型: task_assignment
+【HIGH】Optimize Database Query Performance
+  Sender: max
+  Time: 2026-02-13T21:00:00Z
+  Type: task_assignment
   ID: notif_20260213_005
 
-内容:
-  任务ID: perf_20260213_001
-  文件: backend/api/users.js
-  问题: getUserList接口响应时间超过3秒
-  期望: 响应时间应在500ms以内
-  提示: 建议在user_id和created_at字段添加索引
+Content:
+  Task ID: perf_20260213_001
+  File: backend/api/users.js
+  Issue: getUserList API response time exceeds 3 seconds
+  Expected: Response time should be within 500ms
+  Hint: Recommend adding indexes on user_id and created_at fields
 ```
 
 ---
 
-### 步骤4: 贾维斯标记为已读（可选）
+### Step 4: Jarvis Marks as Read (Optional)
 
-**使用Edit工具更新 `notifications.json`**:
+**Using Edit Tool to Update `notifications.json`**:
 
-找到ID为 `notif_20260213_005` 的通知，修改：
+Find notification with ID `notif_20260213_005`, modify:
 ```json
 "read_by": ["jarvis"]
 ```
 
-**或使用jq命令**（如果需要）:
+**Or use jq command** (if needed):
 ```bash
 jq '(.notifications[] |
      select(.id == "notif_20260213_005").read_by) += ["jarvis"]' \
@@ -133,26 +133,26 @@ jq '(.notifications[] |
 
 ---
 
-### 步骤5: 贾维斯完成任务后确认
+### Step 5: Jarvis Confirms After Task Completion
 
-**更新通知的 `acknowledged_by` 字段**:
+**Update notification's `acknowledged_by` field**:
 ```json
 "acknowledged_by": ["jarvis"]
 ```
 
-**同时更新 `status.json`**:
+**Simultaneously update `status.json`**:
 ```json
 {
-  "current_task": "优化数据库查询性能 - 进行中",
+  "current_task": "Optimize Database Query Performance - In Progress",
   "last_updated": "2026-02-13T21:30:00Z"
 }
 ```
 
 ---
 
-## 场景2: 麦克斯发送全体通知
+## Scenario 2: Max Sends Team-wide Notification
 
-### 步骤1: 麦克斯发送会议通知
+### Step 1: Max Sends Meeting Notification
 
 ```json
 {
@@ -162,17 +162,17 @@ jq '(.notifications[] |
   "type": "information",
   "from": "max",
   "to": "all",
-  "subject": "本周项目进度会议",
+  "subject": "Weekly Project Progress Meeting",
   "content": {
     "meeting_time": "2026-02-14T15:00:00Z",
     "agenda": [
-      "设计进度回顾 - 艾拉",
-      "开发进度回顾 - 贾维斯",
-      "测试情况汇报 - 凯尔",
-      "下周计划安排 - 麦克斯"
+      "Design Progress Review - Ella",
+      "Development Progress Review - Jarvis",
+      "Testing Status Report - Kyle",
+      "Next Week Planning - Max"
     ],
-    "location": "线上会议室",
-    "preparation": "请各位提前准备5分钟工作总结"
+    "location": "Online Meeting Room",
+    "preparation": "Please prepare a 5-minute work summary in advance"
   },
   "read_by": [],
   "acknowledged_by": [],
@@ -182,144 +182,144 @@ jq '(.notifications[] |
 
 ---
 
-### 步骤2: 各AI检查
+### Step 2: Each AI Checks
 
-**艾拉检查**:
+**Ella Checks**:
 ```bash
 ./check_notifications_simple.sh ella
-# 输出: 检测到通知文件有更新
+# Output: Notification file update detected
 # Exit code: 1
 ```
 
-**贾维斯检查**:
+**Jarvis Checks**:
 ```bash
 ./check_notifications_simple.sh jarvis
-# 输出: 检测到通知文件有更新（相对于上次贾维斯的检查时间）
+# Output: Notification file update detected (relative to Jarvis's last check time)
 # Exit code: 1
 ```
 
-**凯尔检查**:
+**Kyle Checks**:
 ```bash
 ./check_notifications_simple.sh kyle
-# 输出: 检测到通知文件有更新
+# Output: Notification file update detected
 # Exit code: 1
 ```
 
-**所有AI都会收到这个通知**（因为 `to: "all"`）
+**All AIs will receive this notification** (because `to: "all"`)
 
 ---
 
-### 步骤3: 各AI确认参加
+### Step 3: Each AI Confirms Attendance
 
-每个AI读取通知后，更新 `acknowledged_by`:
+After each AI reads the notification, update `acknowledged_by`:
 
 ```json
 "acknowledged_by": ["ella", "jarvis", "kyle"]
 ```
 
-麦克斯可以查看哪些成员已确认参加会议。
+Max can view which members have confirmed meeting attendance.
 
 ---
 
-## 场景3: 缓存机制效果验证
+## Scenario 3: Cache Mechanism Effect Verification
 
-### 步骤1: 连续多次检查（无新通知）
+### Step 1: Multiple Consecutive Checks (No New Notifications)
 
-**第一次检查**（贾维斯）:
+**First Check** (Jarvis):
 ```bash
 ./check_notifications_simple.sh jarvis
-# 输出: 检测到通知文件有更新
+# Output: Notification file update detected
 # Exit code: 1
-# Token消耗: ~150 tokens
+# Token consumption: ~150 tokens
 ```
 
-**第二次检查**（贾维斯，5分钟后）:
+**Second Check** (Jarvis, 5 minutes later):
 ```bash
 ./check_notifications_simple.sh jarvis
-# 输出: 无新通知（文件未修改）
+# Output: No new notifications (file not modified)
 # Exit code: 0
-# Token消耗: ~150 tokens（但无需读取文件，实际只消耗脚本执行）
+# Token consumption: ~150 tokens (but no file reading needed, only script execution)
 ```
 
-**第三次检查**（贾维斯，10分钟后）:
+**Third Check** (Jarvis, 10 minutes later):
 ```bash
 ./check_notifications_simple.sh jarvis
-# 输出: 无新通知（文件未修改）
+# Output: No new notifications (file not modified)
 # Exit code: 0
-# Token消耗: ~150 tokens（仅检查，未读取）
+# Token consumption: ~150 tokens (check only, no reading)
 ```
 
-**效果**:
-- 传统方式: 每次都读取文件 → 3次 × 4500 tokens = 13,500 tokens
-- 缓存方式: 只有第一次读取 → 1次读取(1500 tokens) + 2次检查(300 tokens) = 1,800 tokens
-- **节省率: 87%**
+**Effect**:
+- Traditional method: Read file every time → 3 times × 4500 tokens = 13,500 tokens
+- Cache method: Only first read → 1 read (1500 tokens) + 2 checks (300 tokens) = 1,800 tokens
+- **Savings rate: 87%**
 
 ---
 
-### 步骤2: 有新通知时的表现
+### Step 2: Performance When New Notifications Exist
 
-**麦克斯添加紧急通知**:
+**Max Adds Urgent Notification**:
 ```bash
-# 编辑notifications.json，添加新通知
-# 文件mtime自动更新
+# Edit notifications.json, add new notification
+# File mtime automatically updates
 ```
 
-**贾维斯第四次检查**:
+**Jarvis Fourth Check**:
 ```bash
 ./check_notifications_simple.sh jarvis
-# 输出: 检测到通知文件有更新
+# Output: Notification file update detected
 # Exit code: 1
-# 触发读取notifications.json
+# Triggers reading notifications.json
 ```
 
-**关键**: 只在文件真正变化时才读取，避免无意义的重复读取。
+**Key Point**: Only read when file actually changes, avoiding meaningless repeated reading.
 
 ---
 
-## 场景4: 多AI独立检查（无冲突）
+## Scenario 4: Multiple AIs Independent Checking (No Conflicts)
 
-### 同一时刻，4个AI同时检查
+### At the Same Moment, 4 AIs Check Simultaneously
 
-**麦克斯**:
+**Max**:
 ```bash
 ./check_notifications_simple.sh max
-# 读取缓存: .cache/max_last_check.txt
-# 写入缓存: .cache/max_last_check.txt
+# Read cache: .cache/max_last_check.txt
+# Write cache: .cache/max_last_check.txt
 ```
 
-**艾拉**:
+**Ella**:
 ```bash
 ./check_notifications_simple.sh ella
-# 读取缓存: .cache/ella_last_check.txt
-# 写入缓存: .cache/ella_last_check.txt
+# Read cache: .cache/ella_last_check.txt
+# Write cache: .cache/ella_last_check.txt
 ```
 
-**贾维斯**:
+**Jarvis**:
 ```bash
 ./check_notifications_simple.sh jarvis
-# 读取缓存: .cache/jarvis_last_check.txt
-# 写入缓存: .cache/jarvis_last_check.txt
+# Read cache: .cache/jarvis_last_check.txt
+# Write cache: .cache/jarvis_last_check.txt
 ```
 
-**凯尔**:
+**Kyle**:
 ```bash
 ./check_notifications_simple.sh kyle
-# 读取缓存: .cache/kyle_last_check.txt
-# 写入缓存: .cache/kyle_last_check.txt
+# Read cache: .cache/kyle_last_check.txt
+# Write cache: .cache/kyle_last_check.txt
 ```
 
-**结果**:
-- 每个AI有独立的缓存文件
-- 无文件锁冲突
-- 可并行执行
+**Result**:
+- Each AI has independent cache files
+- No file lock conflicts
+- Can execute in parallel
 
 ---
 
-## 场景5: 通知过期和清理
+## Scenario 5: Notification Expiration and Cleanup
 
-### 麦克斯定期清理过期通知
+### Max Regularly Cleans Expired Notifications
 
-**执行清理脚本**（需要jq）:
+**Execute Cleanup Script** (requires jq):
 ```bash
 CURRENT_ISO=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
 
@@ -329,134 +329,134 @@ jq --arg now "$CURRENT_ISO" \
    notifications.json > notifications.json.tmp && \
    mv notifications.json.tmp notifications.json
 
-echo "已清理过期通知"
+echo "Expired notifications cleaned"
 ```
 
-**效果**:
-- 自动删除 `expires_at < 当前时间` 的通知
-- 保持文件体积小
-- 提高读取速度
+**Effect**:
+- Automatically delete notifications where `expires_at < current time`
+- Keep file size small
+- Improve reading speed
 
 ---
 
-## 性能对比总结
+## Performance Comparison Summary
 
-### 一周使用统计（实际场景）
+### Weekly Usage Statistics (Real-world Scenario)
 
-**前提**:
-- 4个AI，每天各启动3次会话
-- 每周平均发送10条新通知
-- 每周共84次会话检查（4×3×7）
+**Assumptions**:
+- 4 AIs, each starting 3 sessions daily
+- Average 10 new notifications sent per week
+- Total 84 session checks per week (4×3×7)
 
-**传统方式**:
+**Traditional Method**:
 ```
-84次会话 × 4500 tokens/次 = 378,000 tokens/周
-约 $5.67/周（按Sonnet价格）
-```
-
-**缓存优化方式**:
-```
-10次有新通知 × 1650 tokens = 16,500 tokens
-74次无新通知 × 150 tokens = 11,100 tokens
-总计: 27,600 tokens/周
-约 $0.41/周（按Sonnet价格）
+84 sessions × 4500 tokens/session = 378,000 tokens/week
+Approximately $5.67/week (at Sonnet pricing)
 ```
 
-**周节省**: $5.26 (93%节省率)
-**月节省**: $20+
-**年节省**: $240+
+**Cache Optimized Method**:
+```
+10 times with new notifications × 1650 tokens = 16,500 tokens
+74 times without new notifications × 150 tokens = 11,100 tokens
+Total: 27,600 tokens/week
+Approximately $0.41/week (at Sonnet pricing)
+```
+
+**Weekly Savings**: $5.26 (93% savings rate)
+**Monthly Savings**: $20+
+**Annual Savings**: $240+
 
 ---
 
-## 最佳实践建议
+## Best Practice Recommendations
 
-### 对于AI成员
+### For AI Members
 
-1. **每次会话启动都执行检查脚本**
-2. **只在exit code=1时读取通知文件**
-3. **读取后建议标记为已读**（避免重复处理）
-4. **重要通知要acknowledge确认**
+1. **Execute check script on every session startup**
+2. **Only read notification file when exit code=1**
+3. **Recommend marking as read after reading** (avoid duplicate processing)
+4. **Acknowledge important notifications for confirmation**
 
-### 对于麦克斯（通知管理者）
+### For Max (Notification Manager)
 
-1. **发送通知时确保ID唯一且递增**
-2. **设置合理的过期时间**（通常30天）
-3. **高优先级任务用 priority: "high"**
-4. **每月执行一次过期通知清理**
+1. **Ensure unique and incremental IDs when sending notifications**
+2. **Set reasonable expiration times** (usually 30 days)
+3. **Use priority: "high" for high-priority tasks**
+4. **Execute expired notification cleanup monthly**
 
-### 对于系统维护
+### For System Maintenance
 
-1. **定期备份 notifications.json**
-2. **监控缓存目录大小**（应该很小）
-3. **如有异常，删除缓存强制重建**
+1. **Regularly backup notifications.json**
+2. **Monitor cache directory size** (should be small)
+3. **Delete cache and force rebuild if anomalies occur**
 
 ---
 
-## 故障演练
+## Failure Drill
 
-### 问题1: 缓存失效，总是显示有新通知
+### Issue 1: Cache Invalid, Always Shows New Notifications
 
-**诊断**:
+**Diagnosis**:
 ```bash
-# 检查缓存文件
+# Check cache file
 cat .cache/jarvis_last_check.txt
-# 输出: 1707825600
+# Output: 1707825600
 
-# 检查notifications.json的mtime
+# Check notifications.json mtime
 stat -f %m notifications.json  # macOS
-# 输出: 1707825600
+# Output: 1707825600
 
-# 如果两者相等但还是显示有更新，缓存文件可能损坏
+# If both are equal but still shows updates, cache file may be corrupted
 ```
 
-**解决**:
+**Solution**:
 ```bash
-# 删除缓存，重新初始化
+# Delete cache, reinitialize
 rm .cache/jarvis_last_check.txt
 
-# 下次检查会自动创建新缓存
+# Next check will automatically create new cache
 ./check_notifications_simple.sh jarvis
 ```
 
 ---
 
-### 问题2: 脚本没有权限执行
+### Issue 2: Script Lacks Execute Permission
 
-**诊断**:
+**Diagnosis**:
 ```bash
 ls -l scripts/check_notifications_simple.sh
-# 输出: -rw-r--r-- (没有x权限)
+# Output: -rw-r--r-- (no x permission)
 ```
 
-**解决**:
+**Solution**:
 ```bash
 chmod +x scripts/check_notifications_simple.sh
 ```
 
 ---
 
-### 问题3: 文件路径错误
+### Issue 3: File Path Error
 
-**现象**: 脚本报错 "通知文件不存在"
+**Phenomenon**: Script error "Notification file does not exist"
 
-**诊断**:
+**Diagnosis**:
 ```bash
-# 检查文件是否存在
+# Check if file exists
 ls -l /Users/yuhao/Desktop/yezannnnn/aiGroup/shared/notifications.json
 
-# 检查脚本中的路径配置
+# Check path configuration in script
 head -20 scripts/check_notifications_simple.sh | grep NOTIFICATION_FILE
 ```
 
-**解决**: 修改脚本中的路径配置或移动文件到正确位置
+**Solution**: Modify path configuration in script or move file to correct location
 
 ---
 
-## 扩展演示：批量文件监控
+## Extended Demo: Batch File Monitoring
 
-### 监控多个文件的变化
+### Monitor Multiple File Changes
 
-创建批量检查脚本 `check_all_files.sh`:
+Create batch check script `check_all_files.sh`:
 
 ```bash
 #!/bin/bash
@@ -464,7 +464,7 @@ head -20 scripts/check_notifications_simple.sh | grep NOTIFICATION_FILE
 AI_NAME="${1:-max}"
 SHARED_DIR="/Users/yuhao/Desktop/yezannnnn/aiGroup/shared"
 
-# 定义监控文件列表
+# Define monitored file list
 FILES=(
   "notifications.json"
   "status.json"
@@ -472,7 +472,7 @@ FILES=(
   "tasks/meetings.md"
 )
 
-echo "检查所有文件更新 - $AI_NAME"
+echo "Check all file updates - $AI_NAME"
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 
 HAS_UPDATE=false
@@ -489,41 +489,41 @@ for file in "${FILES[@]}"; do
   CACHED_MTIME=$(cat "$CACHE_FILE" 2>/dev/null || echo "0")
 
   if [ "$CURRENT_MTIME" -gt "$CACHED_MTIME" ]; then
-    echo "✓ $file 有更新"
+    echo "✓ $file has updates"
     echo "$CURRENT_MTIME" > "$CACHE_FILE"
     HAS_UPDATE=true
   else
-    echo "✗ $file 无变化"
+    echo "✗ $file no changes"
   fi
 done
 
 if [ "$HAS_UPDATE" = true ]; then
   echo ""
-  echo "检测到文件更新，建议读取变更内容"
+  echo "File updates detected, recommend reading changed content"
   exit 1
 else
   echo ""
-  echo "所有文件无变化"
+  echo "All files unchanged"
   exit 0
 fi
 ```
 
-**使用效果**:
-- 一次性检查多个重要文件
-- 进一步提升Token效率
-- 适合项目启动时的全面状态检查
+**Usage Effect**:
+- Check multiple important files at once
+- Further improve Token efficiency
+- Suitable for comprehensive status check at project startup
 
 ---
 
-**演示结束**
+**Demo Complete**
 
-这个演示展示了通知缓存机制在实际场景中的完整使用流程和显著的优化效果。
+This demonstration showcases the complete usage workflow and significant optimization effects of the notification caching mechanism in real-world scenarios.
 
-**下一步**:
-1. 在你的CLAUDE.md中集成检查脚本
-2. 进行实际测试验证
-3. 观察Token消耗变化
+**Next Steps**:
+1. Integrate check script into your CLAUDE.md
+2. Conduct actual testing and verification
+3. Observe Token consumption changes
 
-**文档**:
-- 快速上手: `NOTIFICATION_QUICK_START.md`
-- 完整实现: `NOTIFICATION_CACHE_IMPLEMENTATION.md`
+**Documentation**:
+- Quick Start: `NOTIFICATION_QUICK_START.md`
+- Complete Implementation: `NOTIFICATION_CACHE_IMPLEMENTATION.md`

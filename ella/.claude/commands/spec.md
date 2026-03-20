@@ -1,160 +1,160 @@
-# /spec - 设计规范
+# /spec - Design Specification
 
-输出完整的设计规范文档
+Output complete design specification document
 
-## 使用方式
+## Usage
 
 ```
-/spec              # 输出当前项目设计规范
-/spec create       # 创建新的设计规范
-/spec update       # 更新现有规范
+/spec              # Output current project design specification
+/spec create       # Create new design specification
+/spec update       # Update existing specification
 ```
 
-## 设计规范模板
+## Design Specification Template
 
 ```markdown
-# 设计规范 - [项目名称]
+# Design Specification - [Project Name]
 
-## 基础信息
-设计师: 艾拉
-创建日期: YYYY-MM-DD
-更新日期: YYYY-MM-DD
-
----
-
-## 1. 颜色系统
-
-### 品牌色
-| 名称 | 色值 | 使用场景 |
-|------|------|----------|
-| 主色 | #1890FF | 按钮、链接、强调 |
-| 主色-浅 | #E6F7FF | 选中背景、提示背景 |
-| 主色-深 | #096DD9 | 按钮hover |
-
-### 中性色
-| 名称 | 色值 | 使用场景 |
-|------|------|----------|
-| 标题 | #262626 | 一级标题 |
-| 正文 | #595959 | 正文内容 |
-| 辅助 | #8C8C8C | 辅助文字 |
-| 禁用 | #BFBFBF | 禁用状态 |
-| 边框 | #D9D9D9 | 边框、分割线 |
-| 背景 | #F5F5F5 | 页面背景 |
-| 白色 | #FFFFFF | 卡片背景 |
-
-### 功能色
-| 名称 | 色值 | 使用场景 |
-|------|------|----------|
-| 成功 | #52C41A | 成功状态 |
-| 警告 | #FAAD14 | 警告提示 |
-| 错误 | #FF4D4F | 错误状态 |
-| 信息 | #1890FF | 信息提示 |
+## Basic Information
+Designer: Ella
+Created Date: YYYY-MM-DD
+Updated Date: YYYY-MM-DD
 
 ---
 
-## 2. 字体系统
+## 1. Color System
 
-### 字体族
+### Brand Colors
+| Name | Hex Value | Usage Scenario |
+|------|------|----------|
+| Primary | #1890FF | Buttons, links, emphasis |
+| Primary Light | #E6F7FF | Selected background, hint background |
+| Primary Dark | #096DD9 | Button hover |
+
+### Neutral Colors
+| Name | Hex Value | Usage Scenario |
+|------|------|----------|
+| Title | #262626 | Primary titles |
+| Body | #595959 | Body content |
+| Secondary | #8C8C8C | Secondary text |
+| Disabled | #BFBFBF | Disabled state |
+| Border | #D9D9D9 | Borders, dividers |
+| Background | #F5F5F5 | Page background |
+| White | #FFFFFF | Card background |
+
+### Functional Colors
+| Name | Hex Value | Usage Scenario |
+|------|------|----------|
+| Success | #52C41A | Success state |
+| Warning | #FAAD14 | Warning alerts |
+| Error | #FF4D4F | Error state |
+| Info | #1890FF | Information alerts |
+
+---
+
+## 2. Typography System
+
+### Font Family
 ```css
 font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI',
              Roboto, 'Helvetica Neue', Arial, sans-serif;
 ```
 
-### 字号层级
-| 层级 | 字号 | 字重 | 行高 | 使用场景 |
+### Font Size Hierarchy
+| Level | Size | Weight | Line Height | Usage Scenario |
 |------|------|------|------|----------|
-| H1 | 28px | 600 | 1.4 | 页面标题 |
-| H2 | 24px | 600 | 1.4 | 区块标题 |
-| H3 | 20px | 500 | 1.4 | 卡片标题 |
-| H4 | 16px | 500 | 1.5 | 列表标题 |
-| Body | 14px | 400 | 1.6 | 正文 |
-| Caption | 12px | 400 | 1.4 | 辅助说明 |
+| H1 | 28px | 600 | 1.4 | Page titles |
+| H2 | 24px | 600 | 1.4 | Section titles |
+| H3 | 20px | 500 | 1.4 | Card titles |
+| H4 | 16px | 500 | 1.5 | List titles |
+| Body | 14px | 400 | 1.6 | Body text |
+| Caption | 12px | 400 | 1.4 | Helper text |
 
 ---
 
-## 3. 间距系统
+## 3. Spacing System
 
-### 基础单位
-基础间距单位: 4px
+### Base Unit
+Base spacing unit: 4px
 
-### 间距规范
-| 名称 | 数值 | 使用场景 |
+### Spacing Specification
+| Name | Value | Usage Scenario |
 |------|------|----------|
-| xs | 4px | 紧凑元素间距 |
-| sm | 8px | 相关元素间距 |
-| md | 16px | 标准间距 |
-| lg | 24px | 区块间距 |
-| xl | 32px | 大区块间距 |
+| xs | 4px | Tight element spacing |
+| sm | 8px | Related element spacing |
+| md | 16px | Standard spacing |
+| lg | 24px | Section spacing |
+| xl | 32px | Large section spacing |
 
-### 页面边距
-| 端 | 边距 |
+### Page Margins
+| Device | Margin |
 |------|------|
-| 移动端 | 16px |
-| 平板 | 24px |
-| 桌面端 | 32px |
+| Mobile | 16px |
+| Tablet | 24px |
+| Desktop | 32px |
 
 ---
 
-## 4. 圆角系统
+## 4. Border Radius System
 
-| 元素 | 圆角 |
+| Element | Border Radius |
 |------|------|
-| 按钮-小 | 4px |
-| 按钮-中 | 6px |
-| 卡片 | 8px |
-| 弹窗 | 12px |
-| 头像 | 50% |
+| Small Button | 4px |
+| Medium Button | 6px |
+| Card | 8px |
+| Modal | 12px |
+| Avatar | 50% |
 
 ---
 
-## 5. 阴影系统
+## 5. Shadow System
 
-| 层级 | 阴影值 | 使用场景 |
+| Level | Shadow Value | Usage Scenario |
 |------|--------|----------|
-| 一级 | 0 1px 2px rgba(0,0,0,0.05) | 卡片 |
-| 二级 | 0 4px 8px rgba(0,0,0,0.1) | 下拉菜单 |
-| 三级 | 0 8px 16px rgba(0,0,0,0.15) | 弹窗 |
+| Level 1 | 0 1px 2px rgba(0,0,0,0.05) | Cards |
+| Level 2 | 0 4px 8px rgba(0,0,0,0.1) | Dropdown menus |
+| Level 3 | 0 8px 16px rgba(0,0,0,0.15) | Modals |
 
 ---
 
-## 6. 组件规范
+## 6. Component Specifications
 
-### 按钮
-| 类型 | 高度 | 内边距 | 字号 |
+### Buttons
+| Type | Height | Padding | Font Size |
 |------|------|--------|------|
-| 大按钮 | 44px | 0 24px | 16px |
-| 中按钮 | 36px | 0 16px | 14px |
-| 小按钮 | 28px | 0 12px | 12px |
+| Large Button | 44px | 0 24px | 16px |
+| Medium Button | 36px | 0 16px | 14px |
+| Small Button | 28px | 0 12px | 12px |
 
-### 输入框
-| 属性 | 值 |
+### Input Fields
+| Property | Value |
 |------|------|
-| 高度 | 36px |
-| 边框 | 1px solid #D9D9D9 |
-| 圆角 | 4px |
-| 内边距 | 0 12px |
+| Height | 36px |
+| Border | 1px solid #D9D9D9 |
+| Border Radius | 4px |
+| Padding | 0 12px |
 
-### 卡片
-| 属性 | 值 |
+### Cards
+| Property | Value |
 |------|------|
-| 背景 | #FFFFFF |
-| 圆角 | 8px |
-| 内边距 | 16px |
-| 阴影 | 一级阴影 |
+| Background | #FFFFFF |
+| Border Radius | 8px |
+| Padding | 16px |
+| Shadow | Level 1 shadow |
 
 ---
 
-## 7. 响应式断点
+## 7. Responsive Breakpoints
 
-| 断点 | 范围 | 布局 |
+| Breakpoint | Range | Layout |
 |------|------|------|
-| xs | < 576px | 单列 |
-| sm | >= 576px | 单列 |
-| md | >= 768px | 双列 |
-| lg | >= 992px | 多列 |
-| xl | >= 1200px | 最大宽度1200px |
+| xs | < 576px | Single column |
+| sm | >= 576px | Single column |
+| md | >= 768px | Two columns |
+| lg | >= 992px | Multi-column |
+| xl | >= 1200px | Max width 1200px |
 ```
 
-## 存储位置
+## Storage Location
 
-设计规范存储到 `../shared/designs/design-spec.md`
+Design specification stored to `../shared/designs/design-spec.md`

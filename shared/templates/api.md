@@ -1,82 +1,82 @@
-# API 结构化模板
+# API Structured Template
 
-> 将接口文档转化为此格式
+> Convert interface documentation to this format
 
 ---
 
 ## META
 ```yaml
-模块: [模块名称]
-版本: v1.0
-基础路径: /api/v1
-认证: Bearer Token | Cookie | 无
+Module: [Module name]
+Version: v1.0
+Base Path: /api/v1
+Authentication: Bearer Token | Cookie | None
 ```
 
-## 接口清单
+## API List
 
-| 方法 | 路径 | 说明 | 认证 |
-|------|------|------|------|
-| POST | /user/login | 用户登录 | ❌ |
-| GET | /user/info | 获取用户信息 | ✅ |
-| PUT | /user/update | 更新用户信息 | ✅ |
+| Method | Path | Description | Auth |
+|--------|------|-------------|------|
+| POST | /user/login | User login | ❌ |
+| GET | /user/info | Get user info | ✅ |
+| PUT | /user/update | Update user info | ✅ |
 
 ---
 
-## 接口详情
+## API Details
 
 ### POST /user/login
-> 用户登录
+> User login
 
-**请求**
+**Request**
 ```json
 {
-  "username": "string, 必填, 用户名/手机号",
-  "password": "string, 必填, 密码MD5"
+  "username": "string, required, username/phone",
+  "password": "string, required, MD5 password"
 }
 ```
 
-**响应**
+**Response**
 ```json
 {
-  "code": "number, 0=成功",
+  "code": "number, 0=success",
   "data": {
-    "token": "string, JWT令牌",
-    "expires": "number, 过期时间戳"
+    "token": "string, JWT token",
+    "expires": "number, expiration timestamp"
   },
-  "msg": "string, 错误信息"
+  "msg": "string, error message"
 }
 ```
 
-**错误码**
-| code | 说明 |
-|------|------|
-| 0 | 成功 |
-| 1001 | 用户名不存在 |
-| 1002 | 密码错误 |
-| 1003 | 账号已锁定 |
+**Error Codes**
+| code | Description |
+|------|-------------|
+| 0 | Success |
+| 1001 | Username not found |
+| 1002 | Password incorrect |
+| 1003 | Account locked |
 
 ---
 
 ### GET /user/info
-> 获取当前用户信息
+> Get current user information
 
-**请求头**
+**Request Headers**
 ```yaml
 Authorization: Bearer {token}
 ```
 
-**请求参数**: 无
+**Request Parameters**: None
 
-**响应**
+**Response**
 ```json
 {
   "code": 0,
   "data": {
-    "id": "number, 用户ID",
-    "username": "string, 用户名",
-    "avatar": "string, 头像URL",
+    "id": "number, user ID",
+    "username": "string, username",
+    "avatar": "string, avatar URL",
     "role": "string, admin|user",
-    "createdAt": "string, ISO时间"
+    "createdAt": "string, ISO time"
   }
 }
 ```
@@ -84,74 +84,74 @@ Authorization: Bearer {token}
 ---
 
 ### PUT /user/update
-> 更新用户信息
+> Update user information
 
-**请求**
+**Request**
 ```json
 {
-  "nickname": "string, 可选, 昵称",
-  "avatar": "string, 可选, 头像URL",
-  "phone": "string, 可选, 手机号"
+  "nickname": "string, optional, nickname",
+  "avatar": "string, optional, avatar URL",
+  "phone": "string, optional, phone number"
 }
 ```
 
-**响应**
+**Response**
 ```json
 {
   "code": 0,
-  "msg": "更新成功"
+  "msg": "Update successful"
 }
 ```
 
 ---
 
-## 通用说明
+## General Instructions
 
-### 认证方式
+### Authentication
 ```
-请求头: Authorization: Bearer {token}
-过期时间: 7天
-刷新机制: 过期前1天可刷新
+Request header: Authorization: Bearer {token}
+Expiration: 7 days
+Refresh mechanism: Can refresh 1 day before expiration
 ```
 
-### 响应格式
+### Response Format
 ```json
 {
-  "code": "number, 0=成功, 非0=失败",
-  "data": "any, 业务数据",
-  "msg": "string, 提示信息"
+  "code": "number, 0=success, non-0=failure",
+  "data": "any, business data",
+  "msg": "string, message"
 }
 ```
 
-### 通用错误码
-| code | 说明 |
-|------|------|
-| 401 | 未登录/Token过期 |
-| 403 | 无权限 |
-| 500 | 服务器错误 |
+### Common Error Codes
+| code | Description |
+|------|-------------|
+| 401 | Not logged in/Token expired |
+| 403 | No permission |
+| 500 | Server error |
 
-### 分页参数
+### Pagination Parameters
 ```yaml
-page: 页码, 从1开始
-size: 每页条数, 默认20
+page: Page number, starts from 1
+size: Items per page, default 20
 ```
 
-### 分页响应
+### Pagination Response
 ```json
 {
   "list": [],
-  "total": "number, 总条数",
-  "page": "number, 当前页",
-  "size": "number, 每页条数"
+  "total": "number, total count",
+  "page": "number, current page",
+  "size": "number, items per page"
 }
 ```
 
 ---
 
 <!--
-转换指南:
-1. 每个字段标注类型+必填+说明
-2. 用示例值而非描述
-3. 错误码集中列出
-4. 通用规则提取到底部
+Conversion guide:
+1. Annotate each field with type + required + description
+2. Use example values instead of descriptions
+3. List error codes centrally
+4. Extract common rules to bottom
 -->

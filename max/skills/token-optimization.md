@@ -1,618 +1,618 @@
-# 项目管理 Token 优化 Skill
+# Project Management Token Optimization Skill
 
-**作者**: 麦克斯 (Max) - 项目经理
-**版本**: v1.2
-**更新日期**: 2026-02-12
-**节省率**: 约67-85%（通过Task多模型优化策略）
-**基于**: AI债务助手项目的实际经验总结
-**v1.1更新**: 新增模型选择经验总结章节，基于实际使用中的选择错误与纠正
-**v1.2更新**: 新增Task多模型优化策略，实现细粒度成本控制和任务分解优化
+**Author**: Max - Project Manager
+**Version**: v1.2
+**Update Date**: 2026-02-12
+**Savings Rate**: ~67-85% (through Task multi-model optimization strategy)
+**Based on**: Practical experience summary from AI Debt Assistant project
+**v1.1 Update**: Added model selection experience summary chapter, based on selection errors and corrections in actual use
+**v1.2 Update**: Added Task multi-model optimization strategy, achieving fine-grained cost control and task decomposition optimization
 
-## 优化原则
+## Optimization Principles
 
-1. **结构化信息存储** - 用数据代替描述
-2. **标准化状态管理** - 减少重复查询
-3. **精准任务分配** - 一次性明确需求
-4. **预设权限管理** - 避免反复确认
+1. **Structured Information Storage** - Use data instead of descriptions
+2. **Standardized Status Management** - Reduce redundant queries
+3. **Precise Task Assignment** - Clarify requirements all at once
+4. **Preset Permission Management** - Avoid repeated confirmations
 
 ---
 
-## 核心优化策略
+## Core Optimization Strategies
 
-### 1. 状态管理优化 ⭐⭐⭐
+### 1. Status Management Optimization ⭐⭐⭐
 
-**传统方式** (消耗大):
+**Traditional Method** (High consumption):
 ```
-麦克斯: 请问艾拉现在在做什么？
-系统: 查询艾拉状态...
-麦克斯: 艾拉的任务完成了吗？
-系统: 检查任务状态...
-麦克斯: 贾维斯那边进度如何？
+Max: What is Ella working on now?
+System: Querying Ella's status...
+Max: Has Ella's task been completed?
+System: Checking task status...
+Max: How is Jarvis's progress?
 ```
 
-**优化方式** (节省70%):
+**Optimized Method** (Save 70%):
 ```json
-// 直接读取 status.json
+// Direct read of status.json
 {
-  "current_task": "AI债务助手 - Bug修复",
+  "current_task": "AI Debt Assistant - Bug Fix",
   "notifications": [...],
   "completed_tasks": [...]
 }
 ```
 
-**实施**:
-- 启动时读取 `status.json` 获得全局状态
-- 用结构化 JSON 代替自然语言询问
-- 状态变更直接更新文件，不需要多轮对话
+**Implementation**:
+- Read `status.json` at startup to get global status
+- Use structured JSON instead of natural language queries
+- Update files directly for status changes, no multi-round dialogues needed
 
-### 2. 任务分配标准化 ⭐⭐⭐
+### 2. Standardized Task Assignment ⭐⭐⭐
 
-**传统方式**:
+**Traditional Method**:
 ```
-用户: 让贾维斯修复这个bug
-麦克斯: 什么bug？在哪个文件？具体表现？
-用户: [解释...]
-麦克斯: 贾维斯，你理解需求吗？
-贾维斯: 我需要更多细节...
+User: Have Jarvis fix this bug
+Max: What bug? In which file? Specific symptoms?
+User: [Explanation...]
+Max: Jarvis, do you understand the requirements?
+Jarvis: I need more details...
 ```
 
-**优化方式**:
+**Optimized Method**:
 ```json
 {
-  "to": "贾维斯",
-  "task": "Bug修复",
+  "to": "Jarvis",
+  "task": "Bug Fix",
   "details": {
     "file": "frontend/src/App.vue",
     "issues": [
       {
         "id": 1,
-        "title": "录音识别失败处理错误",
+        "title": "Speech recognition failure handling error",
         "current_behavior": "...",
         "expected_behavior": "...",
-        "hint": "检查 recognizeSpeech 函数"
+        "hint": "Check recognizeSpeech function"
       }
     ]
   }
 }
 ```
 
-**节省点**:
-- 一次性提供完整上下文
-- 结构化问题描述
-- 预设解决线索
+**Savings Points**:
+- Provide complete context all at once
+- Structured problem description
+- Preset solution clues
 
-### 3. 权限预授权 ⭐⭐
+### 3. Permission Pre-authorization ⭐⭐
 
-**传统方式**:
+**Traditional Method**:
 ```
-麦克斯: 我需要更新status.json，可以吗？
-用户: 可以
-麦克斯: 我要记录这个bug，行吗？
-用户: 行
-```
-
-**优化方式**:
-```
-// CLAUDE.md 中预设：
-## 用户授权（重要）
-以下操作已获得永久授权，直接执行：
-- 更新项目状态（status.json）
-- 记录 Bug 和问题
-- 通知团队成员
+Max: Can I update status.json?
+User: Yes
+Max: Can I record this bug?
+User: Yes
 ```
 
-**节省**: 每次操作节省2-3轮确认对话
-
-### 4. 问题记录模板化 ⭐⭐
-
-**传统方式**:
+**Optimized Method**:
 ```
-用户: 播放按钮有问题
-麦克斯: 什么问题？
-用户: 暂停后重新开始了
-麦克斯: 期望是什么？
-用户: 应该继续播放
+// Preset in CLAUDE.md:
+## User Authorization (Important)
+Following operations have permanent authorization, execute directly:
+- Update project status (status.json)
+- Record bugs and issues
+- Notify team members
 ```
 
-**优化模板**:
+**Savings**: Save 2-3 rounds of confirmation dialogue per operation
+
+### 4. Problem Recording Templating ⭐⭐
+
+**Traditional Method**:
+```
+User: The play button has issues
+Max: What issues?
+User: It restarts after pause
+Max: What's the expected behavior?
+User: Should continue playing
+```
+
+**Optimized Template**:
 ```json
 {
   "id": 2,
-  "title": "播放按钮状态问题",
-  "severity": "严重",
-  "current_behavior": "暂停后再播放从头开始",
-  "expected_behavior": "暂停后点击应该从暂停位置继续播放",
-  "hint": "检查 toggleAudioPlay 函数的状态同步"
+  "title": "Play button status issue",
+  "severity": "Critical",
+  "current_behavior": "Restarts from beginning after pause then play",
+  "expected_behavior": "Should continue from pause position when clicked after pause",
+  "hint": "Check toggleAudioPlay function status synchronization"
 }
 ```
 
-### 5. 通知批处理 ⭐⭐
+### 5. Notification Batch Processing ⭐⭐
 
-**传统方式**:
+**Traditional Method**:
 ```
-麦克斯: 通知艾拉...
-麦克斯: 再通知凯尔...
-麦克斯: 发个桌面通知...
+Max: Notify Ella...
+Max: Then notify Kyle...
+Max: Send a desktop notification...
 ```
 
-**优化方式**:
+**Optimized Method**:
 ```json
-// 一次性更新 status.json 包含所有通知
+// Update status.json once with all notifications
 {
   "notifications": [
-    {"to": "艾拉", "task": "..."},
-    {"to": "凯尔", "task": "..."}
+    {"to": "Ella", "task": "..."},
+    {"to": "Kyle", "task": "..."}
   ]
 }
-// + 一次桌面通知
+// + one desktop notification
 ```
 
 ---
 
-## 具体执行 Skill
+## Specific Execution Skills
 
-### 启动时
-1. 读取 `status.json` 获得完整状态
-2. 读取 `todos.md` 了解待办事项
-3. 输出状态摘要，不询问细节
+### At Startup
+1. Read `status.json` to get complete status
+2. Read `todos.md` to understand pending items
+3. Output status summary, don't ask for details
 
-### 任务分配时
-1. 用 JSON 结构化任务详情
-2. 包含文件路径、具体问题、期望结果
-3. 提供解决提示
-4. 一次性发送完整信息
+### During Task Assignment
+1. Use JSON to structure task details
+2. Include file paths, specific issues, expected results
+3. Provide solution hints
+4. Send complete information all at once
 
-### 状态更新时
-1. 直接操作文件，不询问权限
-2. 用结构化数据代替自然语言
-3. 批量更新相关状态
+### During Status Updates
+1. Operate files directly, don't ask for permissions
+2. Use structured data instead of natural language
+3. Batch update related statuses
 
-### 问题记录时
-1. 用预设模板收集信息
-2. 分类标记（严重/一般/轻微）
-3. 包含具体位置和解决线索
-
----
-
-## 避免的Token浪费行为
-
-❌ **反复询问权限**: "我可以更新状态吗？"
-❌ **多轮确认**: "你是指这个意思吗？"
-❌ **重复查询**: "目前进度如何？"
-❌ **模糊任务**: "让XX处理这个问题"
-❌ **冗长描述**: 用大段文字解释简单概念
-
-✅ **直接执行**: 基于预授权直接操作
-✅ **结构化信息**: 用数据代替对话
-✅ **精准任务**: 包含完整上下文的任务描述
-✅ **批量操作**: 一次性处理多个相关任务
+### During Problem Recording
+1. Use preset templates to collect information
+2. Classify markings (Critical/General/Minor)
+3. Include specific locations and solution clues
 
 ---
 
-## 成效统计
+## Token Waste Behaviors to Avoid
 
-基于 AI债务助手项目：
+❌ **Repeated Permission Requests**: "Can I update status?"
+❌ **Multiple Confirmations**: "Do you mean this?"
+❌ **Redundant Queries**: "What's the current progress?"
+❌ **Vague Tasks**: "Have XX handle this problem"
+❌ **Verbose Descriptions**: Using lengthy text to explain simple concepts
 
-| 场景 | 传统Token消耗 | 优化后消耗 | 节省率 |
-|------|--------------|-----------|--------|
-| 状态查询 | ~200 tokens | ~50 tokens | 75% |
-| 任务分配 | ~300 tokens | ~80 tokens | 73% |
-| 问题记录 | ~250 tokens | ~70 tokens | 72% |
-| 权限确认 | ~100 tokens | ~0 tokens | 100% |
-| **平均** | | | **75%** |
-
----
-
-**应用指南**: 下次执行项目管理任务时，严格按照此Skill执行，预计节省75%的Token消耗。
+✅ **Direct Execution**: Operate directly based on pre-authorization
+✅ **Structured Information**: Use data instead of dialogue
+✅ **Precise Tasks**: Task descriptions containing complete context
+✅ **Batch Operations**: Handle multiple related tasks all at once
 
 ---
 
-## Opus使用确认机制
+## Effectiveness Statistics
 
-### 场景说明
-- **Opus优势**: 处理复杂分析、多角度综合判断、高难度问题时token效率更高
-- **必要性判断**: 当任务涉及全局战略分析、风险评估、重大决策建议时需要Opus
+Based on AI Debt Assistant project:
 
-### 确认流程
+| Scenario | Traditional Token Consumption | Optimized Consumption | Savings Rate |
+|----------|------------------------------|----------------------|-------------|
+| Status Queries | ~200 tokens | ~50 tokens | 75% |
+| Task Assignment | ~300 tokens | ~80 tokens | 73% |
+| Problem Recording | ~250 tokens | ~70 tokens | 72% |
+| Permission Confirmation | ~100 tokens | ~0 tokens | 100% |
+| **Average** | | | **75%** |
 
-#### 第1步：识别Opus场景
-在以下情况需要使用更强大的模型：
-- 项目全面风险评估（涉及多个维度）
-- 战略性决策建议（影响项目方向）
-- 复杂问题的系统分析（需要深度思考）
-- 多项目整体协调（全局视角）
+---
 
-#### 第2步：向用户确认
+**Application Guide**: Next time executing project management tasks, strictly follow this Skill, expected to save 75% of Token consumption.
+
+---
+
+## Opus Usage Confirmation Mechanism
+
+### Scenario Description
+- **Opus Advantages**: Higher token efficiency when handling complex analysis, multi-angle comprehensive judgment, and high-difficulty problems
+- **Necessity Assessment**: Opus needed when tasks involve global strategic analysis, risk assessment, major decision recommendations
+
+### Confirmation Process
+
+#### Step 1: Identify Opus Scenarios
+More powerful model needed in following situations:
+- Comprehensive project risk assessment (involving multiple dimensions)
+- Strategic decision recommendations (affecting project direction)
+- System analysis of complex problems (requiring deep thinking)
+- Overall coordination of multiple projects (global perspective)
+
+#### Step 2: User Confirmation
 ```
-发现当前任务适合使用Opus进行深度分析。
-请确认：
-[ 选项A ] 仅本次使用Opus（推荐，成本低）
-[ 选项B ] 整个会话使用Opus（持续深度支持）
-[ 选项C ] 降级使用Sonnet（快速完成，可能信息不够深入）
-```
-
-#### 第3步：处理用户决策
-
-**用户选A或B**：
-- 激活Opus进行任务
-- 输出更深入的分析和建议
-
-**用户选C或拒绝**：
-- 降级使用Sonnet处理
-- 说明可能影响：
-  - 分析深度可能不够全面
-  - 风险预警可能不够敏锐
-  - 建议的针对性可能降低
-
-### 降级影响说明
-
-| 场景 | Opus优势 | 降级到Sonnet的风险 |
-|------|---------|------------------|
-| 风险评估 | 多维度深度分析 | 可能遗漏隐性风险 |
-| 战略建议 | 系统性思维 | 建议可能片面化 |
-| 复杂问题 | 完整逻辑链条 | 解决方案可能不够完善 |
-| 多项协调 | 全局优化视角 | 可能优化空间不足 |
-
-### 使用原则
-
-- ✅ **主动询问** - 识别到Opus场景时必须先向用户确认
-- ✅ **明确说明** - 说清楚两种模型的差异和选C的风险
-- ✅ **尊重选择** - 用户拒绝则立即降级，不坚持
-- ✅ **成本意识** - 建议"仅本次"而非"整个会话"
-
-### 示例对话
-
-**场景：用户要求全面的项目风险评估**
-
-```
-麦克斯：检测到需要进行全面的项目风险评估（涉及设计、开发、测试、进度等多维度）。
-这类深度分析建议使用Opus模型，能提供更完整的系统化评估和防范建议。
-
-您的选择：
-A. 仅本次分析使用Opus（推荐）
-B. 整个会话使用Opus
-C. 用Sonnet快速完成（风险：可能遗漏重要隐患）
-
-请告诉我您的选择。
+Found current task suitable for Opus deep analysis.
+Please confirm:
+[ Option A ] Use Opus for this task only (recommended, low cost)
+[ Option B ] Use Opus for entire session (continuous deep support)
+[ Option C ] Downgrade to Sonnet (quick completion, may lack depth)
 ```
 
-**用户选A后：**
-```
-已切换到Opus，执行深度风险评估...
+#### Step 3: Handle User Decisions
 
-[进行详细的多维度分析]
+**User chooses A or B**:
+- Activate Opus for the task
+- Output deeper analysis and recommendations
+
+**User chooses C or refuses**:
+- Downgrade to Sonnet processing
+- Explain possible impacts:
+  - Analysis depth may not be comprehensive enough
+  - Risk warnings may not be sharp enough
+  - Recommendations may have reduced targeting
+
+### Downgrade Impact Explanation
+
+| Scenario | Opus Advantages | Risk of Downgrading to Sonnet |
+|----------|-----------------|-------------------------------|
+| Risk Assessment | Multi-dimensional deep analysis | May miss hidden risks |
+| Strategic Recommendations | Systematic thinking | Recommendations may be one-sided |
+| Complex Problems | Complete logical chains | Solutions may be incomplete |
+| Multi-project Coordination | Global optimization perspective | Optimization space may be insufficient |
+
+### Usage Principles
+
+- ✅ **Proactive Inquiry** - Must confirm with user first when Opus scenario is identified
+- ✅ **Clear Explanation** - Clearly explain differences between two models and risks of choosing C
+- ✅ **Respect Choice** - Immediately downgrade if user refuses, don't insist
+- ✅ **Cost Awareness** - Suggest "this time only" rather than "entire session"
+
+### Example Dialogue
+
+**Scenario: User requests comprehensive project risk assessment**
+
+```
+Max: Detected need for comprehensive project risk assessment (involving design, development, testing, progress and other dimensions).
+This type of deep analysis recommends using Opus model, which can provide more complete systematic assessment and prevention recommendations.
+
+Your choice:
+A. Use Opus for this analysis only (recommended)
+B. Use Opus for entire session
+C. Use Sonnet for quick completion (risk: may miss important hazards)
+
+Please tell me your choice.
 ```
 
-**用户选C后：**
+**After user chooses A:**
 ```
-已降级到Sonnet处理。
-提醒：此模式可能无法识别所有隐性风险，
-建议关键决策前再使用Opus进行验证。
+Switched to Opus, executing deep risk assessment...
+
+[Conduct detailed multi-dimensional analysis]
+```
+
+**After user chooses C:**
+```
+Downgraded to Sonnet processing.
+Reminder: This mode may not identify all hidden risks,
+recommend using Opus for verification before critical decisions.
 ```
 
 ---
 
-## 模型选择经验总结 (v1.1更新)
+## Model Selection Experience Summary (v1.1 Update)
 
-### 常见选择错误与纠正
+### Common Selection Errors and Corrections
 
-#### 错误1: 过度保守选择Haiku
-**表现**: 为了节省成本，将中等复杂任务也用Haiku处理
-**后果**: 输出质量下降，用户体验受影响，解决问题不够深入
-**纠正**: 重新评估任务复杂度，质量优先于成本
+#### Error 1: Overly Conservative Haiku Selection
+**Manifestation**: Using Haiku for medium-complexity tasks to save costs
+**Consequences**: Output quality decline, user experience affected, problem solving not thorough enough
+**Correction**: Re-evaluate task complexity, quality priority over cost
 
-#### 错误2: 任务复杂度评估偏低
-**表现**: 系统设计、专业咨询等复杂任务被当作"简单任务"
-**纠正标准**: 需要专业知识、逻辑分析、系统思考的都是中等复杂度
+#### Error 2: Task Complexity Assessment Too Low
+**Manifestation**: Complex tasks like system design, professional consulting treated as "simple tasks"
+**Correction Standard**: Tasks requiring professional knowledge, logical analysis, systematic thinking are medium complexity
 
-#### 错误3: 成本焦虑过度
-**表现**: 形成"默认选Haiku"的习惯性思维
-**纠正**: 建立质量导向的选择标准，合理分布模型使用
+#### Error 3: Excessive Cost Anxiety
+**Manifestation**: Forming habitual thinking of "default to Haiku"
+**Correction**: Establish quality-oriented selection standards, reasonable distribution of model usage
 
-### 修正的模型选择标准
+### Corrected Model Selection Standards
 
-#### Haiku适用场景 (30-40%使用率)
-- 标准化文件操作 (读写、复制、移动)
-- 简单文本替换和格式化
-- 基础配置文件生成 (.gitignore, LICENSE)
-- 标准Git操作 (add, commit, push)
-- 简单信息查询和数据提取
+#### Haiku Applicable Scenarios (30-40% usage rate)
+- Standardized file operations (read/write, copy, move)
+- Simple text replacement and formatting
+- Basic configuration file generation (.gitignore, LICENSE)
+- Standard Git operations (add, commit, push)
+- Simple information queries and data extraction
 
-#### Sonnet适用场景 (50-60%使用率)
-- 系统架构和流程设计
-- 专业领域咨询 (法律、安全、技术选择)
-- 复杂文档分析和整理
-- 策略制定和经验总结
-- 需要上下文理解和逻辑分析的任务
-- 工作流程优化和改进
+#### Sonnet Applicable Scenarios (50-60% usage rate)
+- System architecture and process design
+- Professional domain consulting (legal, security, technology selection)
+- Complex document analysis and organization
+- Strategy formulation and experience summary
+- Tasks requiring contextual understanding and logical analysis
+- Workflow optimization and improvement
 
-#### Opus适用场景 (5-10%使用率，需确认)
-- 战略级决策支持
-- 复杂技术架构设计
-- 创新方案和突破性解决方案
-- 多维度深度分析
+#### Opus Applicable Scenarios (5-10% usage rate, requires confirmation)
+- Strategic-level decision support
+- Complex technical architecture design
+- Innovative solutions and breakthrough approaches
+- Multi-dimensional deep analysis
 
-### 质量优先原则
+### Quality First Principles
 
-1. **重要性评估**: 任务对项目的影响程度 > 单次成本节省
-2. **输出质量要求**: 需要准确性和深度的选择更强模型
-3. **用户体验**: 用户满意度和解决方案完整性优先
-4. **长期效益**: 质量好的方案能减少返工，长期更省成本
+1. **Importance Assessment**: Task's impact on project > single-time cost savings
+2. **Output Quality Requirements**: Choose stronger models when accuracy and depth needed
+3. **User Experience**: User satisfaction and solution completeness priority
+4. **Long-term Benefits**: Quality solutions reduce rework, more cost-effective long-term
 
-### 实践指南
+### Practice Guidelines
 
-#### 选择决策树
+#### Selection Decision Tree
 ```
-任务评估
-├─ 标准化操作? → Haiku
-├─ 需要专业知识? → Sonnet
-├─ 需要深度创新? → Opus (确认)
-└─ 不确定? → 选择Sonnet (安全选择)
+Task Assessment
+├─ Standardized operations? → Haiku
+├─ Requires professional knowledge? → Sonnet
+├─ Requires deep innovation? → Opus (confirm)
+└─ Uncertain? → Choose Sonnet (safe choice)
 ```
 
-#### 月度模型分布目标
-- Haiku: 30-40% (真正简单任务)
-- Sonnet: 50-60% (主力模型)
-- Opus: 5-10% (关键任务)
+#### Monthly Model Distribution Target
+- Haiku: 30-40% (truly simple tasks)
+- Sonnet: 50-60% (main workhorse model)
+- Opus: 5-10% (critical tasks)
 
-#### 持续改进
-- 每月review模型选择效果
-- 收集用户对输出质量的反馈
-- 基于实际效果调整选择标准
-- 避免极端化(全部Haiku或全部Sonnet)
+#### Continuous Improvement
+- Monthly review of model selection effectiveness
+- Collect user feedback on output quality
+- Adjust selection criteria based on actual results
+- Avoid extremes (all Haiku or all Sonnet)
 
 ---
 
-## Task工具多模型选择策略 (高级优化技巧)
+## Task Tool Multi-Model Selection Strategy (Advanced Optimization Techniques)
 
-### Task vs 直接工具调用的优化潜力
+### Optimization Potential: Task vs Direct Tool Calls
 
-#### 直接工具调用局限性
-- **Read/Write/Edit/Bash等工具无模型选择参数**
-  - 通常按默认模型计费，无法细化优化
-  - 适合简单明确的单步操作
-  - 无法针对复杂度调整资源消耗
+#### Direct Tool Call Limitations
+- **Read/Write/Edit/Bash tools have no model selection parameters**
+  - Usually billed by default model, cannot fine-tune optimization
+  - Suitable for simple, clear single-step operations
+  - Cannot adjust resource consumption based on complexity
 
-#### Task工具优势
-- **可精确指定 model="haiku/sonnet/opus"**
-  - 支持复杂任务的分解优化
-  - 根据子任务特点选择最适合的模型
-  - 实现细粒度的成本控制
+#### Task Tool Advantages
+- **Can precisely specify model="haiku/sonnet/opus"**
+  - Supports decomposition optimization of complex tasks
+  - Choose most suitable model based on subtask characteristics
+  - Achieve fine-grained cost control
 
-### 复杂任务的分解优化模式
+### Complex Task Decomposition Optimization Patterns
 
-#### 三阶段分解模式
+#### Three-Stage Decomposition Pattern
 ```
-阶段1: 信息收集 → Task(model="haiku")
-阶段2: 逻辑分析 → Task(model="sonnet")
-阶段3: 结果输出 → Task(model="haiku")
+Stage 1: Information Collection → Task(model="haiku")
+Stage 2: Logical Analysis → Task(model="sonnet")
+Stage 3: Result Output → Task(model="haiku")
 ```
 
-#### 实际案例对比
+#### Actual Case Comparison
 
-**❌ 传统方式 (8000+ tokens)**:
+**❌ Traditional Method (8000+ tokens)**:
 ```python
-Task(prompt="分析系统架构并生成优化报告")
+Task(prompt="Analyze system architecture and generate optimization report")
 ```
 
-**✅ 分解优化 (4500 tokens, 节省44%)**:
+**✅ Decomposition Optimization (4500 tokens, save 44%)**:
 ```python
-Task(model="haiku", prompt="提取架构组件和技术栈信息")
-Task(model="sonnet", prompt="分析架构问题和改进机会")
-Task(model="haiku", prompt="格式化为标准化报告")
+Task(model="haiku", prompt="Extract architecture components and tech stack info")
+Task(model="sonnet", prompt="Analyze architecture problems and improvement opportunities")
+Task(model="haiku", prompt="Format into standardized report")
 ```
 
-**节省原理**：
-- 信息提取不需要深度分析能力 → Haiku够用
-- 核心分析保持质量 → Sonnet保证
-- 格式化纯粹模板化 → Haiku即可
+**Savings Principle**:
+- Information extraction doesn't need deep analysis capability → Haiku sufficient
+- Core analysis maintains quality → Sonnet guarantees
+- Formatting is purely templated → Haiku adequate
 
-### 并行Task的差异化选择
+### Differentiated Selection for Parallel Tasks
 
-#### 策略说明
-根据各子任务的复杂度独立选择模型，不同任务可以同时使用不同模型。
+#### Strategy Description
+Choose models independently based on each subtask's complexity, different tasks can simultaneously use different models.
 
-#### 实战示例：团队配置任务
+#### Practical Example: Team Configuration Task
 
-**场景**: 为团队4个成员配置工作环境
+**Scenario**: Configure work environment for 4 team members
 
-**❌ 传统方式**:
+**❌ Traditional Method**:
 ```python
-# 全部用Sonnet，过度消耗
-Task(model="sonnet", prompt="更新麦克斯的配置")
-Task(model="sonnet", prompt="更新艾拉的配置")
-Task(model="sonnet", prompt="更新贾维斯的配置")
-Task(model="sonnet", prompt="更新凯尔的配置")
+# All use Sonnet, excessive consumption
+Task(model="sonnet", prompt="Update Max's configuration")
+Task(model="sonnet", prompt="Update Ella's configuration")
+Task(model="sonnet", prompt="Update Jarvis's configuration")
+Task(model="sonnet", prompt="Update Kyle's configuration")
 ```
 
-**✅ 差异化选择**:
+**✅ Differentiated Selection**:
 ```python
-# 同时启动，不同模型
-Task(model="haiku", prompt="更新成员A的标准配置")    # 简单重复
-Task(model="haiku", prompt="更新成员B的标准配置")    # 简单重复
-Task(model="sonnet", prompt="设计团队协作流程")      # 复杂设计
-Task(model="haiku", prompt="验证配置一致性")         # 简单检查
+# Launch simultaneously, different models
+Task(model="haiku", prompt="Update member A's standard config")    # Simple repetition
+Task(model="haiku", prompt="Update member B's standard config")    # Simple repetition
+Task(model="sonnet", prompt="Design team collaboration workflow")   # Complex design
+Task(model="haiku", prompt="Verify configuration consistency")      # Simple check
 ```
 
-**节省效果**: 约60%的Token消耗
+**Savings Effect**: Approximately 60% Token consumption
 
-### Task模型选择决策矩阵
+### Task Model Selection Decision Matrix
 
-| 子任务类型 | 推荐模型 | Token节省 | 质量影响 | 适用场景示例 |
-|------------|----------|-----------|----------|--------------|
-| 数据提取/格式转换 | Haiku | 70-80% | 无影响 | 提取JSON数据、格式化文本 |
-| 简单验证/检查 | Haiku | 70-80% | 无影响 | 检查配置一致性、验证格式 |
-| 标准化文档生成 | Haiku | 70-80% | 无影响 | 套用模板、格式化报告 |
-| 逻辑分析/策略制定 | Sonnet | 基准 | 保证质量 | 问题诊断、方案设计 |
-| 系统设计/专业咨询 | Sonnet | 基准 | 保证质量 | 架构设计、技术选型 |
-| 复杂创新/战略决策 | Opus | -3-5倍 | 显著提升 | 重大架构决策、创新方案 |
+| Subtask Type | Recommended Model | Token Savings | Quality Impact | Example Scenarios |
+|--------------|------------------|---------------|----------------|-------------------|
+| Data extraction/format conversion | Haiku | 70-80% | No impact | Extract JSON data, format text |
+| Simple validation/checking | Haiku | 70-80% | No impact | Check config consistency, validate format |
+| Standardized document generation | Haiku | 70-80% | No impact | Apply templates, format reports |
+| Logic analysis/strategy development | Sonnet | Baseline | Ensure quality | Problem diagnosis, solution design |
+| System design/professional consulting | Sonnet | Baseline | Ensure quality | Architecture design, technology selection |
+| Complex innovation/strategic decisions | Opus | -3-5x | Significant improvement | Major architecture decisions, innovative solutions |
 
-### 最佳实践指南
+### Best Practice Guidelines
 
-#### 1. 任务分解原则
-- **识别独立子任务**: 找出可以并行执行的独立部分
-- **评估复杂度**: 为每个子任务独立评估复杂度
-- **优先分解大任务**: 越大的任务分解收益越高
+#### 1. Task Decomposition Principles
+- **Identify independent subtasks**: Find independent parts that can be executed in parallel
+- **Assess complexity**: Independently assess complexity for each subtask
+- **Prioritize decomposing large tasks**: Larger tasks yield higher decomposition benefits
 
-**示例**：
+**Example**:
 ```
-用户要求: "为新项目搭建完整开发环境并给出技术建议"
+User request: "Set up complete development environment for new project and provide technical recommendations"
 
-❌ 单任务: Task("搭建环境+技术建议") → 12000 tokens
+❌ Single task: Task("setup environment + tech recommendations") → 12000 tokens
 
-✅ 分解:
-- Task(haiku, "创建项目目录结构") → 500 tokens
-- Task(haiku, "配置package.json") → 600 tokens
-- Task(haiku, "设置.gitignore和基础配置") → 400 tokens
-- Task(sonnet, "分析项目需求提供技术选型建议") → 3000 tokens
-总计 → 4500 tokens，节省62%
+✅ Decomposition:
+- Task(haiku, "Create project directory structure") → 500 tokens
+- Task(haiku, "Configure package.json") → 600 tokens
+- Task(haiku, "Set up .gitignore and basic configs") → 400 tokens
+- Task(sonnet, "Analyze project requirements and provide tech selection advice") → 3000 tokens
+Total → 4500 tokens, save 62%
 ```
 
-#### 2. 模型选择策略
+#### 2. Model Selection Strategy
 
-**决策流程图**:
+**Decision Flowchart**:
 ```
-任务评估
-├─ 纯信息处理? (提取/格式化/验证)
+Task Assessment
+├─ Pure information processing? (extract/format/validate)
 │  └─ Haiku
-├─ 需要逻辑分析? (问题诊断/方案设计)
+├─ Requires logical analysis? (problem diagnosis/solution design)
 │  └─ Sonnet
-├─ 需要深度创新? (战略决策/架构设计)
-│  └─ Opus (需用户确认)
-└─ 不确定复杂度?
-   └─ 保守选择Sonnet
+├─ Requires deep innovation? (strategic decisions/architecture design)
+│  └─ Opus (requires user confirmation)
+└─ Uncertain complexity?
+   └─ Conservative choice: Sonnet
 ```
 
-**选择原则**:
-- **信息处理类** → Haiku
-  - 读取文件并提取数据
-  - 格式转换（JSON/YAML/Markdown）
-  - 简单验证（格式检查、一致性检查）
+**Selection Principles**:
+- **Information Processing** → Haiku
+  - Read files and extract data
+  - Format conversion (JSON/YAML/Markdown)
+  - Simple validation (format checking, consistency checking)
 
-- **逻辑分析类** → Sonnet
-  - 问题诊断和原因分析
-  - 方案设计和技术选型
-  - 代码审查和优化建议
+- **Logical Analysis** → Sonnet
+  - Problem diagnosis and root cause analysis
+  - Solution design and technology selection
+  - Code review and optimization recommendations
 
-- **创新设计类** → Opus (需确认)
-  - 系统架构重大设计
-  - 战略级决策支持
-  - 突破性解决方案
+- **Innovation Design** → Opus (requires confirmation)
+  - Major system architecture design
+  - Strategic-level decision support
+  - Breakthrough solutions
 
-#### 3. 质量保证机制
+#### 3. Quality Assurance Mechanism
 
-**核心原则**: 质量优先，合理优化
+**Core Principle**: Quality first, reasonable optimization
 
-**质量保证检查点**:
-1. **关键业务逻辑必须用Sonnet+**
-   - 涉及产品核心功能的设计
-   - 影响用户体验的关键决策
-   - 有法律/安全风险的内容
+**Quality Assurance Checkpoints**:
+1. **Critical business logic must use Sonnet+**
+   - Design involving core product functionality
+   - Key decisions affecting user experience
+   - Content with legal/security risks
 
-2. **用户直接交互的输出保证质量**
-   - 最终报告、建议文档
-   - 用户问题的答复
-   - 团队沟通的重要信息
+2. **Ensure quality for direct user interaction outputs**
+   - Final reports, recommendation documents
+   - Responses to user questions
+   - Important team communication information
 
-3. **内部处理步骤可适度优化**
-   - 中间数据转换
-   - 临时文件生成
-   - 辅助性验证
+3. **Internal processing steps can be moderately optimized**
+   - Intermediate data conversion
+   - Temporary file generation
+   - Auxiliary validation
 
-**错误示例**：
+**Error Example**:
 ```python
-❌ 过度优化导致质量下降
-Task(haiku, "分析系统安全漏洞并提供修复方案")
-# 安全问题需要深度分析，Haiku不够
+❌ Over-optimization leading to quality decline
+Task(haiku, "Analyze system security vulnerabilities and provide fix solutions")
+# Security issues need deep analysis, Haiku insufficient
 
-✅ 正确做法
-Task(sonnet, "分析系统安全漏洞并提供修复方案")
-# 安全问题用Sonnet保证质量
+✅ Correct approach
+Task(sonnet, "Analyze system security vulnerabilities and provide fix solutions")
+# Use Sonnet for security issues to ensure quality
 ```
 
-#### 4. 效果监控与迭代
+#### 4. Effectiveness Monitoring and Iteration
 
-**建立监控机制**:
-1. **记录分解前后的Token消耗对比**
+**Establish monitoring mechanism**:
+1. **Record token consumption comparison before/after decomposition**
    ```
-   任务: 生成项目报告
-   传统方式: 8000 tokens
-   分解优化: 4200 tokens (节省47%)
-   质量评估: 用户满意
-   ```
-
-2. **监控输出质量和用户满意度**
-   - 用户反馈收集
-   - 返工次数统计
-   - 输出准确性评估
-
-3. **建立任务类型的最佳实践模板**
-   ```
-   模板名称: "系统架构分析报告"
-   标准分解:
-   1. Haiku: 收集组件信息 (500 tokens)
-   2. Sonnet: 分析问题和机会 (2500 tokens)
-   3. Haiku: 格式化报告 (400 tokens)
-   总计: 3400 tokens
-   节省率: 65%
+   Task: Generate project report
+   Traditional method: 8000 tokens
+   Decomposition optimization: 4200 tokens (save 47%)
+   Quality assessment: User satisfied
    ```
 
-### 预期优化效果
+2. **Monitor output quality and user satisfaction**
+   - User feedback collection
+   - Rework frequency statistics
+   - Output accuracy assessment
 
-#### Token节省潜力
+3. **Establish best practice templates for task types**
+   ```
+   Template name: "System Architecture Analysis Report"
+   Standard decomposition:
+   1. Haiku: Collect component info (500 tokens)
+   2. Sonnet: Analyze problems and opportunities (2500 tokens)
+   3. Haiku: Format report (400 tokens)
+   Total: 3400 tokens
+   Savings rate: 65%
+   ```
 
-| 任务复杂度 | 优化空间 | 预期节省 | 质量保证 |
-|-----------|---------|----------|----------|
-| 简单Task (单步操作) | 无额外空间 | 0% | 已是最优 |
-| 中等复杂Task (3-5步) | 中等 | 30-50% | 核心步骤保质 |
-| 高复杂Task (5+步) | 很大 | 50-70% | 关键步骤保质 |
+### Expected Optimization Effects
 
-#### 实际案例验证
+#### Token Savings Potential
 
-**案例1: 项目初始化**
+| Task Complexity | Optimization Space | Expected Savings | Quality Assurance |
+|-----------------|-------------------|------------------|-------------------|
+| Simple Task (single-step operation) | No additional space | 0% | Already optimal |
+| Medium Complex Task (3-5 steps) | Medium | 30-50% | Core steps maintain quality |
+| High Complex Task (5+ steps) | Very large | 50-70% | Key steps maintain quality |
+
+#### Actual Case Verification
+
+**Case 1: Project Initialization**
 ```
-任务: 创建新项目并配置开发环境
-传统: Task(sonnet, "全流程处理") = 10000 tokens
-优化:
-- Task(haiku, "创建目录") = 500 tokens
-- Task(haiku, "生成配置文件") = 600 tokens
-- Task(sonnet, "设计项目架构") = 2800 tokens
-- Task(haiku, "验证环境") = 400 tokens
-优化后总计 = 4300 tokens
-节省率: 57%
-质量: 架构设计质量保持，用户满意
+Task: Create new project and configure development environment
+Traditional: Task(sonnet, "full process handling") = 10000 tokens
+Optimized:
+- Task(haiku, "create directories") = 500 tokens
+- Task(haiku, "generate config files") = 600 tokens
+- Task(sonnet, "design project architecture") = 2800 tokens
+- Task(haiku, "verify environment") = 400 tokens
+Optimized total = 4300 tokens
+Savings rate: 57%
+Quality: Architecture design quality maintained, user satisfied
 ```
 
-**案例2: 团队状态报告**
+**Case 2: Team Status Report**
 ```
-任务: 生成团队周报
-传统: Task(sonnet, "全流程处理") = 6000 tokens
-优化:
-- Task(haiku, "读取status.json") = 300 tokens
-- Task(haiku, "提取各成员数据") = 400 tokens
-- Task(sonnet, "分析进度和风险") = 2000 tokens
-- Task(haiku, "格式化报告") = 500 tokens
-优化后总计 = 3200 tokens
-节省率: 47%
-质量: 分析质量保持，格式标准化
+Task: Generate team weekly report
+Traditional: Task(sonnet, "full process handling") = 6000 tokens
+Optimized:
+- Task(haiku, "read status.json") = 300 tokens
+- Task(haiku, "extract member data") = 400 tokens
+- Task(sonnet, "analyze progress and risks") = 2000 tokens
+- Task(haiku, "format report") = 500 tokens
+Optimized total = 3200 tokens
+Savings rate: 47%
+Quality: Analysis quality maintained, format standardized
 ```
 
-### 质量保证承诺
+### Quality Assurance Commitment
 
-**核心原则**：
-- ✅ 核心逻辑用Sonnet+保证质量
-- ✅ 辅助处理用Haiku提升效率
-- ✅ 整体解决方案质量不降低
-- ✅ 用户满意度优先于成本节省
+**Core Principles**:
+- ✅ Core logic uses Sonnet+ to ensure quality
+- ✅ Auxiliary processing uses Haiku to improve efficiency
+- ✅ Overall solution quality does not decline
+- ✅ User satisfaction prioritized over cost savings
 
-**不会降低质量的原因**：
-1. 关键分析步骤仍使用Sonnet/Opus
-2. 只有简单的信息处理使用Haiku
-3. 任务分解本身提升了流程清晰度
-4. 持续监控质量并调整策略
+**Reasons quality won't decline**:
+1. Key analysis steps still use Sonnet/Opus
+2. Only simple information processing uses Haiku
+3. Task decomposition itself improves process clarity
+4. Continuous quality monitoring and strategy adjustment
 
 ---
 
-**应用指南**: 这是Task工具使用的高级优化技巧，建议在熟悉基础模型选择后再应用。初期可以先尝试简单的2-3步分解，积累经验后再处理复杂任务。
+**Application Guide**: This is an advanced optimization technique for Task tool usage, recommended to apply after familiarizing with basic model selection. Initially try simple 2-3 step decomposition, then handle complex tasks after accumulating experience.
 
-**警告**: 不要为了优化而过度分解任务，保持任务粒度的合理性。如果分解后的协调成本超过节省的Token，则不值得分解。
+**Warning**: Don't over-decompose tasks just for optimization, maintain reasonable task granularity. If coordination costs after decomposition exceed Token savings, it's not worth decomposing.

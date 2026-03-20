@@ -1,105 +1,105 @@
-# AI项目说明模板
+# AI Project Description Template
 
-> 放置在项目根目录 `.claude/project.md`，AI启动时自动读取
+> Place in project root `.claude/project.md`, automatically read when AI starts
 
 ---
 
-# [项目名称]
+# [Project Name]
 
 ## META
 ```yaml
-名称: xxx
-版本: x.x.x
-更新: YYYY-MM-DD
-维护者: xxx
+Name: xxx
+Version: x.x.x
+Updated: YYYY-MM-DD
+Maintainer: xxx
 ```
 
-## 一句话描述
-[20字以内描述项目是什么]
+## One-line Description
+[What the project is in under 20 words]
 
-## 技术栈
+## Tech Stack
 ```yaml
-前端: Vue3 / React / ...
-后端: NestJS / Express / ...
-数据库: MySQL / MongoDB / ...
-部署: Docker / PM2 / ...
+Frontend: Vue3 / React / ...
+Backend: NestJS / Express / ...
+Database: MySQL / MongoDB / ...
+Deployment: Docker / PM2 / ...
 ```
 
-## 目录结构
+## Directory Structure
 ```
-项目根目录/
+Project Root/
 ├── src/
-│   ├── modules/       # [说明]
-│   ├── services/      # [说明]
-│   └── utils/         # [说明]
-├── tests/             # [说明]
-└── config/            # [说明]
+│   ├── modules/       # [Description]
+│   ├── services/      # [Description]
+│   └── utils/         # [Description]
+├── tests/             # [Description]
+└── config/            # [Description]
 ```
 
-## 关键文件
-<!-- AI需要重点关注的文件 -->
+## Key Files
+<!-- Files AI needs to focus on -->
 
-| 文件 | 作用 | 修改频率 |
-|------|------|----------|
-| src/main.ts | 入口文件 | 低 |
-| src/config.ts | 配置中心 | 中 |
-| src/modules/user/ | 用户模块 | 高 |
+| File | Purpose | Modification Frequency |
+|------|---------|----------------------|
+| src/main.ts | Entry file | Low |
+| src/config.ts | Configuration center | Medium |
+| src/modules/user/ | User module | High |
 
-## 核心概念
-<!-- 项目特有的业务概念，AI必须理解 -->
+## Core Concepts
+<!-- Project-specific business concepts that AI must understand -->
 
-| 概念 | 说明 |
-|------|------|
+| Concept | Description |
+|---------|-------------|
 | xxx | xxx |
 
-## 数据流
-<!-- 简述数据如何流转 -->
+## Data Flow
+<!-- Brief description of how data flows -->
 ```
-用户请求 → Controller → Service → Repository → DB
+User Request → Controller → Service → Repository → DB
                 ↓
-            返回响应
+            Return Response
 ```
 
-## 开发规范
+## Development Standards
 ```yaml
-命名: 小驼峰 / 大驼峰 / 下划线
-缩进: 2空格 / 4空格
-分支: feature/xxx, fix/xxx
-提交: feat: / fix: / docs:
+Naming: camelCase / PascalCase / snake_case
+Indentation: 2 spaces / 4 spaces
+Branches: feature/xxx, fix/xxx
+Commits: feat: / fix: / docs:
 ```
 
-## 常用命令
+## Common Commands
 ```bash
-npm run dev      # 启动开发
-npm run build    # 构建
-npm run test     # 测试
+npm run dev      # Start development
+npm run build    # Build
+npm run test     # Test
 ```
 
-## 当前状态
+## Current Status
 ```yaml
-阶段: 开发中 / 测试中 / 已上线
-分支: main / develop
-最近变更: [简述]
+Phase: Development / Testing / Live
+Branch: main / develop
+Recent Changes: [Brief description]
 ```
 
-## 进行中的任务
-- [ ] 任务1
-- [ ] 任务2
+## Ongoing Tasks
+- [ ] Task 1
+- [ ] Task 2
 
-## 已知问题
-- 问题1: [描述]
-- 问题2: [描述]
+## Known Issues
+- Issue 1: [Description]
+- Issue 2: [Description]
 
-## 变更记录
+## Change Log
 ### YYYY-MM-DD
-- 变更内容
+- Change content
 
 ---
 
 <!--
-使用说明：
-1. 复制此模板到项目 .claude/project.md
-2. 填写各项内容
-3. 代码变动时更新"当前状态"和"变更记录"
-4. AI启动时会自动读取此文件
+Usage instructions:
+1. Copy this template to project .claude/project.md
+2. Fill in each section
+3. Update "Current Status" and "Change Log" when code changes
+4. AI will automatically read this file on startup
 -->

@@ -1,503 +1,503 @@
-# Token优化技能 - 测试验收领域
+# Token Optimization Skill - Testing & Acceptance Domain
 
-**版本**: v1.2
-**更新日期**: 2026-02-12
-**作者**: 凯尔 (Kyle)
-**优化目标**: 验收过程token使用量减少70%+
-
----
-
-## 技能概述
-
-**技能名称**: 高效验收与代码审查
-**适用场景**: 功能验收、代码审查、Bug修复验证
-**开发者**: 凯尔 (Kyle) - 质量保证专家
+**Version**: v1.2
+**Update Date**: 2026-02-12
+**Author**: Kyle
+**Optimization Goal**: Reduce token usage in acceptance process by 70%+
 
 ---
 
-## 优化策略总览
+## Skill Overview
 
-| 策略 | 节省比例 | 核心方法 | 实施难度 |
-|------|----------|---------|----------|
-| 智能文件读取 | 30% | 一次性完整读取，避免重复 | 低 |
-| 模板化报告 | 25% | 标准格式，关键信息前置 | 低 |
-| 系统化验证 | 20% | 分层验证，问题导向 | 中 |
-| 聚焦代码审查 | 15% | 风险驱动，重点突出 | 中 |
-| 工具使用优化 | 10% | 精准搜索，组合操作 | 低 |
-
-**预期总节省**: **70%+**
+**Skill Name**: Efficient Acceptance and Code Review
+**Applicable Scenarios**: Functional acceptance, code review, bug fix verification
+**Developer**: Kyle (凯尔) - Quality Assurance Expert
 
 ---
 
-## 策略1: 智能文件读取 💾
+## Optimization Strategy Overview
 
-### 核心原理
-**避免重复读取，一次获取最大信息**
+| Strategy | Savings Ratio | Core Method | Implementation Difficulty |
+|----------|---------------|-------------|-------------------------|
+| Intelligent File Reading | 30% | One-time complete read, avoid repetition | Low |
+| Templated Reports | 25% | Standard format, key info prioritized | Low |
+| Systematic Verification | 20% | Layered verification, problem-oriented | Medium |
+| Focused Code Review | 15% | Risk-driven, highlight priorities | Medium |
+| Tool Usage Optimization | 10% | Precise search, combined operations | Low |
 
-### 优化前 ❌
-```
-1. 使用Grep搜索函数位置
-2. Read文件特定行范围
-3. 发现需要更多上下文
-4. 再次Read扩展范围
-5. 需要其他函数时重复上述流程
-```
-
-### 优化后 ✅
-```
-1. 先用Glob确定关键文件
-2. 完整读取主要文件 (如App.vue)
-3. 基于完整内容进行分析
-4. 需要时使用Grep精确定位+上下文扩展
-```
-
-### 实施清单
-- [ ] 识别项目核心文件（通常1-3个）
-- [ ] 优先完整读取核心文件
-- [ ] 使用Grep时指定足够的上下文(-C 10)
-- [ ] 批量并行读取相关文件
+**Expected Total Savings**: **70%+**
 
 ---
 
-## 策略2: 模板化报告 📋
+## Strategy 1: Intelligent File Reading 💾
 
-### 核心原理
-**标准化输出格式，减少生成Token消耗**
+### Core Principle
+**Avoid repeated reading, get maximum information at once**
 
-### 快速摘要模板
-```markdown
-## 验收结果
-✅ 通过 | ❌ 失败 | ⚠️ 有条件通过
-
-**关键发现**: [1-2句话核心问题]
-**通过率**: X% (Y/Z项)
-**主要问题**: [最重要的1-2个问题]
+### Before Optimization ❌
+```
+1. Use Grep to search function locations
+2. Read specific line ranges of files
+3. Discover need for more context
+4. Read again with extended range
+5. Repeat above process when needing other functions
 ```
 
-### 检查清单模板
-```markdown
-| 项目 | 状态 | 备注 |
-|-----|------|------|
-| 功能1 | ✅ | - |
-| 功能2 | ❌ | 具体问题 |
-| 功能3 | ⚠️ | 需要注意的点 |
+### After Optimization ✅
+```
+1. First use Glob to identify key files
+2. Read main files completely (e.g., App.vue)
+3. Analyze based on complete content
+4. Use Grep for precise location + context expansion when needed
 ```
 
-### 代码审查模板
-```markdown
-**安全性**: ✅ 无问题 | ❌ 发现X个问题
-**性能**: ✅ 优秀 | ⚠️ 可优化
-**可维护性**: ✅ 良好 | ❌ 需重构
-```
+### Implementation Checklist
+- [ ] Identify project core files (usually 1-3)
+- [ ] Prioritize complete reading of core files
+- [ ] Specify sufficient context when using Grep (-C 10)
+- [ ] Batch parallel reading of related files
 
 ---
 
-## 策略3: 系统化验证 🔄
+## Strategy 2: Templated Reports 📋
 
-### 核心原理
-**分层有序验证，减少探索性操作**
+### Core Principle
+**Standardize output format, reduce token consumption for generation**
 
-### 验证层级
-1. **架构层**: 整体结构、技术栈、依赖关系
-2. **功能层**: 核心功能、业务逻辑、用户交互
-3. **实现层**: 代码质量、性能、安全性
-4. **边界层**: 错误处理、边界条件、兼容性
-
-### 问题导向检查清单
-
-#### 功能验收清单
+### Quick Summary Template
 ```markdown
-- [ ] 核心功能是否按预期工作？
-- [ ] 用户交互是否流畅？
-- [ ] 错误场景是否处理得当？
-- [ ] 性能是否满足要求？
+## Acceptance Results
+✅ Pass | ❌ Fail | ⚠️ Conditional Pass
+
+**Key Findings**: [1-2 sentences core issues]
+**Pass Rate**: X% (Y/Z items)
+**Main Issues**: [Most important 1-2 issues]
 ```
 
-#### Bug修复验证清单
+### Checklist Template
 ```markdown
-- [ ] 原问题是否彻底解决？
-- [ ] 修复是否引入新问题？
-- [ ] 相关功能是否正常？
-- [ ] 修复方案是否合理？
+| Item | Status | Notes |
+|------|--------|-------|
+| Function1 | ✅ | - |
+| Function2 | ❌ | Specific issue |
+| Function3 | ⚠️ | Points to note |
 ```
 
-#### 代码审查清单
+### Code Review Template
 ```markdown
-- [ ] 是否存在明显的安全隐患？
-- [ ] 性能有无明显问题？
-- [ ] 代码结构是否合理？
-- [ ] 错误处理是否完善？
+**Security**: ✅ No issues | ❌ Found X issues
+**Performance**: ✅ Excellent | ⚠️ Can optimize
+**Maintainability**: ✅ Good | ❌ Needs refactoring
 ```
 
 ---
 
-## 策略4: 聚焦代码审查 🎯
+## Strategy 3: Systematic Verification 🔄
 
-### 核心原理
-**风险驱动审查，重点突出关键问题**
+### Core Principle
+**Layered verification in sequence, reduce exploratory operations**
 
-### SPAR审查原则
-- **Security** 安全性: XSS、注入、权限控制
-- **Performance** 性能: 内存泄漏、重复计算、大数据处理
-- **Architecture** 架构: 代码结构、耦合度、可扩展性
-- **Reliability** 可靠性: 错误处理、边界条件、异常情况
+### Verification Hierarchy
+1. **Architecture Layer**: Overall structure, tech stack, dependencies
+2. **Function Layer**: Core functionality, business logic, user interaction
+3. **Implementation Layer**: Code quality, performance, security
+4. **Boundary Layer**: Error handling, boundary conditions, compatibility
 
-### 风险分级审查
-```
-🔴 高风险 (深度审查):
-- 用户输入处理
-- 权限验证逻辑
-- 数据库操作
-- 外部API调用
+### Problem-Oriented Checklists
 
-🟡 中风险 (重点关注):
-- 状态管理
-- 事件处理
-- 异步操作
-- 业务逻辑
-
-🟢 低风险 (快速扫描):
-- UI样式
-- 静态内容
-- 工具函数
-- 配置文件
+#### Functional Acceptance Checklist
+```markdown
+- [ ] Do core functions work as expected?
+- [ ] Are user interactions smooth?
+- [ ] Are error scenarios handled properly?
+- [ ] Does performance meet requirements?
 ```
 
-### 快速问题识别模式
+#### Bug Fix Verification Checklist
+```markdown
+- [ ] Is the original issue completely resolved?
+- [ ] Does the fix introduce new problems?
+- [ ] Are related functions working normally?
+- [ ] Is the fix approach reasonable?
+```
+
+#### Code Review Checklist
+```markdown
+- [ ] Are there obvious security vulnerabilities?
+- [ ] Are there obvious performance issues?
+- [ ] Is the code structure reasonable?
+- [ ] Is error handling comprehensive?
+```
+
+---
+
+## Strategy 4: Focused Code Review 🎯
+
+### Core Principle
+**Risk-driven review, highlight key issues**
+
+### SPAR Review Principles
+- **Security**: XSS, injection, permission control
+- **Performance**: Memory leaks, redundant calculations, large data processing
+- **Architecture**: Code structure, coupling, scalability
+- **Reliability**: Error handling, boundary conditions, exception scenarios
+
+### Risk-Level Review
+```
+🔴 High Risk (Deep Review):
+- User input processing
+- Permission verification logic
+- Database operations
+- External API calls
+
+🟡 Medium Risk (Focus Attention):
+- State management
+- Event handling
+- Async operations
+- Business logic
+
+🟢 Low Risk (Quick Scan):
+- UI styling
+- Static content
+- Utility functions
+- Configuration files
+```
+
+### Quick Issue Identification Patterns
 ```javascript
-// 🔴 安全风险模式
+// 🔴 Security Risk Patterns
 innerHTML, eval(), document.write()
 
-// 🔴 性能问题模式
-无限循环, 内存泄漏, 同步阻塞
+// 🔴 Performance Issue Patterns
+Infinite loops, memory leaks, synchronous blocking
 
-// 🔴 逻辑错误模式
-空值引用, 类型错误, 边界溢出
+// 🔴 Logic Error Patterns
+Null reference, type errors, boundary overflow
 ```
 
 ---
 
-## 策略5: 工具使用优化 🛠️
+## Strategy 5: Tool Usage Optimization 🛠️
 
-### 核心原理
-**精准高效工具使用，避免重复操作**
+### Core Principle
+**Precise and efficient tool usage, avoid repetitive operations**
 
-### Task工具优化
+### Task Tool Optimization
 ```markdown
-# 指定合适的thoroughness level
-Task(subagent_type="Explore", thoroughness="quick")     # 快速概览
-Task(subagent_type="Explore", thoroughness="medium")    # 标准探索
-Task(subagent_type="Explore", thoroughness="thorough")  # 深度分析
+# Specify appropriate thoroughness level
+Task(subagent_type="Explore", thoroughness="quick")     # Quick overview
+Task(subagent_type="Explore", thoroughness="medium")    # Standard exploration
+Task(subagent_type="Explore", thoroughness="thorough")  # Deep analysis
 ```
 
-### 搜索组合策略
+### Search Combination Strategy
 ```markdown
-# 组合1: 快速定位文件
-Glob("**/*Button*.{js,vue,ts}") + Read(找到的关键文件)
+# Combination 1: Quick file location
+Glob("**/*Button*.{js,vue,ts}") + Read(found key files)
 
-# 组合2: 精确搜索内容
+# Combination 2: Precise content search
 Grep(pattern="function.*Button", output_mode="files") +
 Grep(pattern="function.*Button", output_mode="content", -C=10)
 
-# 组合3: 并行操作
-并行执行: Read(file1) + Read(file2) + Grep(pattern)
+# Combination 3: Parallel operations
+Parallel execution: Read(file1) + Read(file2) + Grep(pattern)
 ```
 
-### 精准搜索模式
+### Precise Search Patterns
 ```markdown
-# 函数定义
+# Function definitions
 Grep("function\s+\w+|const\s+\w+\s*=.*=>")
 
-# 错误处理
+# Error handling
 Grep("try\s*\{|catch\s*\(|throw\s+")
 
-# 状态管理
+# State management
 Grep("useState|useEffect|reactive|ref\(")
 
-# 安全相关
+# Security related
 Grep("innerHTML|eval\(|document\.write")
 ```
 
 ---
 
-## 完整优化工作流 🚀
+## Complete Optimization Workflow 🚀
 
-### Phase 1: 快速概览 (5 tokens)
+### Phase 1: Quick Overview (5 tokens)
 ```markdown
-1. 使用Task(Explore, quick)了解项目结构
-2. 识别核心文件和关键组件
-3. 确定验收范围和重点
+1. Use Task(Explore, quick) to understand project structure
+2. Identify core files and key components
+3. Determine acceptance scope and priorities
 ```
 
-### Phase 2: 系统验证 (15 tokens)
+### Phase 2: Systematic Verification (15 tokens)
 ```markdown
-1. 完整读取1-2个核心文件
-2. 按分层验证清单检查
-3. 使用并行操作验证多个点
+1. Complete reading of 1-2 core files
+2. Check by layered verification checklist
+3. Use parallel operations to verify multiple points
 ```
 
-### Phase 3: 聚焦审查 (10 tokens)
+### Phase 3: Focused Review (10 tokens)
 ```markdown
-1. 按SPAR原则审查关键代码
-2. 使用问题模式快速识别风险
-3. 记录重要发现和建议
+1. Review key code according to SPAR principles
+2. Use problem patterns to quickly identify risks
+3. Record important findings and recommendations
 ```
 
-### Phase 4: 快速报告 (5 tokens)
+### Phase 4: Quick Reporting (5 tokens)
 ```markdown
-1. 使用模板生成验收结果
-2. 关键信息前置，详情可选
-3. 输出标准化检查清单
+1. Use templates to generate acceptance results
+2. Priority information first, details optional
+3. Output standardized checklists
 ```
 
-**总计约35 tokens vs 原来120+ tokens = 节省70%+**
+**Total ~35 tokens vs original 120+ tokens = 70%+ savings**
 
 ---
 
-## 模型选择策略 (v1.2新增)
+## Model Selection Strategy (v1.2 Addition)
 
-### 基础模型选择决策树
+### Basic Model Selection Decision Tree
 
 ```
-验收任务评估
-├─ 标准化检查? → Haiku
-├─ 需要专业判断? → Sonnet
-├─ 需要深度诊断? → Opus (确认)
-└─ 不确定? → 选择Sonnet (安全选择)
+Acceptance Task Assessment
+├─ Standardized check? → Haiku
+├─ Need professional judgment? → Sonnet
+├─ Need deep diagnosis? → Opus (confirmation)
+└─ Uncertain? → Choose Sonnet (safe choice)
 ```
 
-### Haiku适用场景 (30-40%使用率)
-- 标准化格式检查和验证
-- 简单的功能测试确认
-- 基础配置验证
-- 模板化报告生成
-- 简单的代码扫描
+### Haiku Use Cases (30-40% usage rate)
+- Standardized format checking and verification
+- Simple function test confirmation
+- Basic configuration verification
+- Templated report generation
+- Simple code scanning
 
-### Sonnet适用场景 (50-60%使用率)
-- 系统化功能验收
-- 代码质量审查 (SPAR)
-- Bug修复验证
-- 风险评估和问题诊断
-- 需要专业判断的验收任务
+### Sonnet Use Cases (50-60% usage rate)
+- Systematic functional acceptance
+- Code quality review (SPAR)
+- Bug fix verification
+- Risk assessment and problem diagnosis
+- Acceptance tasks requiring professional judgment
 
-### Opus适用场景 (5-10%使用率，需确认)
-- 复杂Bug诊断与根因分析
-- 系统质量评估
-- 性能问题深度分析
-- 难题解决与突破
+### Opus Use Cases (5-10% usage rate, needs confirmation)
+- Complex bug diagnosis and root cause analysis
+- System quality assessment
+- Performance issue deep analysis
+- Difficult problem solving and breakthrough
 
-### 质量优先原则
+### Quality-First Principles
 
-1. **重要性评估**: 质量风险对项目的影响程度 > 单次成本节省
-2. **输出质量要求**: 需要深度分析的选择更强模型
-3. **用户体验**: 验收准确性和问题发现率优先
-4. **长期效益**: 质量好的验收能减少返工，长期更省成本
+1. **Importance Assessment**: Quality risk impact on project > single-time cost savings
+2. **Output Quality Requirements**: Choose stronger model for deep analysis needs
+3. **User Experience**: Acceptance accuracy and problem discovery rate priority
+4. **Long-term Benefits**: Good quality acceptance reduces rework, saves more cost long-term
 
 ---
 
-## Task多模型优化策略 (v1.2新增)
+## Task Multi-Model Optimization Strategy (v1.2 Addition)
 
-### 验收任务分解模式
+### Acceptance Task Decomposition Pattern
 
-#### 三阶段分解示例
+#### Three-Stage Decomposition Example
 ```
-阶段1: 信息收集和快速扫描 → Task(model="haiku")
-阶段2: 专业验收和问题诊断 → Task(model="sonnet")
-阶段3: 报告生成和格式化 → Task(model="haiku")
+Stage 1: Information collection and quick scan → Task(model="haiku")
+Stage 2: Professional acceptance and problem diagnosis → Task(model="sonnet")
+Stage 3: Report generation and formatting → Task(model="haiku")
 ```
 
-### 实际案例对比
+### Real Case Comparison
 
-**❌ 传统方式 (6000+ tokens)**:
+**❌ Traditional Approach (6000+ tokens)**:
 ```python
-Task(prompt="完整验收系统功能并生成详细报告")
+Task(prompt="Complete acceptance of system functionality and generate detailed report")
 ```
 
-**✅ 分解优化 (3200 tokens, 节省47%)**:
+**✅ Decomposed Optimization (3200 tokens, 47% savings)**:
 ```python
-Task(model="haiku", prompt="快速扫描项目结构和关键文件")
-Task(model="sonnet", prompt="系统化验收核心功能和代码质量")
-Task(model="haiku", prompt="格式化为标准化验收报告")
+Task(model="haiku", prompt="Quick scan of project structure and key files")
+Task(model="sonnet", prompt="Systematic acceptance of core functionality and code quality")
+Task(model="haiku", prompt="Format into standardized acceptance report")
 ```
 
-**节省原理**：
-- 信息收集和扫描不需要深度分析 → Haiku够用
-- 核心验收保持专业质量 → Sonnet保证
-- 报告格式化纯粹模板化 → Haiku即可
+**Savings Principle**:
+- Information collection and scanning don't need deep analysis → Haiku sufficient
+- Core acceptance maintains professional quality → Sonnet guaranteed
+- Report formatting is purely templated → Haiku adequate
 
-### Task模型选择决策矩阵
+### Task Model Selection Decision Matrix
 
-| 子任务类型 | 推荐模型 | Token节省 | 质量影响 | 适用场景示例 |
-|------------|----------|-----------|----------|--------------|
-| 信息收集/快速扫描 | Haiku | 70-80% | 无影响 | 文件列表、基础检查 |
-| 简单验证/格式检查 | Haiku | 70-80% | 无影响 | 格式验证、配置检查 |
-| 标准化报告生成 | Haiku | 70-80% | 无影响 | 套用模板、格式化 |
-| 功能验收/代码审查 | Sonnet | 基准 | 保证质量 | SPAR审查、问题诊断 |
-| 系统评估/专业判断 | Sonnet | 基准 | 保证质量 | 风险评估、质量判断 |
-| 复杂诊断/深度分析 | Opus | -3-5倍 | 显著提升 | 根因分析、系统评估 |
+| Subtask Type | Recommended Model | Token Savings | Quality Impact | Use Case Examples |
+|-------------|------------------|---------------|----------------|-------------------|
+| Information collection/Quick scan | Haiku | 70-80% | No impact | File lists, basic checks |
+| Simple validation/Format check | Haiku | 70-80% | No impact | Format validation, config check |
+| Standardized report generation | Haiku | 70-80% | No impact | Template application, formatting |
+| Function acceptance/Code review | Sonnet | Baseline | Quality guarantee | SPAR review, problem diagnosis |
+| System assessment/Professional judgment | Sonnet | Baseline | Quality guarantee | Risk assessment, quality judgment |
+| Complex diagnosis/Deep analysis | Opus | -3-5x | Significant improvement | Root cause analysis, system assessment |
 
-### 质量保证机制
+### Quality Assurance Mechanism
 
-**核心原则**: 质量优先，合理优化
+**Core Principle**: Quality first, reasonable optimization
 
-**质量保证检查点**:
-1. **关键质量验收必须用Sonnet+**
-   - 涉及核心功能的验收
-   - 安全相关的代码审查
-   - 复杂问题的诊断
+**Quality Assurance Checkpoints**:
+1. **Critical quality acceptance must use Sonnet+**
+   - Acceptance involving core functions
+   - Security-related code review
+   - Complex problem diagnosis
 
-2. **用户直接交互的输出保证质量**
-   - 验收结论和建议
-   - 问题分析和解决方案
-   - 质量评估报告
+2. **User-direct interaction outputs guarantee quality**
+   - Acceptance conclusions and recommendations
+   - Problem analysis and solutions
+   - Quality assessment reports
 
-3. **内部处理步骤可适度优化**
-   - 信息收集和整理
-   - 简单格式检查
-   - 报告格式化
+3. **Internal processing steps can be moderately optimized**
+   - Information collection and organization
+   - Simple format checking
+   - Report formatting
 
 ---
 
-## Opus使用确认机制
+## Opus Usage Confirmation Mechanism
 
-### 场景说明
-- **Opus优势**: 处理复杂质量问题、系统化风险评估、难题诊断时能给出更深入的分析
-- **必要性判断**: 当验收涉及复杂问题诊断、系统性质量评估、多层次风险分析时需要Opus
+### Scenario Description
+- **Opus Advantages**: Can provide deeper analysis when handling complex quality issues, systematic risk assessment, and difficult problem diagnosis
+- **Necessity Judgment**: Opus is needed when acceptance involves complex problem diagnosis, systematic quality assessment, and multi-level risk analysis
 
-### 确认流程
+### Confirmation Process
 
-#### 第1步：识别Opus场景
-在以下情况需要使用更强大的模型：
-- 复杂Bug诊断与根因分析（多层因果关系）
-- 系统质量评估（多维度风险全面评估）
-- 性能问题深度分析（涉及复杂优化方向）
-- 难题解决与突破（需要创意性的测试思路）
+#### Step 1: Identify Opus Scenarios
+Use more powerful model in the following situations:
+- Complex bug diagnosis and root cause analysis (multi-layer causal relationships)
+- System quality assessment (comprehensive multi-dimensional risk evaluation)
+- Performance issue deep analysis (involving complex optimization directions)
+- Difficult problem solving and breakthrough (requiring creative testing approaches)
 
-#### 第2步：向用户确认
+#### Step 2: User Confirmation
 ```
-检测到当前验收任务涉及复杂的问题诊断/质量评估。
-建议使用Opus进行更深入的分析和风险评估。
-请确认：
-[ 选项A ] 仅本次验收使用Opus（推荐，成本低）
-[ 选项B ] 整个会话使用Opus（持续深度验收支持）
-[ 选项C ] 降级使用Sonnet（快速完成，可能风险识别不够深入）
+Detected that current acceptance task involves complex problem diagnosis/quality assessment.
+Recommend using Opus for deeper analysis and risk assessment.
+Please confirm:
+[ Option A ] Use Opus for this acceptance only (recommended, low cost)
+[ Option B ] Use Opus for entire session (continuous deep acceptance support)
+[ Option C ] Downgrade to Sonnet (quick completion, may lack deep risk identification)
 ```
 
-#### 第3步：处理用户决策
+#### Step 3: Handle User Decision
 
-**用户选A或B**：
-- 激活Opus进行深入质量分析
-- 提供更全面的风险评估和建议
+**User chooses A or B**:
+- Activate Opus for deep quality analysis
+- Provide more comprehensive risk assessment and recommendations
 
-**用户选C或拒绝**：
-- 降级使用Sonnet处理
-- 说明可能影响：
-  - 问题诊断可能不够深入
-  - 隐性风险可能被遗漏
-  - 质量评估可能不够全面
+**User chooses C or refuses**:
+- Downgrade to Sonnet processing
+- Explain potential impacts:
+  - Problem diagnosis may not be deep enough
+  - Hidden risks may be missed
+  - Quality assessment may not be comprehensive enough
 
-### 降级影响说明
+### Downgrade Impact Description
 
-| 场景 | Opus优势 | 降级到Sonnet的风险 |
-|------|---------|------------------|
-| Bug诊断 | 深度根因分析 | 可能找不到真正原因 |
-| 系统评估 | 多维度风险识别 | 可能遗漏隐性风险 |
-| 性能分析 | 完整优化方向 | 优化方向可能片面 |
-| 难题突破 | 创意性解决思路 | 可能卡在僵局 |
+| Scenario | Opus Advantage | Risk of Downgrading to Sonnet |
+|----------|---------------|-------------------------------|
+| Bug Diagnosis | Deep root cause analysis | May not find true cause |
+| System Assessment | Multi-dimensional risk identification | May miss hidden risks |
+| Performance Analysis | Complete optimization directions | Optimization direction may be partial |
+| Problem Breakthrough | Creative solution approaches | May get stuck in deadlock |
 
-### 使用原则
+### Usage Principles
 
-- ✅ **主动询问** - 识别到Opus场景时必须先向用户确认
-- ✅ **明确说明** - 说清楚两种模型的诊断深度差异
-- ✅ **尊重选择** - 用户拒绝则立即降级，不坚持
-- ✅ **成本意识** - 建议"仅本次"而非"整个会话"
+- ✅ **Proactive Inquiry** - Must confirm with user first when Opus scenario is identified
+- ✅ **Clear Explanation** - Clarify the diagnostic depth difference between two models
+- ✅ **Respect Choice** - If user refuses, immediately downgrade, don't insist
+- ✅ **Cost Awareness** - Suggest "this time only" rather than "entire session"
 
 ---
 
-## 实战案例对比
+## Practical Case Comparison
 
-### 案例1: AI债务助手按钮图标验收
+### Case 1: AI Debt Assistant Button Icon Acceptance
 
-#### 优化前流程 (120 tokens)
-1. 读取设计文档 (20 tokens)
-2. Task工具探索项目 (25 tokens)
-3. 逐个读取验证按钮 (35 tokens)
-4. 详细代码审查 (25 tokens)
-5. 生成详细报告 (15 tokens)
+#### Pre-Optimization Process (120 tokens)
+1. Read design documents (20 tokens)
+2. Task tool project exploration (25 tokens)
+3. Read and verify buttons individually (35 tokens)
+4. Detailed code review (25 tokens)
+5. Generate detailed report (15 tokens)
 
-#### 优化后流程 (35 tokens)
-1. 快速探索+完整读取App.vue (15 tokens)
-2. 系统化验证所有按钮 (10 tokens)
-3. SPAR聚焦审查关键代码 (5 tokens)
-4. 模板化快速报告 (5 tokens)
+#### Post-Optimization Process (35 tokens)
+1. Quick exploration + complete read App.vue (15 tokens)
+2. Systematic verification of all buttons (10 tokens)
+3. SPAR focused review of key code (5 tokens)
+4. Templated quick report (5 tokens)
 
-**节省**: 85 tokens (**71%** ⬇️)
+**Savings**: 85 tokens (**71%** ⬇️)
 
-### 案例2: Bug修复验收
+### Case 2: Bug Fix Acceptance
 
-#### 优化前流程 (95 tokens)
-1. 多次片段读取修复代码 (30 tokens)
-2. 详细功能验证 (25 tokens)
-3. 全面代码质量审查 (25 tokens)
-4. 生成详细验收报告 (15 tokens)
+#### Pre-Optimization Process (95 tokens)
+1. Multiple fragmented reads of fix code (30 tokens)
+2. Detailed functional verification (25 tokens)
+3. Comprehensive code quality review (25 tokens)
+4. Generate detailed acceptance report (15 tokens)
 
-#### 优化后流程 (28 tokens)
-1. 完整读取+Grep精确定位 (12 tokens)
-2. 系统化功能验证 (8 tokens)
-3. SPAR风险聚焦审查 (5 tokens)
-4. 模板化快速报告 (3 tokens)
+#### Post-Optimization Process (28 tokens)
+1. Complete read + Grep precise location (12 tokens)
+2. Systematic functional verification (8 tokens)
+3. SPAR risk-focused review (5 tokens)
+4. Templated quick report (3 tokens)
 
-**节省**: 67 tokens (**71%** ⬇️)
+**Savings**: 67 tokens (**71%** ⬇️)
 
 ---
 
-## 效果预估与监控
+## Effect Estimation and Monitoring
 
-### 预期节省效果
-- **整体节省**: 70%+ Token消耗
-- **时间节省**: 50%+ 验收时间
-- **质量维持**: 95%+ 问题发现率
-- **报告效率**: 80%+ 生成速度提升
+### Expected Savings Effects
+- **Overall Savings**: 70%+ token consumption
+- **Time Savings**: 50%+ acceptance time
+- **Quality Maintenance**: 95%+ problem discovery rate
+- **Report Efficiency**: 80%+ generation speed improvement
 
-### 监控指标
+### Monitoring Metrics
 ```markdown
-每次验收记录:
-- Token消耗数量
-- 发现问题数量
-- 验收时间
-- 报告满意度
+Record for each acceptance:
+- Token consumption amount
+- Number of problems found
+- Acceptance time
+- Report satisfaction level
 ```
 
-### 持续优化
-- 每月回顾优化效果
-- 根据实际使用调整策略
-- 更新检查清单和模板
-- 分享最佳实践案例
+### Continuous Optimization
+- Monthly review of optimization effects
+- Adjust strategy based on actual usage
+- Update checklists and templates
+- Share best practice cases
 
 ---
 
-## 常见问题 FAQ
+## FAQ
 
-**Q: 会不会影响验收质量？**
-A: 不会。聚焦关键点反而提高质量，避免被细节干扰。
+**Q: Will it affect acceptance quality?**
+A: No. Focusing on key points actually improves quality and avoids distraction from details.
 
-**Q: 模板化会不会太死板？**
-A: 模板是基础框架，可根据具体情况灵活调整。
+**Q: Will templating be too rigid?**
+A: Templates are basic frameworks that can be flexibly adjusted based on specific situations.
 
-**Q: 如何处理复杂项目？**
-A: 复杂项目更需要系统化方法，可以增加thoroughness level。
+**Q: How to handle complex projects?**
+A: Complex projects need systematic methods even more; can increase thoroughness level.
 
-**Q: 团队其他成员如何学习？**
-A: 提供检查清单和模板，通过实例演示传授经验。
+**Q: How can other team members learn?**
+A: Provide checklists and templates, transfer experience through practical demonstrations.
 
 ---
 
-## 总结
+## Summary
 
-本Token优化技能通过**智能文件读取**、**模板化报告**、**系统化验证**、**聚焦代码审查**、**工具使用优化**五大策略，实现了测试验收领域70%+的Token节省，同时保持了高质量的验收标准。
+This token optimization skill achieves 70%+ token savings in the testing and acceptance domain through five major strategies: **Intelligent File Reading**, **Templated Reports**, **Systematic Verification**, **Focused Code Review**, and **Tool Usage Optimization**, while maintaining high-quality acceptance standards.
 
-**核心思想**: **系统化 + 标准化 + 聚焦化 = 高效化**
+**Core Concept**: **Systematization + Standardization + Focus = Efficiency**
 
-关键是要**避免完美主义**，聚焦最重要的质量风险，用标准化的方法提高效率，让验收变得既快又准确。
+The key is to **avoid perfectionism**, focus on the most important quality risks, use standardized methods to improve efficiency, making acceptance both fast and accurate.
 
-**应用指南**: 这是测试验收领域的Token优化策略v1.2版本，包含基础优化、模型选择和Task分解三层优化策略。建议从基础策略开始应用，逐步掌握高级技巧。
+**Application Guide**: This is version 1.2 of token optimization strategy for the testing and acceptance domain, containing three levels of optimization strategies: basic optimization, model selection, and Task decomposition. It's recommended to start with basic strategies and gradually master advanced techniques.

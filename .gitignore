@@ -1,14 +1,14 @@
-# 系统文件
+# System files
 .DS_Store
 **/.DS_Store
 
-# 个人配置
+# Personal configuration
 */.claude/settings.local.json
 
-# 文档目录
+# Documentation directory
 docs/
 
-# shared目录：保留框架，忽略具体内容
+# shared directory: retain framework, ignore specific content
 shared/status.json
 shared/token-*.md
 shared/SIMPLIFICATION-SUMMARY.md

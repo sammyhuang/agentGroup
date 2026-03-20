@@ -1,124 +1,124 @@
-# AI项目适配文档模板
+# AI Project Adaptation Document Template
 
-> 放置位置: `项目根目录/.claude/project.md`
-> 提交到git，团队共享
+> Location: `Project root/.claude/project.md`
+> Commit to git, shared by team
 
 ---
 
-# [项目名称]
+# [Project Name]
 
-## 项目简介
+## Project Overview
 ```yaml
-名称: xxx
-一句话描述: xxx
-技术栈: 前端Vue3 + 后端NestJS + MySQL
-仓库: git@xxx.git
-负责人: xxx
+Name: xxx
+One-line description: xxx
+Tech Stack: Frontend Vue3 + Backend NestJS + MySQL
+Repository: git@xxx.git
+Owner: xxx
 ```
 
-## 模块地图
+## Module Map
 
-> AI开发时的导航表，快速定位代码位置
+> Navigation table for AI development, quickly locate code
 
-| 业务功能 | 模块路径 | 关键文件 | 说明 |
-|----------|----------|----------|------|
-| 用户登录 | src/modules/auth/ | auth.service.ts | JWT认证 |
-| 用户管理 | src/modules/user/ | user.service.ts | CRUD |
-| 订单管理 | src/modules/order/ | order.service.ts | 状态机流转 |
-| 支付 | src/modules/payment/ | payment.service.ts | 对接微信/支付宝 |
+| Business Function | Module Path | Key Files | Description |
+|------------------|-------------|-----------|-------------|
+| User Login | src/modules/auth/ | auth.service.ts | JWT authentication |
+| User Management | src/modules/user/ | user.service.ts | CRUD |
+| Order Management | src/modules/order/ | order.service.ts | State machine flow |
+| Payment | src/modules/payment/ | payment.service.ts | WeChat/Alipay integration |
 
-## 业务概念
+## Business Concepts
 
-> AI必须理解的领域术语
+> Domain terminology that AI must understand
 
-| 术语 | 含义 | 示例 |
-|------|------|------|
-| SKU | 库存单位 | iPhone 15 黑色 128G |
-| SPU | 商品单位 | iPhone 15 |
+| Term | Meaning | Example |
+|------|---------|---------|
+| SKU | Stock Keeping Unit | iPhone 15 Black 128G |
+| SPU | Standard Product Unit | iPhone 15 |
 
-## 数据流向
+## Data Flow
 
 ```
-请求 → Controller → Service → Repository → MySQL
-                       ↓
-                   Redis缓存
+Request → Controller → Service → Repository → MySQL
+                        ↓
+                   Redis Cache
 ```
 
-## 禁止事项
+## Prohibitions
 
-> AI绝对不能做的事
+> Things AI absolutely must not do
 
-- ❌ 不要修改 `src/config/prod.ts` 生产配置
-- ❌ 不要删除 `migrations/` 下的任何文件
-- ❌ 不要直接操作数据库，必须通过Repository
-- ❌ 不要在代码中硬编码密钥
+- ❌ Do not modify `src/config/prod.ts` production config
+- ❌ Do not delete any files under `migrations/`
+- ❌ Do not directly operate database, must use Repository
+- ❌ Do not hardcode secrets in code
 
-## 开发规范
+## Development Standards
 
-> AI写代码时遵循的规范
+> Standards AI follows when writing code
 
 ```yaml
-语言: TypeScript strict模式
-命名:
-  - 文件: kebab-case (user-service.ts)
-  - 类: PascalCase (UserService)
-  - 方法: camelCase (findById)
-注释: 中文，关键逻辑必须注释
-错误处理: 统一抛出 BusinessException
-日志: 使用 this.logger，不要用 console.log
+Language: TypeScript strict mode
+Naming:
+  - Files: kebab-case (user-service.ts)
+  - Classes: PascalCase (UserService)
+  - Methods: camelCase (findById)
+Comments: Chinese, must comment key logic
+Error Handling: Uniformly throw BusinessException
+Logging: Use this.logger, not console.log
 ```
 
-## 测试验证
+## Test Verification
 
-> 修改代码后如何验证
+> How to verify after code changes
 
 ```bash
-# 单元测试
+# Unit tests
 npm run test
 
-# E2E测试
+# E2E tests
 npm run test:e2e
 
-# 本地启动验证
+# Local startup verification
 npm run dev
-# 访问 http://localhost:3000/api/health
+# Access http://localhost:3000/api/health
 ```
 
-## 常见问题
+## Common Issues
 
-> 踩过的坑，避免AI重复踩
+> Pitfalls already encountered, avoid AI repeating them
 
-| 问题 | 原因 | 解决方案 |
-|------|------|----------|
-| 启动报错端口占用 | 上次没关干净 | `lsof -i:3000` 然后kill |
-| 数据库连接失败 | 没启动MySQL | `docker-compose up -d` |
+| Issue | Cause | Solution |
+|-------|-------|----------|
+| Startup error port occupied | Previous process not cleanly closed | `lsof -i:3000` then kill |
+| Database connection failed | MySQL not started | `docker-compose up -d` |
 
-## 当前迭代
+## Current Iteration
 
-> 当前在做什么（可选，频繁更新）
+> What's currently being worked on (optional, frequently updated)
 
 ```yaml
-版本: v2.3.0
-分支: feature/payment-refund
-任务:
-  - [ ] 退款功能开发
-  - [ ] 退款通知对接
+Version: v2.3.0
+Branch: feature/payment-refund
+Tasks:
+  - [ ] Refund function development
+  - [ ] Refund notification integration
 ```
 
-## 变更记录
+## Change Log
 
-> 重大变更记录（可选）
+> Major change records (optional)
 
 ### 2024-02-01
-- 新增支付模块 `src/modules/payment/`
-- 订单模块增加支付状态字段
+- Added payment module `src/modules/payment/`
+- Order module added payment status field
 
 ---
 
 <!--
-维护指南:
-1. 模块地图、业务概念、禁止事项 → 变化少，偶尔更新
-2. 当前迭代 → 每个迭代更新一次
-3. 变更记录 → 重大变更时记录
-4. 提交到git，团队共享
+Maintenance guide:
+1. Module map, business concepts, prohibitions → Changes infrequently, update occasionally
+2. Current iteration → Update once per iteration
+3. Change log → Record when major changes occur
+4. Commit to git, share with team
 -->

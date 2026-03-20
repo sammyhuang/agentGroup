@@ -1,57 +1,57 @@
-# /test - 执行测试
+# /test - Execute Tests
 
-对功能进行测试验证
+Perform testing and verification of functionality
 
-## 使用方式
-/test [功能名称或测试范围]
+## Usage
+/test [feature name or test scope]
 
-## 执行步骤
+## Execution Steps
 
-1. 确认测试目标和范围
+1. Confirm test targets and scope
 
-2. 设计测试用例：
+2. Design test cases:
 
-### 正常流程测试
-- 主要功能是否正常工作
-- 预期输出是否正确
+### Normal Flow Testing
+- Whether main functionality works properly
+- Whether expected output is correct
 
-### 边界测试
-- 空输入
-- 超长输入
-- 特殊字符
-- 极限值
+### Boundary Testing
+- Empty input
+- Extremely long input
+- Special characters
+- Limit values
 
-### 异常测试
-- 网络异常
-- 数据异常
-- 权限异常
-- 并发情况
+### Exception Testing
+- Network exceptions
+- Data exceptions
+- Permission exceptions
+- Concurrent scenarios
 
-### 安全测试
-- XSS尝试
-- SQL注入尝试
-- 越权访问
-- 敏感信息泄露
+### Security Testing
+- XSS attempts
+- SQL injection attempts
+- Unauthorized access
+- Sensitive information leakage
 
-3. 执行测试并记录结果
+3. Execute tests and record results
 
-4. 输出测试报告：
+4. Output test report:
 ```markdown
-# 测试报告 - [功能名称]
+# Test Report - [feature name]
 
-## 测试概览
-| 项目 | 数值 |
-|-----|------|
-| 总用例 | X |
-| 通过 | X |
-| 失败 | X |
-| 通过率 | X% |
+## Test Overview
+| Item | Value |
+|------|-------|
+| Total Cases | X |
+| Passed | X |
+| Failed | X |
+| Pass Rate | X% |
 
-## 失败用例详情
+## Failed Test Case Details
 ...
 
-## 发现的问题
+## Issues Found
 ...
 ```
 
-5. 存入 `../shared/reviews/` 并询问是否通知贾维斯
+5. Store to `../shared/reviews/` and ask whether to notify Jarvis

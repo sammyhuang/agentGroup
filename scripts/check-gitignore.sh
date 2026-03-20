@@ -1,9 +1,9 @@
 #!/bin/bash
 # ================================================================
-# aiGroup 项目 - .gitignore 规则检查脚本
-# 版本: v1.0
-# 创建日期: 2026-02-12
-# 维护人: 麦克斯 (Max)
+# aiGroup Project - .gitignore Rules Check Script
+# Version: v1.0
+# Created: 2026-02-12
+# Maintainer: Max
 # ================================================================
 
 set -e
@@ -13,23 +13,23 @@ PROJECT_ROOT="/Users/yuhao/Desktop/yezannnnn/aiGroup"
 cd "$PROJECT_ROOT"
 
 echo "================================================================"
-echo "  aiGroup 项目 .gitignore 规则检查"
+echo "  aiGroup Project .gitignore Rules Check"
 echo "================================================================"
 echo ""
 
-# 颜色定义
+# Color definitions
 RED='\033[0;31m'
 YELLOW='\033[1;33m'
 GREEN='\033[0;32m'
 NC='\033[0m' # No Color
 
-# 检查计数
+# Check counters
 TOTAL_CHECKS=0
 PASSED_CHECKS=0
 WARNINGS=0
 ERRORS=0
 
-# 检查函数
+# Check function
 check_files() {
     local pattern=$1
     local description=$2
@@ -37,19 +37,19 @@ check_files() {
 
     TOTAL_CHECKS=$((TOTAL_CHECKS + 1))
 
-    echo "检查: $description"
+    echo "Checking: $description"
 
     result=$(git ls-files | grep -E "$pattern" || true)
 
     if [ -z "$result" ]; then
-        echo -e "${GREEN}✅ 通过${NC} - 未发现问题"
+        echo -e "${GREEN}✅ Passed${NC} - No issues found"
         PASSED_CHECKS=$((PASSED_CHECKS + 1))
     else
         if [ "$severity" == "ERROR" ]; then
-            echo -e "${RED}🔴 错误${NC} - 发现不应追踪的文件:"
+            echo -e "${RED}🔴 Error${NC} - Found files that should not be tracked:"
             ERRORS=$((ERRORS + 1))
         else
-            echo -e "${YELLOW}⚠️  警告${NC} - 发现以下文件:"
+            echo -e "${YELLOW}⚠️  Warning${NC} - Found the following files:"
             WARNINGS=$((WARNINGS + 1))
         fi
         echo "$result" | sed 's/^/    /'
@@ -58,73 +58,73 @@ check_files() {
 }
 
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-echo "  第 1 部分: 系统文件检查"
+echo "  Part 1: System Files Check"
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 echo ""
 
-check_files "\.(DS_Store)$" "macOS 系统文件 (.DS_Store)" "ERROR"
-check_files "\.(Thumbs\.db|desktop\.ini)$" "Windows 系统文件" "ERROR"
-check_files "^\.directory$" "Linux 系统文件" "ERROR"
+check_files "\.(DS_Store)$" "macOS system files (.DS_Store)" "ERROR"
+check_files "\.(Thumbs\.db|desktop\.ini)$" "Windows system files" "ERROR"
+check_files "^\.directory$" "Linux system files" "ERROR"
 
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-echo "  第 2 部分: 临时和日志文件检查"
-echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-echo ""
-
-check_files "\.(log|tmp|swp|swo)$" "日志和临时文件" "ERROR"
-check_files "\.(bak|backup|old)$" "备份文件" "WARNING"
-
-echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-echo "  第 3 部分: 设计源文件检查"
+echo "  Part 2: Temporary and Log Files Check"
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 echo ""
 
-check_files "\.(psd|ai|fig|sketch|xd)$" "大型设计源文件" "ERROR"
-check_files "shared/designs/.*\.(png|jpg|jpeg)$" "设计目录导出图片（预览图除外）" "WARNING"
+check_files "\.(log|tmp|swp|swo)$" "Log and temporary files" "ERROR"
+check_files "\.(bak|backup|old)$" "Backup files" "WARNING"
 
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-echo "  第 4 部分: 缓存和依赖检查"
-echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-echo ""
-
-check_files "__pycache__|\.pyc$|\.pyo$" "Python 缓存文件" "ERROR"
-check_files "node_modules/|\.cache/" "Node.js 依赖和缓存" "ERROR"
-check_files "\.(egg-info|pytest_cache)/" "Python 包管理和测试缓存" "ERROR"
-
-echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-echo "  第 5 部分: 敏感信息检查"
+echo "  Part 3: Design Source Files Check"
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 echo ""
 
-check_files "\.(env|key|pem)$|secrets/" "敏感配置和密钥文件" "ERROR"
-check_files "settings\.local\.json$" "本地配置文件" "ERROR"
+check_files "\.(psd|ai|fig|sketch|xd)$" "Large design source files" "ERROR"
+check_files "shared/designs/.*\.(png|jpg|jpeg)$" "Design directory exported images (excluding previews)" "WARNING"
 
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-echo "  第 6 部分: 编辑器配置检查"
+echo "  Part 4: Cache and Dependencies Check"
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 echo ""
 
-check_files "\.vscode/|\.idea/|\.cursor/" "编辑器配置目录" "WARNING"
+check_files "__pycache__|\.pyc$|\.pyo$" "Python cache files" "ERROR"
+check_files "node_modules/|\.cache/" "Node.js dependencies and cache" "ERROR"
+check_files "\.(egg-info|pytest_cache)/" "Python package management and test cache" "ERROR"
+
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+echo "  Part 5: Sensitive Information Check"
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+echo ""
+
+check_files "\.(env|key|pem)$|secrets/" "Sensitive configuration and key files" "ERROR"
+check_files "settings\.local\.json$" "Local configuration files" "ERROR"
+
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+echo "  Part 6: Editor Configuration Check"
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+echo ""
+
+check_files "\.vscode/|\.idea/|\.cursor/" "Editor configuration directories" "WARNING"
 
 echo "================================================================"
-echo "  检查结果汇总"
+echo "  Check Results Summary"
 echo "================================================================"
 echo ""
-echo "总检查项:   $TOTAL_CHECKS"
-echo -e "${GREEN}通过:       $PASSED_CHECKS${NC}"
-echo -e "${YELLOW}警告:       $WARNINGS${NC}"
-echo -e "${RED}错误:       $ERRORS${NC}"
+echo "Total checks:   $TOTAL_CHECKS"
+echo -e "${GREEN}Passed:       $PASSED_CHECKS${NC}"
+echo -e "${YELLOW}Warnings:     $WARNINGS${NC}"
+echo -e "${RED}Errors:       $ERRORS${NC}"
 echo ""
 
 if [ $ERRORS -gt 0 ]; then
-    echo -e "${RED}❌ 检查失败 - 发现 $ERRORS 个错误${NC}"
-    echo "建议: 使用 'git rm --cached <file>' 移除不应追踪的文件"
+    echo -e "${RED}❌ Check failed - Found $ERRORS errors${NC}"
+    echo "Suggestion: Use 'git rm --cached <file>' to remove files that should not be tracked"
     exit 1
 elif [ $WARNINGS -gt 0 ]; then
-    echo -e "${YELLOW}⚠️  检查通过（有警告） - 发现 $WARNINGS 个警告${NC}"
-    echo "建议: 检查警告文件是否应该保留在版本控制中"
+    echo -e "${YELLOW}⚠️  Check passed (with warnings) - Found $WARNINGS warnings${NC}"
+    echo "Suggestion: Check if warning files should remain in version control"
     exit 0
 else
-    echo -e "${GREEN}✅ 检查完全通过 - .gitignore 规则正常工作${NC}"
+    echo -e "${GREEN}✅ Check completely passed - .gitignore rules working properly${NC}"
     exit 0
 fi

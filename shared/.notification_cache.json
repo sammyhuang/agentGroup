@@ -1,7 +1,7 @@
 {
   "meta": {
     "version": "1.0.0",
-    "description": "基于文件修改时间戳的通知缓存机制",
+    "description": "File modification timestamp-based notification cache mechanism",
     "last_global_update": "2026-02-13T00:00:00Z"
   },
   "ai_agents": {
@@ -38,7 +38,7 @@
     "tasks/projects.md": 0
   },
   "check_strategy": {
-    "description": "检查策略配置",
+    "description": "Check strategy configuration",
     "full_check_interval_hours": 24,
     "quick_check_files": [
       "notifications.json",

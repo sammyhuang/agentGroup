@@ -1,120 +1,120 @@
-# /prototype - 交互原型
+# /prototype - Interactive Prototype
 
-设计用户交互流程和页面状态变化
+Design user interaction flows and page state changes
 
-## 使用方式
-
-```
-/prototype [功能描述]
-/prototype 登录注册流程
-/prototype 订单支付流程
-```
-
-## 执行步骤
-
-### 1. 理解用户目标
-- 用户要完成什么任务？
-- 有哪些关键步骤？
-- 可能遇到什么问题？
-
-### 2. 绘制流程图
+## Usage
 
 ```
-用户流程: [功能名称]
+/prototype [feature description]
+/prototype login registration flow
+/prototype order payment flow
+```
 
-[起点]
+## Execution Steps
+
+### 1. Understand User Goals
+- What task does the user want to complete?
+- What are the key steps?
+- What problems might they encounter?
+
+### 2. Draw Flow Diagram
+
+```
+User Flow: [Feature Name]
+
+[Start Point]
    ↓
-[步骤1] ──失败──→ [错误处理]
-   ↓ 成功              ↓
-[步骤2]          [重试/返回]
+[Step 1] ──Failure──→ [Error Handling]
+   ↓ Success              ↓
+[Step 2]          [Retry/Return]
    ↓
-[完成]
+[Complete]
 ```
 
-### 3. 定义页面状态
+### 3. Define Page States
 
 ```markdown
-## 页面状态
+## Page States
 
-### [页面名]
+### [Page Name]
 
-| 状态 | 触发条件 | 界面表现 |
+| State | Trigger Condition | UI Behavior |
 |------|----------|----------|
-| 初始态 | 首次进入 | 表单为空 |
-| 加载中 | 提交数据 | 按钮loading |
-| 成功态 | 请求成功 | Toast提示 |
-| 失败态 | 请求失败 | 错误提示 |
-| 空状态 | 无数据 | 空状态插图 |
+| Initial | First entry | Empty form |
+| Loading | Submit data | Button loading |
+| Success | Request success | Toast notification |
+| Error | Request failed | Error message |
+| Empty | No data | Empty state illustration |
 ```
 
-### 4. 设计交互细节
+### 4. Design Interaction Details
 
 ```markdown
-## 交互说明
+## Interaction Instructions
 
-### 表单交互
-| 操作 | 反馈 |
+### Form Interactions
+| Action | Feedback |
 |------|------|
-| 输入时 | 实时校验，错误红框+提示 |
-| 失焦时 | 完成校验 |
-| 提交时 | 按钮loading，禁止重复点击 |
+| Input | Real-time validation, red border + message on error |
+| Focus out | Complete validation |
+| Submit | Button loading, prevent duplicate clicks |
 
-### 手势交互（移动端）
-| 手势 | 效果 |
+### Gesture Interactions (Mobile)
+| Gesture | Effect |
 |------|------|
-| 下拉 | 刷新数据 |
-| 上滑 | 加载更多 |
-| 左滑 | 删除操作 |
+| Pull down | Refresh data |
+| Swipe up | Load more |
+| Swipe left | Delete operation |
 
-### 动画效果
-| 场景 | 动画 | 时长 |
+### Animation Effects
+| Scenario | Animation | Duration |
 |------|------|------|
-| 页面切换 | 左右滑动 | 300ms |
-| 弹窗出现 | 底部弹起 | 250ms |
-| Toast | 淡入淡出 | 200ms |
+| Page transition | Left-right slide | 300ms |
+| Modal appear | Bottom slide up | 250ms |
+| Toast | Fade in/out | 200ms |
 ```
 
-### 5. 异常处理
+### 5. Exception Handling
 
 ```markdown
-## 异常状态
+## Exception States
 
-| 异常 | 处理方式 |
+| Exception | Handling Method |
 |------|----------|
-| 网络错误 | Toast提示"网络异常"，可重试 |
-| 服务器错误 | 错误页面，联系客服 |
-| 登录过期 | 跳转登录页 |
-| 无权限 | 提示无权限，返回上页 |
+| Network error | Toast message "Network error", retry option |
+| Server error | Error page, contact support |
+| Login expired | Redirect to login page |
+| No permission | Show no permission message, return to previous page |
 ```
 
-### 6. 输出原型文档
+### 6. Output Prototype Document
 
-存储到 `../shared/designs/[功能名]-prototype.md`
+Store to `../shared/designs/[feature-name]-prototype.md`
 
-## 示例输出
+## Example Output
 
 ```markdown
-# 交互原型 - 登录流程
+# Interactive Prototype - Login Flow
 
-## 用户流程
+## User Flow
 
-[打开App]
+[Open App]
     ↓
-[登录页] ─已登录─→ [首页]
-    ↓ 未登录
-[输入手机号]
+[Login Page] ─Logged in─→ [Home]
+    ↓ Not logged in
+[Enter Phone Number]
     ↓
-[获取验证码] ──失败──→ [提示错误，重新获取]
-    ↓ 成功
-[输入验证码]
+[Get Verification Code] ──Failed──→ [Show error, get again]
+    ↓ Success
+[Enter Verification Code]
     ↓
-[登录验证] ──失败──→ [提示错误，重新输入]
-    ↓ 成功
-[首页]
+[Login Verification] ──Failed──→ [Show error, re-enter]
+    ↓ Success
+[Home]
 
-## 页面状态
+## Page States
 ...
 
-## 交互细节
+## Interaction Details
 ...
 ```

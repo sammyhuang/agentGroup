@@ -1,81 +1,81 @@
-# /report - 生成项目报告
+# /report - Generate Project Report
 
-生成项目进度报告
+Generate project progress reports
 
-## 使用方式
+## Usage
 
 ```
-/report daily     # 日报
-/report weekly    # 周报
-/report [项目名]  # 指定项目报告
+/report daily        # Daily report
+/report weekly       # Weekly report
+/report [project]    # Specific project report
 ```
 
-## 日报模板
+## Daily Report Template
 
 ```markdown
-# 项目日报 - YYYY-MM-DD
+# Project Daily Report - YYYY-MM-DD
 
-## 今日完成
-### 设计
-- [x] [任务]
+## Today's Completed Tasks
+### Design
+- [x] [task]
 
-### 开发
-- [x] [任务]
+### Development
+- [x] [task]
 
-### 测试
-- [x] [任务]
+### Testing
+- [x] [task]
 
-## 进行中
-- [ ] [任务] - [负责人] - [预计完成时间]
+## In Progress
+- [ ] [task] - [responsible person] - [estimated completion time]
 
-## 阻塞问题
-| 问题 | 影响 | 解决方案 | 负责人 |
-|------|------|----------|--------|
-| [问题] | [影响范围] | [方案] | [人] |
+## Blocking Issues
+| Issue | Impact | Solution | Responsible Person |
+|-------|--------|----------|-------------------|
+| [issue] | [impact scope] | [solution] | [person] |
 
-## 明日计划
-1. [计划]
+## Tomorrow's Plan
+1. [plan]
 ```
 
-## 周报模板
+## Weekly Report Template
 
 ```markdown
-# 项目周报 - 第X周 (MM-DD ~ MM-DD)
+# Project Weekly Report - Week X (MM-DD ~ MM-DD)
 
-## 本周概览
-| 类型 | 计划 | 完成 | 完成率 |
-|------|------|------|--------|
-| 设计 | X | X | XX% |
-| 开发 | X | X | XX% |
-| 测试 | X | X | XX% |
+## This Week Overview
+| Type | Planned | Completed | Completion Rate |
+|------|---------|-----------|----------------|
+| Design | X | X | XX% |
+| Development | X | X | XX% |
+| Testing | X | X | XX% |
 
-## 里程碑进度
-| 里程碑 | 目标日期 | 当前状态 | 风险 |
-|--------|----------|----------|------|
-| [名称] | [日期] | XX% | 低/中/高 |
+## Milestone Progress
+| Milestone | Target Date | Current Status | Risk |
+|-----------|-------------|----------------|------|
+| [name] | [date] | XX% | Low/Medium/High |
 
-## 本周亮点
-1. [亮点]
+## This Week Highlights
+1. [highlight]
 
-## 问题与风险
-| 问题 | 状态 | 影响 | 应对措施 |
-|------|------|------|----------|
-| [问题] | 已解决/进行中 | [影响] | [措施] |
+## Issues and Risks
+| Issue | Status | Impact | Response Measures |
+|-------|--------|---------|------------------|
+| [issue] | Resolved/In Progress | [impact] | [measures] |
 
-## 下周计划
-### 设计
-- [ ] [任务]
+## Next Week Plan
+### Design
+- [ ] [task]
 
-### 开发
-- [ ] [任务]
+### Development
+- [ ] [task]
 
-### 测试
-- [ ] [任务]
+### Testing
+- [ ] [task]
 
-## 需要决策
-1. [需要用户决策的事项]
+## Decisions Needed
+1. [items requiring user decision]
 ```
 
-## 存储位置
+## Storage Location
 
-报告存储到 `../shared/tasks/reports/`
+Reports are stored to `../shared/tasks/reports/`

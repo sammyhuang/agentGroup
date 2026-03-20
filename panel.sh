@@ -1,25 +1,25 @@
 #!/bin/bash
-# AI Group - 交互式启动面板
+# AI Group - Interactive Launch Panel
 
 SESSION="aigroup"
 DIR="$(cd "$(dirname "$0")" && pwd)"
 
-# 检查tmux
+# Check tmux
 if ! command -v tmux &> /dev/null; then
-    echo "错误: 需要安装tmux"
-    echo "安装命令: brew install tmux"
+    echo "Error: tmux installation required"
+    echo "Install command: brew install tmux"
     exit 1
 fi
 
-# 如果session已存在
+# If session already exists
 if tmux has-session -t $SESSION 2>/dev/null; then
-    echo "AI Group 会话已存在"
+    echo "AI Group session already exists"
     echo ""
-    echo "  1) 连接到现有会话"
-    echo "  2) 关闭并重新启动"
-    echo "  3) 退出"
+    echo "  1) Connect to existing session"
+    echo "  2) Close and restart"
+    echo "  3) Exit"
     echo ""
-    read -p "请选择 [1-3]: " choice
+    read -p "Please choose [1-3]: " choice
 
     case $choice in
         1) tmux attach-session -t $SESSION; exit 0 ;;
@@ -29,20 +29,20 @@ if tmux has-session -t $SESSION 2>/dev/null; then
 fi
 
 echo "=========================================="
-echo "  AI Group - 启动面板"
+echo "  AI Group - Launch Panel"
 echo "=========================================="
 echo ""
-echo "  a) 全员启动 (Max + 艾拉 + 贾维斯 + 凯尔)"
-echo "  b) 三人模式 (Max + 艾拉 + 贾维斯)"
-echo "  c) 仅Max"
-echo "  d) 设计开发 (艾拉 + 贾维斯)"
-echo "  q) 退出"
+echo "  a) Full Team (Max + Ella + Jarvis + Kyle)"
+echo "  b) Three-person Mode (Max + Ella + Jarvis)"
+echo "  c) Max Only"
+echo "  d) Design & Development (Ella + Jarvis)"
+echo "  q) Exit"
 echo ""
-read -p "请选择: " selection
+read -p "Please choose: " selection
 
 case $selection in
     a|A)
-        # 全员: Max左 + 右三栏
+        # Full team: Max left + right three columns
         tmux new-session -d -s $SESSION -c "$DIR/max" -n "AI Group"
         tmux send-keys -t $SESSION "claude -c 2>/dev/null || claude" C-m
 
@@ -59,7 +59,7 @@ case $selection in
         tmux attach-session -t $SESSION
         ;;
     b|B)
-        # 三人: Max左 + 右两栏
+        # Three-person: Max left + right two columns
         tmux new-session -d -s $SESSION -c "$DIR/max" -n "AI Group"
         tmux send-keys -t $SESSION "claude -c 2>/dev/null || claude" C-m
 
@@ -73,14 +73,14 @@ case $selection in
         tmux attach-session -t $SESSION
         ;;
     c|C)
-        # 仅Max
+        # Max only
         tmux new-session -d -s $SESSION -c "$DIR/max" -n "AI Group"
         tmux send-keys -t $SESSION "claude -c 2>/dev/null || claude" C-m
         tmux attach-session -t $SESSION
         ;;
     d|D)
-        # 设计开发: 艾拉左 + 贾维斯右
-        tmux new-session -d -s $SESSION -c "$DIR/ella" -n "设计+开发"
+        # Design & Development: Ella left + Jarvis right
+        tmux new-session -d -s $SESSION -c "$DIR/ella" -n "Design+Dev"
         tmux send-keys -t $SESSION "claude --model claude-opus-4-5-20251101 -c 2>/dev/null || claude --model claude-opus-4-5-20251101" C-m
 
         tmux split-window -h -t $SESSION -c "$DIR/jarvis"

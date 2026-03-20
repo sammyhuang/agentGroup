@@ -1,13 +1,13 @@
 #!/bin/bash
 
 ################################################################################
-# 通知检查脚本 - 简化版（无需jq依赖）
-# 用途: AI会话启动时检查是否有新通知（仅检测mtime变化）
-# 使用: ./check_notifications_simple.sh <AI_NAME>
-# 示例: ./check_notifications_simple.sh max
+# Notification Check Script - Simplified Version (No jq dependency)
+# Purpose: Check for new notifications when AI session starts (only detect mtime changes)
+# Usage: ./check_notifications_simple.sh <AI_NAME>
+# Example: ./check_notifications_simple.sh max
 ################################################################################
 
-# 配置
+# Configuration
 AI_NAME="${1:-max}"
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 SHARED_DIR="$(dirname "$SCRIPT_DIR")"
@@ -15,10 +15,10 @@ NOTIFICATION_FILE="$SHARED_DIR/notifications.json"
 CACHE_DIR="$SHARED_DIR/.cache"
 CACHE_FILE="$CACHE_DIR/${AI_NAME}_last_check.txt"
 
-# 创建缓存目录
+# Create cache directory
 mkdir -p "$CACHE_DIR"
 
-# 颜色输出
+# Color output
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
@@ -30,13 +30,13 @@ success() { echo -e "${GREEN}[✓]${NC} $1"; }
 warning() { echo -e "${YELLOW}[!]${NC} $1"; }
 error() { echo -e "${RED}[✗]${NC} $1"; }
 
-# 检查通知文件存在性
+# Check notification file existence
 if [ ! -f "$NOTIFICATION_FILE" ]; then
-    error "通知文件不存在: $NOTIFICATION_FILE"
+    error "Notification file does not exist: $NOTIFICATION_FILE"
     exit 2
 fi
 
-# 获取文件mtime（跨平台）
+# Get file mtime (cross-platform)
 get_mtime() {
     local file="$1"
     if [[ "$OSTYPE" == "darwin"* ]]; then
@@ -46,58 +46,58 @@ get_mtime() {
     fi
 }
 
-# 将mtime转换为可读时间
+# Convert mtime to readable time
 mtime_to_date() {
     local mtime="$1"
     if [[ "$OSTYPE" == "darwin"* ]]; then
-        date -r "$mtime" "+%Y-%m-%d %H:%M:%S" 2>/dev/null || echo "未知时间"
+        date -r "$mtime" "+%Y-%m-%d %H:%M:%S" 2>/dev/null || echo "Unknown time"
     else
-        date -d "@$mtime" "+%Y-%m-%d %H:%M:%S" 2>/dev/null || echo "未知时间"
+        date -d "@$mtime" "+%Y-%m-%d %H:%M:%S" 2>/dev/null || echo "Unknown time"
     fi
 }
 
-# 主逻辑
+# Main logic
 echo ""
-info "AI通知检查 - $AI_NAME"
+info "AI Notification Check - $AI_NAME"
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 
-# 获取当前mtime
+# Get current mtime
 CURRENT_MTIME=$(get_mtime "$NOTIFICATION_FILE")
 CURRENT_DATE=$(mtime_to_date "$CURRENT_MTIME")
 
-info "通知文件最后修改: $CURRENT_DATE"
+info "Notification file last modified: $CURRENT_DATE"
 
-# 读取缓存的mtime
+# Read cached mtime
 if [ -f "$CACHE_FILE" ]; then
     CACHED_MTIME=$(cat "$CACHE_FILE" 2>/dev/null || echo "0")
     CACHED_DATE=$(mtime_to_date "$CACHED_MTIME")
-    info "上次检查时间: $CACHED_DATE"
+    info "Last check time: $CACHED_DATE"
 else
     CACHED_MTIME=0
-    warning "首次检查，无历史记录"
+    warning "First check, no historical record"
 fi
 
 echo ""
 
-# 比较判断
+# Compare and decide
 if [ "$CURRENT_MTIME" -gt "$CACHED_MTIME" ]; then
     echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-    echo -e "  ${GREEN}📬 检测到通知文件有更新！${NC}"
+    echo -e "  ${GREEN}📬 Notification file update detected!${NC}"
     echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
     echo ""
-    success "建议读取通知文件: $NOTIFICATION_FILE"
+    success "Recommend reading notification file: $NOTIFICATION_FILE"
     echo ""
 
-    # 更新缓存
+    # Update cache
     echo "$CURRENT_MTIME" > "$CACHE_FILE"
-    info "缓存已更新"
+    info "Cache updated"
 
-    # 返回状态码1表示有新通知
+    # Return status code 1 for new notifications
     exit 1
 else
-    success "无新通知（文件未修改）"
+    success "No new notifications (file not modified)"
     echo ""
 
-    # 返回状态码0表示无新通知
+    # Return status code 0 for no new notifications
     exit 0
 fi

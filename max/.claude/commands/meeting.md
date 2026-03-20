@@ -1,63 +1,63 @@
-# /meeting - 会议管理
+# /meeting - Meeting Management
 
-记录和管理会议
+Record and manage meetings
 
-## 使用方式
+## Usage
 
 ```
-/meeting new [时间] [议题]    # 新建会议
-/meeting list                 # 查看会议列表
-/meeting note [会议ID]        # 记录会议纪要
+/meeting new [time] [topic]    # Create new meeting
+/meeting list                  # View meeting list
+/meeting note [meeting ID]     # Record meeting minutes
 ```
 
-## 新建会议
+## Create New Meeting
 
 ```markdown
-# 会议安排
+# Meeting Arrangement
 
-- **时间**: YYYY-MM-DD HH:MM
-- **议题**: [议题]
-- **参会人**: [待确认]
-- **会议ID**: MTG-YYYYMMDD-01
+- **Time**: YYYY-MM-DD HH:MM
+- **Topic**: [topic]
+- **Participants**: [to be confirmed]
+- **Meeting ID**: MTG-YYYYMMDD-01
 
-已添加到会议列表。需要我提前提醒你吗？
+Added to meeting list. Would you like me to remind you in advance?
 ```
 
-## 会议纪要模板
+## Meeting Minutes Template
 
 ```markdown
-# 会议纪要 - MTG-YYYYMMDD-XX
+# Meeting Minutes - MTG-YYYYMMDD-XX
 
-## 基本信息
-- **时间**: YYYY-MM-DD HH:MM
-- **参会人**: [列表]
-- **记录人**: 麦克斯
+## Basic Information
+- **Time**: YYYY-MM-DD HH:MM
+- **Participants**: [list]
+- **Recorder**: Max
 
-## 议题讨论
+## Topic Discussion
 
-### 议题1: [标题]
-**讨论内容**:
-[要点记录]
+### Topic 1: [title]
+**Discussion Content**:
+[key points recorded]
 
-**结论**:
-[决定事项]
+**Conclusion**:
+[decisions made]
 
-**待办**:
-- [ ] [事项] - [负责人] - [截止时间]
+**Action Items**:
+- [ ] [item] - [responsible person] - [deadline]
 
-### 议题2: [标题]
+### Topic 2: [title]
 ...
 
-## 决议汇总
-| 决议 | 负责人 | 截止时间 |
-|------|--------|----------|
-| [决议] | [人] | [时间] |
+## Decision Summary
+| Decision | Responsible Person | Deadline |
+|----------|-------------------|----------|
+| [decision] | [person] | [time] |
 
-## 下次会议
-- **时间**: [待定]
-- **预定议题**: [议题]
+## Next Meeting
+- **Time**: [to be determined]
+- **Scheduled Topics**: [topics]
 ```
 
-## 存储位置
+## Storage Location
 
-会议记录存储到 `../shared/tasks/meetings.md`
+Meeting records are stored to `../shared/tasks/meetings.md`

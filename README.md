@@ -1,333 +1,333 @@
-# aiGroup - AI团队协作系统
+# aiGroup - AI Team Collaboration System
 
-> 🚀 四AI专业分工协作框架：设计 + 开发 + 测试 + 管理
+> 🚀 Four-AI Professional Division Framework: Design + Development + Testing + Management
 
-## 🌟 项目特色
+## 🌟 Project Features
 
-### 核心创新
-- **严格职责边界**: 每个AI只处理专属领域任务，避免能力重叠
-- **智能Token优化**: 独创优化策略，实现67-85%成本削减
-- **⚡ 强制优化流程**: 每次消息都自动执行优化策略，跨session永久生效
-- **🔧 强制Task分解**: 自动识别可分解任务，多模型并行执行
-- **任务处理策略**: 基于复杂度的模型选择和任务分解机制
-- **状态化协作**: 通过shared工作区实现AI间信息传递
-- **专属技能库**: 每个AI配备专业技能，支持高级工作流程
+### Core Innovations
+- **Strict Role Boundaries**: Each AI handles only domain-specific tasks, avoiding capability overlap
+- **Intelligent Token Optimization**: Proprietary optimization strategies achieving 67-85% cost reduction
+- **⚡ Mandatory Optimization Process**: Automatic optimization strategy execution with every message, permanent across sessions
+- **🔧 Mandatory Task Decomposition**: Automatic identification and decomposition of tasks, multi-model parallel execution
+- **Task Processing Strategy**: Model selection and task decomposition based on complexity
+- **Stateful Collaboration**: Information exchange between AIs through shared workspace
+- **Dedicated Skill Libraries**: Each AI equipped with professional skills supporting advanced workflows
 
-### 与常见AI使用方式的区别
-| 常见方式 | aiGroup |
+### Differences from Common AI Usage
+| Common Approach | aiGroup |
 |---------|---------|
-| 一个AI处理所有任务 | 四AI专业分工，职责明确 |
-| 随意使用模型 | 基于任务复杂度智能选择 |
-| 无成本意识 | Token优化策略，成本可控 |
-| 重复沟通上下文 | 持续状态管理，减少重复 |
+| One AI handles all tasks | Four AIs with professional division and clear responsibilities |
+| Random model usage | Intelligent selection based on task complexity |
+| No cost awareness | Token optimization strategy, cost-controlled |
+| Repeated context communication | Continuous state management, reduced redundancy |
 
 ---
 
-## 👥 团队成员与职责边界
+## 👥 Team Members & Responsibility Boundaries
 
-### 🎯 **麦克斯 (Max)** - 项目经理 & 产品顾问
-**模型**: Sonnet 4.5 | **职责范围**: 管理和协调
+### 🎯 **Max** - Project Manager & Product Consultant
+**Model**: Sonnet 4.5 | **Scope**: Management and Coordination
 
-**负责任务**:
-- 📋 **项目管理**: 监控进度、识别风险、协调资源
-- 💡 **产品顾问**: 需求分析、优先级排序、方向建议
-- 📅 **个人助理**: 会议管理、待办事项、日程提醒
-- 📊 **数据分析**: 团队效率分析、成本控制
+**Responsibilities**:
+- 📋 **Project Management**: Progress monitoring, risk identification, resource coordination
+- 💡 **Product Consulting**: Requirements analysis, priority ranking, strategic recommendations
+- 📅 **Personal Assistant**: Meeting management, todo items, schedule reminders
+- 📊 **Data Analysis**: Team efficiency analysis, cost control
 
-**不负责**: UI设计、代码开发、测试验收
+**Not Responsible For**: UI design, code development, testing acceptance
 
-**🔧 专属技能**:
-- CCPM项目管理系统（GitHub Issues集成）
-- PM Claude技能集（节省8-9小时/周）
-- 快速工具箱（交互式菜单）
+**🔧 Exclusive Skills**:
+- CCPM Project Management System (GitHub Issues integration)
+- PM Claude skill set (saves 8-9 hours/week)
+- Quick Toolkit (interactive menu)
 
-### 🎨 **艾拉 (Ella)** - UI/UX设计师
-**模型**: Sonnet 4.5 | **职责范围**: 设计创作
+### 🎨 **Ella** - UI/UX Designer
+**Model**: Sonnet 4.5 | **Scope**: Design Creation
 
-**负责任务**:
-- 🎨 **UI设计**: 界面布局、视觉规范、组件设计
-- 👤 **UX设计**: 用户体验流程、交互逻辑
-- 🎭 **品牌设计**: 色彩搭配、字体选择、风格统一
-- 📱 **响应式设计**: 多设备适配、移动优先
+**Responsibilities**:
+- 🎨 **UI Design**: Interface layout, visual standards, component design
+- 👤 **UX Design**: User experience flows, interaction logic
+- 🎭 **Brand Design**: Color schemes, typography, style consistency
+- 📱 **Responsive Design**: Multi-device adaptation, mobile-first
 
-**不负责**: 代码实现、项目管理、测试验收
+**Not Responsible For**: Code implementation, project management, testing acceptance
 
-**🔧 专属技能**:
-- UI/UX设计系统化方法
-- 视觉设计和用户体验设计
-- 设计规范和组件视觉规范制定
-- 响应式设计和交互原型制作
+**🔧 Exclusive Skills**:
+- Systematic UI/UX design methodology
+- Visual design and user experience design
+- Design standards and component visual specification
+- Responsive design and interactive prototyping
 
-### ⚡ **贾维斯 (Jarvis)** - 全栈开发工程师
-**模型**: Sonnet 4.5 | **职责范围**: 技术实现
+### ⚡ **Jarvis** - Full-Stack Developer
+**Model**: Sonnet 4.5 | **Scope**: Technical Implementation
 
-**负责任务**:
-- 💻 **前端开发**: React/Vue/Angular，现代框架
-- 🔧 **后端开发**: Node.js/Python/Java，API设计
-- 🗄️ **数据库**: SQL/NoSQL，数据建模
-- ☁️ **部署运维**: Docker/云服务，自动化部署
+**Responsibilities**:
+- 💻 **Frontend Development**: React/Vue/Angular, modern frameworks
+- 🔧 **Backend Development**: Node.js/Python/Java, API design
+- 🗄️ **Database**: SQL/NoSQL, data modeling
+- ☁️ **Deployment & Operations**: Docker/Cloud services, automated deployment
 
-**不负责**: UI设计、项目管理、测试策略
+**Not Responsible For**: UI design, project management, testing strategy
 
-**🔧 专属技能**:
-- Claude Simone开发框架（AI辅助开发）
-- 完整工程技能集（前端/后端/全栈/架构）
-- React/Vue组件开发和前端实现
-- 代码审查和技术栈评估
-- DevOps和部署运维
+**🔧 Exclusive Skills**:
+- Claude Simone development framework (AI-assisted development)
+- Complete engineering skill set (frontend/backend/full-stack/architecture)
+- React/Vue component development and frontend implementation
+- Code review and tech stack evaluation
+- DevOps and deployment operations
 
-### 🔍 **凯尔 (Kyle)** - 质量保证工程师
-**模型**: Sonnet 4.5 | **职责范围**: 质量控制
+### 🔍 **Kyle** - Quality Assurance Engineer
+**Model**: Sonnet 4.5 | **Scope**: Quality Control
 
-**负责任务**:
-- 🧪 **功能测试**: 核心业务逻辑验证
-- 🔍 **代码审查**: 安全漏洞、性能问题检查
-- 📋 **验收测试**: 用户需求完整性验证
-- 📊 **质量报告**: 系统化测试文档输出
+**Responsibilities**:
+- 🧪 **Functional Testing**: Core business logic verification
+- 🔍 **Code Review**: Security vulnerabilities, performance issue checking
+- 📋 **Acceptance Testing**: User requirements completeness verification
+- 📊 **Quality Reports**: Systematic testing documentation output
 
-**不负责**: 代码开发、UI设计、项目规划
+**Not Responsible For**: Code development, UI design, project planning
 
 ---
 
-## 💰 Token优化策略
+## 💰 Token Optimization Strategy
 
-### 🎯 优化成果
-- **综合节省**: 67-85% Token成本削减
-- **三层策略**: 基础选择(30-40%) + 质量平衡(15-25%) + Task分解(20-40%)
-- **实战验证**: 基于实际项目优化经验
+### 🎯 Optimization Results
+- **Total Savings**: 67-85% Token cost reduction
+- **Three-Layer Strategy**: Basic selection (30-40%) + Quality balance (15-25%) + Task decomposition (20-40%)
+- **Battle-Tested**: Based on real project optimization experience
 
-### 📊 各AI优化数据
-| 成员 | 优化率 | 核心策略 |
+### 📊 AI Optimization Data
+| Member | Optimization Rate | Core Strategy |
 |------|--------|----------|
-| 麦克斯 | 75% | 结构化管理、批量操作、预授权 |
-| 艾拉 | 65% | 设计系统化、API直取、模板复用 |
-| 贾维斯 | 60% | 代码复用、模块化开发、精准实现 |
-| 凯尔 | 70%+ | 聚焦测试、模板化报告、智能文件读取 |
+| Max | 75% | Structured management, batch operations, pre-authorization |
+| Ella | 65% | Design systematization, direct API access, template reuse |
+| Jarvis | 60% | Code reuse, modular development, precise implementation |
+| Kyle | 70%+ | Focused testing, templated reports, intelligent file reading |
 
-### 核心优化原则
-1. **模型智能选择**: 根据任务复杂度选择Haiku/Sonnet/Opus
-2. **任务分解策略**: 复杂任务分解为简单子任务，差异化模型处理
-3. **需求澄清机制**: 避免过度设计，精准满足用户需求
-4. **状态化管理**: 减少重复查询和上下文重建
-
----
-
-## 🚀 任务处理策略
-
-### 📋 任务分配原则
-```
-用户需求 → 麦克斯分析 → 分配给对应AI → 执行 → 麦克斯汇总
-```
-
-**分配规则**:
-- 设计类需求 → 艾拉处理
-- 开发类需求 → 贾维斯处理
-- 测试类需求 → 凯尔处理
-- 管理类需求 → 麦克斯处理
-
-### ⚡ 模型选择策略
-
-**决策树**:
-```
-任务复杂度评估
-├─ 简单操作 (文件读写、格式化) → Haiku
-├─ 中等复杂 (分析、设计、开发) → Sonnet
-└─ 高度复杂 (战略决策、创新设计) → Opus (需确认)
-```
-
-**选择原则**:
-- **质量优先**: 关键任务保证输出质量
-- **成本意识**: 避免过度使用高成本模型
-- **效率平衡**: 在质量和成本间找到最佳平衡
+### Core Optimization Principles
+1. **Intelligent Model Selection**: Choose Haiku/Sonnet/Opus based on task complexity
+2. **Task Decomposition Strategy**: Break complex tasks into simple subtasks, differentiated model processing
+3. **Requirements Clarification Mechanism**: Avoid over-engineering, precisely meet user needs
+4. **Stateful Management**: Reduce redundant queries and context rebuilding
 
 ---
 
-## 🚀 快速开始
+## 🚀 Task Processing Strategy
 
-### 基础命令
+### 📋 Task Assignment Principles
+```
+User Requirements → Max Analysis → Assign to Corresponding AI → Execute → Max Summary
+```
+
+**Assignment Rules**:
+- Design requirements → Ella handles
+- Development requirements → Jarvis handles
+- Testing requirements → Kyle handles
+- Management requirements → Max handles
+
+### ⚡ Model Selection Strategy
+
+**Decision Tree**:
+```
+Task Complexity Assessment
+├─ Simple operations (file read/write, formatting) → Haiku
+├─ Medium complexity (analysis, design, development) → Sonnet
+└─ High complexity (strategic decisions, innovative design) → Opus (requires confirmation)
+```
+
+**Selection Principles**:
+- **Quality First**: Ensure output quality for critical tasks
+- **Cost Awareness**: Avoid overuse of high-cost models
+- **Efficiency Balance**: Find optimal balance between quality and cost
+
+---
+
+## 🚀 Quick Start
+
+### Basic Commands
 ```bash
-# 克隆项目
+# Clone project
 git clone https://github.com/yezannnnn/agnetGroup.git
 cd agnetGroup
 
-# 启动特定AI (推荐方式)
-./start-max.sh           # 麦克斯 - 项目管理和个人助理
-./start-ella.sh          # 艾拉 - UI/UX设计
-./start-jarvis.sh        # 贾维斯 - 开发任务
-./start-kyle.sh          # 凯尔 - 测试验收
+# Start specific AI (recommended approach)
+./start-max.sh           # Max - Project management and personal assistant
+./start-ella.sh          # Ella - UI/UX design
+./start-jarvis.sh        # Jarvis - Development tasks
+./start-kyle.sh          # Kyle - Testing and acceptance
 
-# 可选：使用高级模型
-./start-max.sh opus      # 使用Opus模型启动麦克斯
-./start-ella.sh opus     # 使用Opus模型启动艾拉
+# Optional: Use advanced models
+./start-max.sh opus      # Start Max with Opus model
+./start-ella.sh opus     # Start Ella with Opus model
 ```
 
-### 📋 可用技能命令
-每个AI都有专属技能，通过斜杠命令调用：
+### 📋 Available Skill Commands
+Each AI has exclusive skills, invoked through slash commands:
 
-**麦克斯技能**:
-- `/status` - 查看团队状态汇总
-- `/report` - 生成项目报告
-- `/meeting` - 记录会议
-- `/todo` - 管理待办事项
-- `/suggest` - 提供产品建议
+**Max Skills**:
+- `/status` - View team status summary
+- `/report` - Generate project reports
+- `/meeting` - Record meetings
+- `/todo` - Manage todo items
+- `/suggest` - Provide product suggestions
 
-**艾拉技能** (UI/UX设计):
-- `/design` - UI/UX设计和原型制作
-- `/prototype` - 交互原型制作
-- `/handoff` - 设计交付和规范
+**Ella Skills** (UI/UX Design):
+- `/design` - UI/UX design and prototyping
+- `/prototype` - Interactive prototype creation
+- `/handoff` - Design handoff and specifications
 
-**贾维斯技能** (全栈开发):
-- `/code` - 代码开发和架构设计
-- `/deploy` - 部署和运维管理
-- `/debug` - 代码调试和性能优化
-- `/review` - 代码审查和质量检查
+**Jarvis Skills** (Full-stack Development):
+- `/code` - Code development and architecture design
+- `/deploy` - Deployment and operations management
+- `/debug` - Code debugging and performance optimization
+- `/review` - Code review and quality checking
 
-**凯尔技能** (质量保证):
-- `/test` - 功能测试和自动化测试
-- `/review` - 代码审查和安全检查
-- `/verify` - PRD验收和需求验证
-- `/report` - 质量报告和测试文档
+**Kyle Skills** (Quality Assurance):
+- `/test` - Functional testing and automation testing
+- `/review` - Code review and security checking
+- `/verify` - PRD acceptance and requirements verification
+- `/report` - Quality reports and test documentation
 
 ---
 
-## 📁 项目结构
+## 📁 Project Structure
 
 ```
 aiGroup/
-├── 📋 README.md           # 项目介绍
-├── 🔒 .gitignore          # 精准版本（11行解决方案）
-├── 📜 LICENSE             # 开源协议
+├── 📋 README.md           # Project introduction
+├── 🔒 .gitignore          # Precise version (11-line solution)
+├── 📜 LICENSE             # Open source license
 │
-├── 👨‍💼 max/               # 麦克斯配置
-│   ├── CLAUDE.md          # 行为指令
-│   ├── PERSONA.md         # 人格设定
-│   └── skills/            # 专属技能
+├── 👨‍💼 max/               # Max configuration
+│   ├── CLAUDE.md          # Behavior instructions
+│   ├── PERSONA.md         # Personality settings
+│   └── skills/            # Exclusive skills
 │
-├── 🎨 ella/               # 艾拉配置
-├── ⚡ jarvis/             # 贾维斯配置
-├── 🔍 kyle/               # 凯尔配置
+├── 🎨 ella/               # Ella configuration
+├── ⚡ jarvis/             # Jarvis configuration
+├── 🔍 kyle/               # Kyle configuration
 │
-├── 🤝 shared/             # 共享工作区
-│   ├── status.json        # 团队状态（实时同步）
-│   ├── tasks/             # 任务管理
-│   ├── docs/              # 文档库
-│   ├── designs/           # 设计资源
-│   └── reviews/           # 测试报告
+├── 🤝 shared/             # Shared workspace
+│   ├── status.json        # Team status (real-time sync)
+│   ├── tasks/             # Task management
+│   ├── docs/              # Documentation library
+│   ├── designs/           # Design resources
+│   └── reviews/           # Test reports
 │
-└── 🛠️ scripts/            # 项目工具
-    ├── check-gitignore.sh # 规则验证
-    └── clean-system-files.sh # 文件清理
+└── 🛠️ scripts/            # Project tools
+    ├── check-gitignore.sh # Rule verification
+    └── clean-system-files.sh # File cleanup
 ```
 
 ---
 
-## 🔄 协作流程
+## 🔄 Collaboration Workflow
 
 ```mermaid
 graph LR
-    A[用户需求] --> B[麦克斯分析]
-    B --> C{任务类型}
-    C -->|设计| D[艾拉处理]
-    C -->|开发| E[贾维斯处理]
-    C -->|测试| F[凯尔处理]
-    C -->|管理| G[麦克斯处理]
+    A[User Requirements] --> B[Max Analysis]
+    B --> C{Task Type}
+    C -->|Design| D[Ella Processing]
+    C -->|Development| E[Jarvis Processing]
+    C -->|Testing| F[Kyle Processing]
+    C -->|Management| G[Max Processing]
 
-    D --> H[shared/状态同步]
+    D --> H[shared/Status Sync]
     E --> H
     F --> H
     G --> H
 
-    H --> I[麦克斯汇总]
-    I --> J[交付成果]
+    H --> I[Max Summary]
+    I --> J[Deliver Results]
 ```
 
-### 典型工作流
-1. **需求分析** → 麦克斯分析需求，确定任务类型
-2. **任务分配** → 根据职责边界分配给对应AI
-3. **专业处理** → 各AI在职责范围内处理任务
-4. **状态同步** → 通过shared工作区同步进展
-5. **成果汇总** → 麦克斯整合各AI成果，交付用户
+### Typical Workflow
+1. **Requirements Analysis** → Max analyzes requirements, determines task type
+2. **Task Assignment** → Assign to corresponding AI based on responsibility boundaries
+3. **Professional Processing** → Each AI handles tasks within their scope
+4. **Status Synchronization** → Sync progress through shared workspace
+5. **Result Integration** → Max integrates AI outputs and delivers to user
 
 ---
 
-## 💡 使用建议
+## 💡 Usage Recommendations
 
-### 🎯 最佳实践
-- **明确角色**: 直接找对应AI，避免跨职责请求
-- **利用状态**: 查看`shared/status.json`了解团队进展
-- **遵循边界**: 尊重各AI的职责范围
-- **成本意识**: 关注Token消耗，合理选择模型
-- **⚡ 自动优化**: 每个AI都会自动执行优化流程，无需干预
+### 🎯 Best Practices
+- **Clear Roles**: Directly approach corresponding AI, avoid cross-responsibility requests
+- **Leverage Status**: Check `shared/status.json` for team progress
+- **Respect Boundaries**: Honor each AI's responsibility scope
+- **Cost Awareness**: Pay attention to Token consumption, choose models wisely
+- **⚡ Automatic Optimization**: Each AI automatically executes optimization process, no intervention needed
 
-### 🔴 重要：强制优化流程
+### 🔴 Important: Mandatory Optimization Process
 
-**aiGroup的每个AI都配置了双重强制优化**：
+**Every AI in aiGroup is configured with dual mandatory optimization**:
 
-🔄 **基础优化流程**：
-- 🔍 每次消息都先读取token-optimization.md
-- 🎯 自动分析任务复杂度并选择最佳模型
-- 📋 说明模型选择原因
-- ⚡ 按优化策略执行任务
+🔄 **Basic Optimization Process**:
+- 🔍 Always read token-optimization.md first with every message
+- 🎯 Automatically analyze task complexity and select optimal model
+- 📋 Explain model selection reasoning
+- ⚡ Execute tasks according to optimization strategy
 
-🔧 **Task分解强制策略**：
-- 📊 自动检测可分解任务(3+步骤/多文件/可并行)
-- 🤖 使用Task工具进行任务分解
-- ⚡ 为每个子任务选择最佳模型
-- 🔄 并行执行节省40-60% Token成本
+🔧 **Mandatory Task Decomposition Strategy**:
+- 📊 Automatically detect decomposable tasks (3+ steps/multiple files/parallelizable)
+- 🤖 Use Task tool for task decomposition
+- ⚡ Select optimal model for each subtask
+- 🔄 Parallel execution saves 40-60% Token cost
 
-**实现效果**：
+**Implementation Effect**:
 ```
-传统方式: 单一Sonnet处理复杂任务 → 高Token消耗
-aiGroup方式: 自动分解 → 分析用Sonnet + 实施用Haiku → 节省40-60%
+Traditional: Single Sonnet handles complex tasks → High Token consumption
+aiGroup: Automatic decomposition → Sonnet for analysis + Haiku for implementation → Save 40-60%
 ```
 
-**特性**：
-- ✅ **跨Session持久**: 即使清理session也会自动执行
-- ✅ **无例外情况**: 任何消息都会触发双重优化
-- ✅ **自动分解**: 智能识别分解机会并自动执行
-- ✅ **自动纠错**: 检测到违规会立即自我纠正
-- ✅ **全AI覆盖**: 麦克斯、艾拉、贾维斯、凯尔都遵循
+**Features**:
+- ✅ **Cross-Session Persistent**: Automatic execution even after session cleanup
+- ✅ **No Exceptions**: Any message triggers dual optimization
+- ✅ **Automatic Decomposition**: Intelligently identify and execute decomposition opportunities
+- ✅ **Auto-Correction**: Immediate self-correction when violations detected
+- ✅ **Full AI Coverage**: Max, Ella, Jarvis, Kyle all comply
 
-### 🔔 智能通知检查机制
+### 🔔 Intelligent Notification Check Mechanism
 
-**基于文件修改时间戳的高效通知系统**：
-- 🚀 **97%Token节省** - 仅在通知文件有变化时读取
-- ⚡ **零依赖实现** - 纯Bash脚本，跨平台兼容
-- 🔄 **自动缓存** - 每个AI独立维护检查状态
-- 📊 **实时检测** - 基于文件系统mtime特性
+**Efficient notification system based on file modification timestamps**:
+- 🚀 **97% Token Savings** - Only read when notification files change
+- ⚡ **Zero Dependencies** - Pure Bash script, cross-platform compatible
+- 🔄 **Auto Caching** - Each AI maintains independent check state
+- 📊 **Real-time Detection** - Based on filesystem mtime features
 
-**工作机制**：
+**Working Mechanism**:
 ```bash
-# 每个AI在强制流程第2步自动执行
+# Each AI auto-executes at step 2 of mandatory process
 ../shared/scripts/check_notifications_simple.sh [ai_name]
-# Exit code 1 = 有新通知，继续读取处理
-# Exit code 0 = 无新通知，跳过文件读取
+# Exit code 1 = New notifications, continue reading and processing
+# Exit code 0 = No new notifications, skip file reading
 ```
 
-**性能优化效果**：
+**Performance Optimization Effect**:
 ```
-无新通知场景: 4500 tokens → 150 tokens (节省97%)
-有新通知场景: 4500 tokens → 1650 tokens (节省63%)
-月度节省估算: $22+ (基于正常使用频率)
+No new notifications: 4500 tokens → 150 tokens (97% savings)
+New notifications: 4500 tokens → 1650 tokens (63% savings)
+Monthly savings estimate: $22+ (based on normal usage frequency)
 ```
 
-### ⚠️ 职责边界提醒
-- 设计问题不要问贾维斯或凯尔
-- 代码问题不要问艾拉或麦克斯
-- 测试问题不要问艾拉或贾维斯
-- 管理问题不要问艾拉、贾维斯或凯尔
+### ⚠️ Responsibility Boundary Reminders
+- Don't ask Jarvis or Kyle about design issues
+- Don't ask Ella or Max about code issues
+- Don't ask Ella or Jarvis about testing issues
+- Don't ask Ella, Jarvis, or Kyle about management issues
 
-### 🚫 Token浪费防护
-- 避免过度设计：用户要简单方案就给简单方案
-- 需求澄清：模糊需求先问清楚再执行
-- 复杂度评估：>1000 tokens任务先确认范围
+### 🚫 Token Waste Prevention
+- Avoid over-engineering: Give simple solutions when users want simple solutions
+- Requirements clarification: Clarify vague requirements before execution
+- Complexity assessment: Confirm scope for >1000 token tasks first
 
 ---
 
-## 📄 许可证
+## 📄 License
 
-本项目采用 MIT 许可证 - 查看 [LICENSE](LICENSE) 文件了解详情。
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ---
 
-*🚀 让每个AI在专业领域发挥最大价值，实现高效协作！*
+*🚀 Let each AI maximize value in their professional domain and achieve efficient collaboration!*

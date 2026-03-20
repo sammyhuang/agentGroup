@@ -1,28 +1,28 @@
-# /bug - 记录Bug
+# /bug - Record Bug
 
-记录Bug到 `../shared/tasks/bugs.md`
+Record bug to `../shared/tasks/bugs.md`
 
-## 使用方式
-/bug [bug描述]
+## Usage
+/bug [bug description]
 
-## 执行步骤
+## Execution Steps
 
-1. 解析bug信息
+1. Parse bug information
 
-2. 生成bug ID: BUG-YYYYMMDD-序号
+2. Generate bug ID: BUG-YYYYMMDD-number
 
-3. 追加到 `../shared/tasks/bugs.md`，格式：
+3. Append to `../shared/tasks/bugs.md` with format:
 ```markdown
 ## BUG-XXXXXX-XX
 
-- **描述**: xxx
-- **发现时间**: YYYY-MM-DD HH:mm
-- **严重程度**: 高/中/低
-- **状态**: 待修复
-- **相关文件**: xxx
-- **复现步骤**:
+- **Description**: xxx
+- **Discovery Time**: YYYY-MM-DD HH:mm
+- **Severity**: High/Medium/Low
+- **Status**: Pending fix
+- **Related Files**: xxx
+- **Reproduction Steps**:
   1. xxx
-- **修复记录**:
+- **Fix Records**:
 ```
 
-4. 确认记录并询问是否立即处理
+4. Confirm record and ask if immediate processing is needed

@@ -1,62 +1,62 @@
-# 通知缓存机制 - 快速上手指南
+# Notification Caching Mechanism - Quick Start Guide
 
-**版本**: v1.0.0
-**目标用户**: AI团队成员（麦克斯、艾拉、贾维斯、凯尔）
+**Version**: v1.0.0
+**Target Users**: AI Team Members (Max, Ella, Jarvis, Kyle)
 
 ---
 
-## 一分钟快速上手
+## One-Minute Quick Start
 
-### AI成员使用（在CLAUDE.md初始化步骤中添加）
+### AI Member Usage (Add to CLAUDE.md initialization steps)
 
 ```bash
-# 在会话启动时执行
+# Execute during session startup
 /Users/yuhao/Desktop/yezannnnn/aiGroup/shared/scripts/check_notifications_simple.sh max
 ```
 
-**输出解读**:
-- **Exit code = 1** → 有新通知，需要读取 `notifications.json`
-- **Exit code = 0** → 无新通知，跳过读取
+**Output Interpretation**:
+- **Exit code = 1** → New notifications available, need to read `notifications.json`
+- **Exit code = 0** → No new notifications, skip reading
 
 ---
 
-## 完整集成示例（推荐）
+## Complete Integration Example (Recommended)
 
-在各AI的`CLAUDE.md`初始化步骤中添加：
+Add to each AI's `CLAUDE.md` initialization steps:
 
 ```markdown
-## 初始化步骤（必须执行）
+## Initialization Steps (Must Execute)
 
-1. **读取人设文件** `./PERSONA.md`
-2. **读取共享状态** `../shared/status.json`
-3. **【新增】检查通知更新**:
+1. **Read Persona File** `./PERSONA.md`
+2. **Read Shared Status** `../shared/status.json`
+3. **[NEW] Check Notification Updates**:
    ```bash
-   # 检查是否有新通知
-   ../shared/scripts/check_notifications_simple.sh max  # 替换为对应AI名称
+   # Check for new notifications
+   ../shared/scripts/check_notifications_simple.sh max  # Replace with corresponding AI name
 
-   # 根据退出码判断
+   # Judge based on exit code
    if [ $? -eq 1 ]; then
-     # 有新通知，使用Read工具读取
-     # 文件路径: ../shared/notifications.json
+     # New notifications available, use Read tool to read
+     # File path: ../shared/notifications.json
    fi
    ```
-4. **检查待办事项** `../shared/tasks/todos.md`
+4. **Check Todo Items** `../shared/tasks/todos.md`
 ```
 
 ---
 
-## 文件说明
+## File Description
 
-### 核心文件
+### Core Files
 
-| 文件路径 | 用途 | 谁维护 |
-|---------|------|--------|
-| `notifications.json` | 存储所有通知 | 麦克斯发送，各AI读取 |
-| `.notification_cache.json` | 高级缓存（需要jq） | 系统自动 |
-| `.cache/{ai_name}_last_check.txt` | 简化缓存（纯Bash） | 系统自动 |
-| `scripts/check_notifications_simple.sh` | 检查脚本（推荐） | 系统维护 |
+| File Path | Purpose | Maintained By |
+|---------|---------|---------------|
+| `notifications.json` | Store all notifications | Max sends, all AIs read |
+| `.notification_cache.json` | Advanced cache (requires jq) | System automatic |
+| `.cache/{ai_name}_last_check.txt` | Simplified cache (pure Bash) | System automatic |
+| `scripts/check_notifications_simple.sh` | Check script (recommended) | System maintenance |
 
-### 通知结构示例
+### Notification Structure Example
 
 ```json
 {
@@ -66,11 +66,11 @@
   "type": "task_assignment",
   "from": "max",
   "to": "jarvis",
-  "subject": "紧急Bug修复",
+  "subject": "Urgent Bug Fix",
   "content": {
     "task_id": "bug_001",
     "file": "frontend/src/App.vue",
-    "issue": "描述问题"
+    "issue": "Issue description"
   },
   "read_by": [],
   "acknowledged_by": [],
@@ -80,33 +80,33 @@
 
 ---
 
-## 使用场景
+## Usage Scenarios
 
-### 场景1: AI会话启动检查（最常用）
+### Scenario 1: AI Session Startup Check (Most Common)
 
 ```bash
-# 在CLAUDE.md初始化步骤执行
+# Execute in CLAUDE.md initialization steps
 cd /Users/yuhao/Desktop/yezannnnn/aiGroup/shared/scripts
 ./check_notifications_simple.sh max
 
-# 检查返回值
+# Check return value
 if [ $? -eq 1 ]; then
-  echo "有新通知，需要读取"
-  # 然后使用Read工具读取 ../shared/notifications.json
+  echo "New notifications available, need to read"
+  # Then use Read tool to read ../shared/notifications.json
 fi
 ```
 
-### 场景2: 麦克斯发送通知
+### Scenario 2: Max Sending Notifications
 
-**方法A: 直接编辑JSON文件**（推荐）
+**Method A: Direct JSON File Editing** (Recommended)
 ```bash
-# 使用Edit工具编辑 notifications.json
-# 添加新的通知对象到 notifications 数组
+# Use Edit tool to edit notifications.json
+# Add new notification object to notifications array
 
-# 文件保存后，mtime自动更新，触发其他AI的检查
+# After file save, mtime automatically updates, triggering other AIs' checks
 ```
 
-**方法B: 使用jq命令**（高级）
+**Method B: Using jq Command** (Advanced)
 ```bash
 jq '.notifications += [{
   "id": "notif_20260213_004",
@@ -115,8 +115,8 @@ jq '.notifications += [{
   "type": "information",
   "from": "max",
   "to": "all",
-  "subject": "团队会议提醒",
-  "content": {"message": "明天15:00开会"},
+  "subject": "Team Meeting Reminder",
+  "content": {"message": "Meeting tomorrow at 15:00"},
   "read_by": [],
   "acknowledged_by": [],
   "expires_at": "'$(date -u -v+30d +"%Y-%m-%dT%H:%M:%SZ")'"
@@ -124,10 +124,10 @@ jq '.notifications += [{
 mv notifications.json.tmp notifications.json
 ```
 
-### 场景3: 标记通知为已读
+### Scenario 3: Mark Notification as Read
 
 ```bash
-# 读取通知后，更新read_by字段
+# After reading notification, update read_by field
 jq '(.notifications[] | select(.id == "notif_20260213_001").read_by) += ["jarvis"]' \
    notifications.json > notifications.json.tmp && \
    mv notifications.json.tmp notifications.json
@@ -135,93 +135,93 @@ jq '(.notifications[] | select(.id == "notif_20260213_001").read_by) += ["jarvis
 
 ---
 
-## Token优化效果
+## Token Optimization Effects
 
-### 对比数据
+### Comparison Data
 
-**传统方式**（每次会话都读取）:
+**Traditional Method** (Read every session):
 ```
-步骤1: 读取notifications.json → 1500 tokens
-步骤2: 处理所有通知 → 3000 tokens
-总计: 4500 tokens/会话
-```
-
-**缓存优化方式**:
-```
-步骤1: 执行检查脚本 → 150 tokens
-步骤2: 如果无更新，跳过 → 0 tokens
-总计（无更新）: 150 tokens/会话 (节省97%)
-总计（有更新）: 1650 tokens/会话 (节省63%)
+Step 1: Read notifications.json → 1500 tokens
+Step 2: Process all notifications → 3000 tokens
+Total: 4500 tokens/session
 ```
 
-### 实际收益（月度估算）
-
-假设每天每个AI启动3次会话：
-- 4个AI × 3次/天 × 30天 = 360次会话
-- 其中90%无新通知（324次），10%有新通知（36次）
-
-**传统方式月消耗**:
+**Cache Optimized Method**:
 ```
-360次 × 4500 tokens = 1,620,000 tokens
-约 $24.30（按Sonnet价格）
+Step 1: Execute check script → 150 tokens
+Step 2: If no update, skip → 0 tokens
+Total (no update): 150 tokens/session (97% savings)
+Total (with update): 1650 tokens/session (63% savings)
 ```
 
-**优化后月消耗**:
+### Actual Benefits (Monthly Estimate)
+
+Assuming each AI starts 3 sessions per day:
+- 4 AIs × 3 times/day × 30 days = 360 sessions
+- 90% have no new notifications (324 times), 10% have new notifications (36 times)
+
+**Traditional Method Monthly Consumption**:
 ```
-324次 × 150 tokens + 36次 × 1650 tokens = 108,000 tokens
-约 $1.62（按Sonnet价格）
+360 times × 4500 tokens = 1,620,000 tokens
+Approximately $24.30 (at Sonnet pricing)
 ```
 
-**月节省**: $22.68 (93%节省率)
+**Optimized Monthly Consumption**:
+```
+324 times × 150 tokens + 36 times × 1650 tokens = 108,000 tokens
+Approximately $1.62 (at Sonnet pricing)
+```
+
+**Monthly Savings**: $22.68 (93% savings rate)
 
 ---
 
-## 常见问题
+## Frequently Asked Questions
 
-### Q1: 脚本返回exit code 1是错误吗？
+### Q1: Is script returning exit code 1 an error?
 
-**A**: 不是错误！这是设计行为：
-- Exit code 1 = 检测到新通知（需要读取）
-- Exit code 0 = 无新通知（跳过读取）
-- Exit code 2 = 真正的错误（文件不存在等）
+**A**: Not an error! This is designed behavior:
+- Exit code 1 = New notifications detected (need to read)
+- Exit code 0 = No new notifications (skip reading)
+- Exit code 2 = Actual error (file doesn't exist, etc.)
 
-### Q2: 如何测试缓存机制？
+### Q2: How to test the cache mechanism?
 
 **A**:
 ```bash
-# 第一次运行（会检测到更新）
+# First run (will detect updates)
 ./check_notifications_simple.sh max
 
-# 第二次运行（应该显示无更新）
+# Second run (should show no updates)
 ./check_notifications_simple.sh max
 
-# 修改notifications.json后再运行（又会检测到更新）
+# Modify notifications.json then run again (will detect updates again)
 touch ../notifications.json
 ./check_notifications_simple.sh max
 ```
 
-### Q3: 缓存文件在哪里？
+### Q3: Where are the cache files?
 
 **A**:
-- 简化版缓存: `shared/.cache/{ai_name}_last_check.txt`
-- 高级版缓存: `shared/.notification_cache.json`（需要jq）
+- Simplified cache: `shared/.cache/{ai_name}_last_check.txt`
+- Advanced cache: `shared/.notification_cache.json` (requires jq)
 
-这些文件由系统自动管理，无需手动编辑。
+These files are automatically managed by the system, no manual editing required.
 
-### Q4: 如何清空缓存强制重新读取？
+### Q4: How to clear cache and force re-reading?
 
 **A**:
 ```bash
-# 删除特定AI的缓存
+# Delete specific AI's cache
 rm /Users/yuhao/Desktop/yezannnnn/aiGroup/shared/.cache/max_last_check.txt
 
-# 或者删除所有AI的缓存
+# Or delete all AIs' cache
 rm -rf /Users/yuhao/Desktop/yezannnnn/aiGroup/shared/.cache/*
 ```
 
-### Q5: 多个AI同时检查会冲突吗？
+### Q5: Will multiple AIs checking simultaneously cause conflicts?
 
-**A**: 不会。每个AI有独立的缓存文件：
+**A**: No. Each AI has independent cache files:
 - max → `.cache/max_last_check.txt`
 - ella → `.cache/ella_last_check.txt`
 - jarvis → `.cache/jarvis_last_check.txt`
@@ -229,11 +229,11 @@ rm -rf /Users/yuhao/Desktop/yezannnnn/aiGroup/shared/.cache/*
 
 ---
 
-## 高级功能
+## Advanced Features
 
-### 批量检查多个文件
+### Batch Check Multiple Files
 
-编辑 `check_strategy` 配置：
+Edit `check_strategy` configuration:
 
 ```json
 {
@@ -250,9 +250,9 @@ rm -rf /Users/yuhao/Desktop/yezannnnn/aiGroup/shared/.cache/*
 }
 ```
 
-### 通知优先级过滤
+### Notification Priority Filtering
 
-只读取高优先级通知（需要jq）:
+Read only high priority notifications (requires jq):
 
 ```bash
 jq '[.notifications[] |
@@ -262,7 +262,7 @@ jq '[.notifications[] |
      notifications.json
 ```
 
-### 统计未读通知
+### Count Unread Notifications
 
 ```bash
 jq --arg ai "max" \
@@ -275,13 +275,13 @@ jq --arg ai "max" \
 
 ---
 
-## 维护建议
+## Maintenance Recommendations
 
-### 定期清理（麦克斯职责）
+### Regular Cleanup (Max's Responsibility)
 
-**每月执行一次**:
+**Execute monthly**:
 ```bash
-# 删除已过期的通知
+# Delete expired notifications
 CURRENT_ISO=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
 jq --arg now "$CURRENT_ISO" \
    '.notifications = [.notifications[] | select(.expires_at > $now)]' \
@@ -289,55 +289,55 @@ jq --arg now "$CURRENT_ISO" \
    mv notifications.json.tmp notifications.json
 ```
 
-### 备份通知历史
+### Backup Notification History
 
 ```bash
-# 每月备份
+# Monthly backup
 cp notifications.json "notifications_backup_$(date +%Y%m).json"
 ```
 
 ---
 
-## 故障排查
+## Troubleshooting
 
-### 问题1: 脚本没有执行权限
+### Issue 1: Script lacks execute permission
 
 ```bash
 chmod +x /Users/yuhao/Desktop/yezannnnn/aiGroup/shared/scripts/check_notifications_simple.sh
 ```
 
-### 问题2: 缓存失效，总是显示有新通知
+### Issue 2: Cache invalid, always shows new notifications
 
 ```bash
-# 检查缓存文件内容
+# Check cache file content
 cat /Users/yuhao/Desktop/yezannnnn/aiGroup/shared/.cache/max_last_check.txt
 
-# 手动设置为当前mtime
+# Manually set to current mtime
 stat -f %m notifications.json > .cache/max_last_check.txt  # macOS
 stat -c %Y notifications.json > .cache/max_last_check.txt  # Linux
 ```
 
-### 问题3: 文件权限错误
+### Issue 3: File permission error
 
 ```bash
-# 确保shared目录和脚本可访问
+# Ensure shared directory and scripts are accessible
 chmod -R 755 /Users/yuhao/Desktop/yezannnnn/aiGroup/shared/scripts
 ```
 
 ---
 
-## 下一步
+## Next Steps
 
-1. **立即行动**: 在你的CLAUDE.md初始化步骤中添加检查脚本调用
-2. **测试验证**: 运行一次脚本，确认能正常检测
-3. **查看详细文档**: 阅读 `NOTIFICATION_CACHE_IMPLEMENTATION.md` 了解完整设计
+1. **Immediate Action**: Add check script call to your CLAUDE.md initialization steps
+2. **Test Verification**: Run the script once to confirm it detects properly
+3. **View Detailed Documentation**: Read `NOTIFICATION_CACHE_IMPLEMENTATION.md` for complete design understanding
 
 ---
 
-**相关文档**:
-- `NOTIFICATION_CACHE_IMPLEMENTATION.md` - 完整实现文档
-- `notifications.json` - 通知数据文件
-- `scripts/check_notifications_simple.sh` - 检查脚本
+**Related Documentation**:
+- `NOTIFICATION_CACHE_IMPLEMENTATION.md` - Complete implementation documentation
+- `notifications.json` - Notification data file
+- `scripts/check_notifications_simple.sh` - Check script
 
-**维护者**: 麦克斯 (Max)
-**最后更新**: 2026-02-13
+**Maintainer**: Max
+**Last Updated**: 2026-02-13

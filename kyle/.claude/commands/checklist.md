@@ -1,57 +1,57 @@
-# /checklist - 审查清单
+# /checklist - Review Checklist
 
-显示完整的审查清单模板
+Display complete review checklist template
 
-## 使用方式
+## Usage
 /checklist
 
-## 执行步骤
+## Execution Steps
 
-输出标准审查清单：
+Output standard review checklist:
 
 ```markdown
-# 审查清单
+# Review Checklist
 
-## 一、代码规范
-- [ ] 变量命名清晰有意义
-- [ ] 函数命名使用动词开头
-- [ ] 类名使用大驼峰
-- [ ] 常量使用大写下划线
-- [ ] 缩进和格式一致
-- [ ] 必要的注释存在
-- [ ] 无调试代码残留
+## 1. Code Standards
+- [ ] Clear and meaningful variable naming
+- [ ] Function names start with verbs
+- [ ] Class names use PascalCase
+- [ ] Constants use UPPER_SNAKE_CASE
+- [ ] Consistent indentation and formatting
+- [ ] Necessary comments exist
+- [ ] No debug code remnants
 
-## 二、功能正确性
-- [ ] 主流程功能正常
-- [ ] 边界条件处理
-- [ ] 空值处理
-- [ ] 异常流程处理
-- [ ] 错误提示友好
+## 2. Functional Correctness
+- [ ] Main process functions properly
+- [ ] Boundary condition handling
+- [ ] Null value handling
+- [ ] Exception flow processing
+- [ ] User-friendly error messages
 
-## 三、安全性
-- [ ] 输入验证完整
-- [ ] 无SQL注入风险
-- [ ] 无XSS风险
-- [ ] 敏感信息未暴露
-- [ ] 权限控制正确
-- [ ] 接口鉴权存在
+## 3. Security
+- [ ] Complete input validation
+- [ ] No SQL injection risks
+- [ ] No XSS risks
+- [ ] Sensitive information not exposed
+- [ ] Correct permission controls
+- [ ] Interface authentication exists
 
-## 四、性能
-- [ ] 无明显性能问题
-- [ ] 无N+1查询
-- [ ] 大数据量分页处理
-- [ ] 适当使用缓存
+## 4. Performance
+- [ ] No obvious performance issues
+- [ ] No N+1 queries
+- [ ] Large data set pagination handling
+- [ ] Appropriate use of caching
 
-## 五、可维护性
-- [ ] 代码结构清晰
-- [ ] 无过度复杂逻辑
-- [ ] 无重复代码
-- [ ] 易于理解和修改
+## 5. Maintainability
+- [ ] Clear code structure
+- [ ] No overly complex logic
+- [ ] No duplicate code
+- [ ] Easy to understand and modify
 
-## 六、兼容性
-- [ ] 浏览器兼容（如前端）
-- [ ] 版本兼容
-- [ ] 数据迁移（如需要）
+## 6. Compatibility
+- [ ] Browser compatibility (for frontend)
+- [ ] Version compatibility
+- [ ] Data migration (if needed)
 ```
 
-提示用户可以复制使用或根据具体功能调整。
+Remind user they can copy and use or adjust based on specific functionality.

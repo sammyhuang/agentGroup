@@ -1,73 +1,73 @@
-# /report - 生成审查报告
+# /report - Generate Review Report
 
-生成完整的审查报告
+Generate complete review report
 
-## 使用方式
-/report [功能名称]
+## Usage
+/report [feature name]
 
-## 执行步骤
+## Execution Steps
 
-1. 汇总该功能的所有审查结果：
-   - 代码审查 (/review)
-   - PRD验收 (/verify)
-   - 测试结果 (/test)
+1. Summarize all review results for the feature:
+   - Code review (/review)
+   - PRD verification (/verify)
+   - Test results (/test)
 
-2. 生成综合报告：
+2. Generate comprehensive report:
 ```markdown
-# 审查报告 - [功能名称]
+# Review Report - [feature name]
 
-**审查人**: 凯尔
-**日期**: YYYY-MM-DD
-**结论**: ✅通过 / ⚠️有条件通过 / ❌不通过
+**Reviewer**: Kyle
+**Date**: YYYY-MM-DD
+**Conclusion**: ✅Pass / ⚠️Conditional Pass / ❌Fail
 
 ---
 
-## 一、代码审查结果
+## 1. Code Review Results
 
-### 代码规范
+### Code Standards
 ...
 
-### 发现的问题
-| 级别 | 问题 | 文件 | 行号 | 状态 |
-|-----|------|-----|-----|------|
+### Issues Found
+| Level | Issue | File | Line | Status |
+|-------|-------|------|------|--------|
 
 ---
 
-## 二、PRD验收结果
+## 2. PRD Verification Results
 
-| PRD要求 | 状态 | 备注 |
-|--------|------|------|
+| PRD Requirement | Status | Notes |
+|-----------------|--------|-------|
 
-**符合率**: X%
+**Compliance Rate**: X%
 
 ---
 
-## 三、测试结果
+## 3. Test Results
 
-| 测试类型 | 通过/总数 | 通过率 |
-|---------|----------|--------|
+| Test Type | Pass/Total | Pass Rate |
+|-----------|------------|-----------|
 
-### 失败用例
+### Failed Test Cases
 ...
 
 ---
 
-## 四、总结
+## 4. Summary
 
-### 必须修复（上线阻塞）
+### Must Fix (Blocking Release)
 1. ...
 
-### 建议修复
+### Recommended Fixes
 1. ...
 
-### 优化建议
+### Optimization Suggestions
 1. ...
 
 ---
 
-**签字**: 凯尔
+**Signature**: Kyle
 ```
 
-3. 存入 `../shared/reviews/report-[功能名]-[日期].md`
+3. Store to `../shared/reviews/report-[feature-name]-[date].md`
 
-4. 询问是否通知贾维斯查看
+4. Ask whether to notify Jarvis for review

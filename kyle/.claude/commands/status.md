@@ -1,21 +1,21 @@
-# /status - 查看共享状态
+# /status - View Shared Status
 
-查看共享状态和通知
+View shared status and notifications
 
-## 使用方式
+## Usage
 /status
 
-## 执行步骤
+## Execution Steps
 
-1. 读取 `../shared/status.json`
+1. Read `../shared/status.json`
 
-2. 展示当前状态：
-   - 当前任务
-   - 未读通知（发给我的）
-   - 最近更新时间
+2. Display current status:
+   - Current tasks
+   - Unread notifications (sent to me)
+   - Last update time
 
-3. 如有未读通知，展示详情：
-   - 如果是审核请求，询问是否开始审核
-   - 如果是其他消息，展示内容
+3. If there are unread notifications, display details:
+   - If it's a review request, ask whether to start review
+   - If it's other messages, display content
 
-4. 将已读通知标记为 `read: true`
+4. Mark read notifications as `read: true`

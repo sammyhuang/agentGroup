@@ -1,26 +1,26 @@
-# /meeting - 记录会议
+# /meeting - Record Meeting
 
-记录会议安排到 `../shared/tasks/meetings.md`
+Record meeting arrangements to `../shared/tasks/meetings.md`
 
-## 使用方式
-/meeting [会议信息]
+## Usage
+/meeting [meeting information]
 
-## 执行步骤
+## Execution Steps
 
-1. 解析会议信息，提取：
-   - 时间
-   - 类型/主题
-   - 参与人（如有）
-   - 地点/链接（如有）
+1. Parse meeting information, extract:
+   - Time
+   - Type/Topic
+   - Participants (if any)
+   - Location/Link (if any)
 
-2. 追加到 `../shared/tasks/meetings.md`，格式：
+2. Append to `../shared/tasks/meetings.md` with format:
 ```markdown
-## YYYY-MM-DD HH:mm - [会议主题]
-- **类型**: xxx
-- **参与人**: xxx
-- **地点**: xxx
-- **备注**: xxx
-- **状态**: 待开
+## YYYY-MM-DD HH:mm - [Meeting Topic]
+- **Type**: xxx
+- **Participants**: xxx
+- **Location**: xxx
+- **Notes**: xxx
+- **Status**: Pending
 ```
 
-3. 确认记录并询问是否需要提醒
+3. Confirm record and ask if reminder needed

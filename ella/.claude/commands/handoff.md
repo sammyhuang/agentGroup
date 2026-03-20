@@ -1,77 +1,77 @@
-# /handoff - 设计交付
+# /handoff - Design Handoff
 
-整理设计稿，准备交付给贾维斯开发
+Organize design mockups and prepare for handoff to Jarvis for development
 
-## 使用方式
+## Usage
 
 ```
-/handoff [设计稿名称]
-/handoff 登录页面
-/handoff all  # 交付所有待开发设计
+/handoff [design mockup name]
+/handoff login page
+/handoff all  # Handoff all designs ready for development
 ```
 
-## 执行步骤
+## Execution Steps
 
-### 1. 检查设计完整性
+### 1. Check Design Completeness
 
-确认设计稿包含：
-- [ ] 页面布局（ASCII图示）
-- [ ] 设计规范（颜色、字体、间距）
-- [ ] 组件状态（默认、hover、active、disabled）
-- [ ] 交互说明
-- [ ] 异常状态处理
+Confirm design mockup includes:
+- [ ] Page layout (ASCII diagram)
+- [ ] Design specifications (colors, typography, spacing)
+- [ ] Component states (default, hover, active, disabled)
+- [ ] Interaction instructions
+- [ ] Exception state handling
 
-### 2. 生成开发交付文档
+### 2. Generate Development Handoff Document
 
 ```markdown
-# 设计交付 - [功能名称]
+# Design Handoff - [Feature Name]
 
-## 交付信息
-设计师: 艾拉
-交付日期: YYYY-MM-DD
-设计稿位置: ../shared/designs/[文件名].md
+## Handoff Information
+Designer: Ella
+Handoff Date: YYYY-MM-DD
+Design Mockup Location: ../shared/designs/[filename].md
 
-## 设计概览
-[简要说明设计内容]
+## Design Overview
+[Brief description of design content]
 
-## 开发注意事项
+## Development Notes
 
-### 关键交互
-1. [重要交互点1]
-2. [重要交互点2]
+### Key Interactions
+1. [Important interaction point 1]
+2. [Important interaction point 2]
 
-### 组件复用
-| 组件 | 是否复用 | 参考 |
+### Component Reuse
+| Component | Reuse | Reference |
 |------|----------|------|
-| 按钮 | 是 | 现有Button组件 |
-| 表单 | 是 | 现有Form组件 |
-| 卡片 | 新建 | 见设计稿 |
+| Button | Yes | Existing Button component |
+| Form | Yes | Existing Form component |
+| Card | New | See design mockup |
 
-### 响应式要求
-| 断点 | 布局变化 |
+### Responsive Requirements
+| Breakpoint | Layout Change |
 |------|----------|
-| < 768px | 单列布局 |
-| >= 768px | 双列布局 |
+| < 768px | Single column layout |
+| >= 768px | Two column layout |
 
-## 验收标准
-1. 还原度达到设计稿要求
-2. 交互效果流畅
-3. 异常状态处理完善
+## Acceptance Criteria
+1. Implementation fidelity meets design requirements
+2. Smooth interaction effects
+3. Complete exception state handling
 
-## 设计稿清单
-- [ ] [设计稿1].md
-- [ ] [设计稿2].md
+## Design Mockup Checklist
+- [ ] [Design mockup 1].md
+- [ ] [Design mockup 2].md
 ```
 
-### 3. 更新共享状态
+### 3. Update Shared Status
 
-更新 `../shared/status.json`：
+Update `../shared/status.json`:
 ```json
 {
   "designs": {
-    "[功能名]": {
-      "status": "待开发",
-      "designer": "艾拉",
+    "[feature name]": {
+      "status": "pending development",
+      "designer": "Ella",
       "files": ["xxx-ui.md", "xxx-prototype.md"],
       "handoffDate": "YYYY-MM-DD"
     }
@@ -79,19 +79,19 @@
 }
 ```
 
-### 4. 通知选项
+### 4. Notification Options
 
-询问用户：
-- 是否需要通知贾维斯开始开发？
-- 如需通知，我会在status.json中标记任务
+Ask user:
+- Should I notify Jarvis to start development?
+- If notification needed, I'll mark the task in status.json
 
-## 交付检查清单
+## Handoff Checklist
 
-| 检查项 | 状态 |
+| Check Item | Status |
 |--------|------|
-| 颜色值完整 | ✓ |
-| 字号字重完整 | ✓ |
-| 间距标注完整 | ✓ |
-| 交互说明清晰 | ✓ |
-| 异常状态定义 | ✓ |
-| 响应式说明 | ✓ |
+| Complete color values | ✓ |
+| Complete font sizes/weights | ✓ |
+| Complete spacing annotations | ✓ |
+| Clear interaction instructions | ✓ |
+| Exception states defined | ✓ |
+| Responsive specifications | ✓ |

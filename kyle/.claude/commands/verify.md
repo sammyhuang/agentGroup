@@ -1,31 +1,31 @@
-# /verify - PRD验收
+# /verify - PRD Verification
 
-验证实现是否符合PRD要求
+Verify whether implementation meets PRD requirements
 
-## 使用方式
-/verify [PRD文件路径]
+## Usage
+/verify [PRD file path]
 
-## 执行步骤
+## Execution Steps
 
-1. 阅读PRD文档，提取所有功能要求
+1. Read PRD document and extract all functional requirements
 
-2. 逐条验证：
+2. Verify item by item:
 ```markdown
-| 序号 | PRD要求 | 状态 | 验证方式 | 备注 |
-|-----|--------|------|---------|------|
-| 1 | xxx | ✅/❌/⚠️ | 代码检查/测试 | xxx |
+| No. | PRD Requirement | Status | Verification Method | Notes |
+|-----|-----------------|--------|-------------------|-------|
+| 1 | xxx | ✅/❌/⚠️ | Code check/testing | xxx |
 ```
 
-3. 对每个要求：
-   - ✅ 完全符合
-   - ⚠️ 部分符合（说明差异）
-   - ❌ 未实现或不符合
+3. For each requirement:
+   - ✅ Fully compliant
+   - ⚠️ Partially compliant (explain differences)
+   - ❌ Not implemented or non-compliant
 
-4. 汇总验收结果：
-   - 通过率
-   - 未通过项详情
-   - 建议补充项
+4. Summarize verification results:
+   - Pass rate
+   - Details of failed items
+   - Recommended additions
 
-5. 生成验收报告存入 `../shared/reviews/`
+5. Generate verification report and store to `../shared/reviews/`
 
-6. 询问是否通知贾维斯处理未通过项
+6. Ask whether to notify Jarvis to handle failed items

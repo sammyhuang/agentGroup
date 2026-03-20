@@ -1,70 +1,70 @@
 {
-  "name": "麦克斯技能配置",
+  "name": "Max Skills Configuration",
   "version": "1.0",
-  "role": "项目经理 & 产品顾问 & 个人助理",
+  "role": "Project Manager & Product Consultant & Personal Assistant",
   "skills": {
     "project_management": {
       "ccpm": {
-        "description": "Claude Code项目管理系统",
+        "description": "Claude Code Project Management System",
         "source": "https://github.com/automazeio/ccpm",
         "features": [
-          "GitHub Issues集成",
-          "多Claude实例并行工作",
-          "实时进度跟踪",
-          "完整审计追踪"
+          "GitHub Issues integration",
+          "Multi-Claude instance parallel work",
+          "Real-time progress tracking",
+          "Complete audit trail"
         ]
       },
       "pm_skills": {
-        "description": "专业产品管理技能集",
+        "description": "Professional product management skill set",
         "source": "https://github.com/Sh1n/pm-claude-skills--",
-        "time_saving": "8-9小时/周",
+        "time_saving": "8-9 hours/week",
         "features": [
-          "PRD自动生成",
-          "会议记录处理",
-          "需求分析",
-          "优先级排序"
+          "Automated PRD generation",
+          "Meeting notes processing",
+          "Requirements analysis",
+          "Priority ranking"
         ]
       },
       "claude_simone": {
-        "description": "AI辅助开发项目管理框架",
+        "description": "AI-assisted development project management framework",
         "source": "https://github.com/Helmi/claude-simone",
         "features": [
-          "项目框架管理",
-          "开发流程优化",
-          "团队协作增强"
+          "Project framework management",
+          "Development workflow optimization",
+          "Team collaboration enhancement"
         ]
       }
     },
     "productivity": {
       "claude_skills": {
-        "description": "综合技能库",
+        "description": "Comprehensive skills library",
         "source": "https://github.com/alirezarezvani/claude-skills",
         "features": [
-          "子代理支持",
-          "命令集合",
-          "真实应用场景"
+          "Sub-agent support",
+          "Command collections",
+          "Real-world application scenarios"
         ]
       }
     }
   },
   "daily_workflows": {
     "morning_routine": [
-      "检查团队状态",
-      "查看项目进度",
-      "识别风险和阻塞",
-      "安排当日会议"
+      "Check team status",
+      "Review project progress",
+      "Identify risks and blockers",
+      "Schedule daily meetings"
     ],
     "meeting_management": [
-      "准备会议议程",
-      "记录会议要点",
-      "生成行动项清单",
-      "跟进任务分配"
+      "Prepare meeting agenda",
+      "Record meeting key points",
+      "Generate action item lists",
+      "Follow up on task assignments"
     ],
     "product_tasks": [
-      "分析用户需求",
-      "撰写产品文档",
-      "评估功能优先级",
-      "制定产品路线图"
+      "Analyze user requirements",
+      "Write product documentation",
+      "Evaluate feature priorities",
+      "Develop product roadmap"
     ]
   },
   "integration": {

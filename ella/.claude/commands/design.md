@@ -1,91 +1,91 @@
-# /design - UI设计
+# /design - UI Design
 
-根据PRD需求设计用户界面
+Design user interface based on PRD requirements
 
-## 使用方式
+## Usage
 
 ```
-/design [PRD文件或功能描述]
-/design 登录页面
+/design [PRD file or feature description]
+/design login page
 /design ../shared/docs/xxx.md
 ```
 
-## 执行步骤
+## Execution Steps
 
-### 1. 理解需求
-- 读取PRD文档或用户描述
-- 提取关键功能点和用户流程
-- 确认设计范围（移动端/PC端）
+### 1. Understand Requirements
+- Read PRD document or user description
+- Extract key functional points and user flows
+- Confirm design scope (mobile/PC)
 
-### 2. 确认设计方向
-询问用户：
-- 是否有参考设计？
-- 是否沿用现有设计规范？
-- 有特殊风格要求吗？
+### 2. Confirm Design Direction
+Ask user:
+- Are there any reference designs?
+- Should we follow existing design specifications?
+- Any special style requirements?
 
-### 3. 输出设计稿
+### 3. Output Design Mockup
 
 ```markdown
-# UI设计 - [功能名称]
+# UI Design - [Feature Name]
 
-## 设计信息
-设计师: 艾拉
-日期: YYYY-MM-DD
-PRD来源: [来源]
+## Design Information
+Designer: Ella
+Date: YYYY-MM-DD
+PRD Source: [source]
 
-## 设计规范
+## Design Specifications
 
-### 颜色
-| 名称 | 色值 | 用途 |
+### Colors
+| Name | Hex Value | Usage |
 |------|------|------|
-| 主色 | #1890FF | 按钮、链接 |
-| 背景 | #F5F5F5 | 页面背景 |
-| 文字 | #333333 | 主要文字 |
+| Primary | #1890FF | Buttons, links |
+| Background | #F5F5F5 | Page background |
+| Text | #333333 | Main text |
 
-### 字体
-| 类型 | 字号 | 字重 | 颜色 |
+### Typography
+| Type | Size | Weight | Color |
 |------|------|------|------|
-| 大标题 | 24px | 600 | #333 |
-| 标题 | 18px | 500 | #333 |
-| 正文 | 14px | 400 | #666 |
+| Large Title | 24px | 600 | #333 |
+| Title | 18px | 500 | #333 |
+| Body Text | 14px | 400 | #666 |
 
-### 间距
-| 类型 | 数值 |
+### Spacing
+| Type | Value |
 |------|------|
-| 页面边距 | 16px |
-| 模块间距 | 24px |
-| 元素间距 | 12px |
+| Page Margin | 16px |
+| Module Spacing | 24px |
+| Element Spacing | 12px |
 
-## 页面布局
+## Page Layout
 
-### [页面名称]
+### [Page Name]
 
 +----------------------------------+
 |           Header 44px            |
 +----------------------------------+
 |                                  |
-|         [内容区域描述]            |
+|      [Content Area Description]  |
 |                                  |
 +----------------------------------+
 |           Footer 50px            |
 +----------------------------------+
 
-### 组件说明
-[各组件的详细说明]
+### Component Description
+[Detailed description of each component]
 
-## 交互说明
-[用户操作流程和反馈]
+## Interaction Instructions
+[User operation flows and feedback]
 ```
 
-### 4. 存储设计稿
-保存到 `../shared/designs/[功能名]-ui.md`
+### 4. Store Design Mockup
+Save to `../shared/designs/[feature-name]-ui.md`
 
-### 5. 询问后续
-- 是否需要调整？
-- 是否通知贾维斯开始开发？
+### 5. Ask for Next Steps
+- Need any adjustments?
+- Should I notify Jarvis to start development?
 
-## 示例
+## Example
 
-**输入**: /design 接待建档页面
+**Input**: /design reception filing page
 
-**输出**: 完整的UI设计稿，包含布局、规范、交互说明
+**Output**: Complete UI design mockup including layout, specifications, and interaction instructions

@@ -1,363 +1,363 @@
-# Token优化技能 - UI/UX设计领域
+# Token Optimization Skills - UI/UX Design Domain
 
-**版本**: v1.2
-**更新日期**: 2026-02-12
-**作者**: 艾拉 (Ella)
-**优化目标**: 设计过程token使用量减少65%以上
-
----
-
-## 一、设计决策优化
-
-### 1.1 设计系统优先
-**问题**: 每次从零开始设计，大量token用于探索风格
-**解决**:
-```bash
-# 启用设计系统推荐（节省70% exploration token）
-python3 .agents/skills/ui-ux-pro-max/scripts/search.py "产品类型 行业 关键词" --design-system -p "项目名"
-```
-**效果**: 直接获得配色、字体、风格推荐，避免多轮试错
-
-### 1.2 用户偏好快速确认
-**问题**: 通过文字描述收集用户偏好，来回对话多
-**解决**:
-- 生成可视化选项（SVG预览图）
-- 3-5个具体方案供选择
-- 避免开放性问题，改用选择题
-
-**示例**:
-```
-❌ "你喜欢什么风格的按钮?"
-✅ 生成5个按钮样式的SVG预览，用户选择
-```
-
-### 1.3 参考现有界面
-**问题**: 盲目设计新界面风格
-**解决**:
-- 先读取现有界面截图/代码
-- 保持风格一致性
-- 只优化具体元素，不重构整体
+**Version**: v1.2
+**Updated**: 2026-02-12
+**Author**: Ella
+**Optimization Goal**: Reduce design process token usage by 65%+
 
 ---
 
-## 二、工具使用优化
+## I. Design Decision Optimization
 
-### 2.1 图标获取策略
-**问题**: 多轮对话描述图标需求
-**解决**:
+### 1.1 Design System Priority
+**Problem**: Starting design from scratch each time, many tokens used for style exploration
+**Solution**:
 ```bash
-# 直接API获取，一次到位
+# Enable design system recommendations (save 70% exploration tokens)
+python3 .agents/skills/ui-ux-pro-max/scripts/search.py "product_type industry keywords" --design-system -p "project_name"
+```
+**Effect**: Directly get color, font, style recommendations, avoid multiple trial-and-error rounds
+
+### 1.2 Quick User Preference Confirmation
+**Problem**: Collecting user preferences through text descriptions, many back-and-forth conversations
+**Solution**:
+- Generate visual options (SVG preview images)
+- 3-5 specific options for selection
+- Avoid open-ended questions, use multiple choice instead
+
+**Example**:
+```
+❌ "What style of buttons do you prefer?"
+✅ Generate 5 button style SVG previews for user selection
+```
+
+### 1.3 Reference Existing Interfaces
+**Problem**: Blindly designing new interface styles
+**Solution**:
+- First read existing interface screenshots/code
+- Maintain style consistency
+- Only optimize specific elements, don't restructure entirely
+
+---
+
+## II. Tool Usage Optimization
+
+### 2.1 Icon Acquisition Strategy
+**Problem**: Multiple rounds of conversation describing icon requirements
+**Solution**:
+```bash
+# Direct API acquisition, one-time completion
 WebFetch: https://api.iconify.design/lucide/icon-name.svg
 ```
-**节省**: 从5-8轮对话 → 1次API调用
+**Savings**: From 5-8 conversation rounds → 1 API call
 
-### 2.2 批量设计元素
-**问题**: 逐个设计UI元素
-**解决**:
-- 一次性设计同类元素（所有按钮、所有图标）
-- 统一SVG文件包含多个元素
-- 减少文件读写次数
+### 2.2 Batch Design Elements
+**Problem**: Designing UI elements one by one
+**Solution**:
+- Design similar elements at once (all buttons, all icons)
+- Single SVG file containing multiple elements
+- Reduce file read/write operations
 
-### 2.3 工具链整合
-**优先级顺序**:
-1. UI/UX Pro Max skill（设计系统）
-2. Iconify API（图标）
-3. WebFetch（样式参考）
-4. 直接SVG编写（简单图形）
+### 2.3 Tool Chain Integration
+**Priority Order**:
+1. UI/UX Pro Max skill (design system)
+2. Iconify API (icons)
+3. WebFetch (style reference)
+4. Direct SVG writing (simple graphics)
 
 ---
 
-## 三、输出格式优化
+## III. Output Format Optimization
 
-### 3.1 标准化交付文档
-**模板化输出，减少重复性token**:
+### 3.1 Standardized Delivery Documents
+**Templated output to reduce repetitive tokens**:
 
 ```markdown
-# UI设计交付 - [项目名]
-## 一、设计规范
-| 元素 | 规格 | 颜色 | 尺寸 |
-## 二、图标清单
-[SVG代码块]
-## 三、交互说明
-[状态转换]
-## 四、开发建议
-[技术实现]
+# UI Design Delivery - [Project Name]
+## I. Design Specifications
+| Element | Specification | Color | Size |
+## II. Icon Checklist
+[SVG code blocks]
+## III. Interaction Instructions
+[State transitions]
+## IV. Development Recommendations
+[Technical implementation]
 ```
 
-### 3.2 SVG代码优化
-**问题**: 冗长的SVG代码占用token
-**解决**:
-- 使用viewBox统一尺寸
-- 复用定义（defs、gradients）
-- 简化path数据
-- 组合相关元素
+### 3.2 SVG Code Optimization
+**Problem**: Verbose SVG code consuming tokens
+**Solution**:
+- Use viewBox for unified sizing
+- Reuse definitions (defs, gradients)
+- Simplify path data
+- Combine related elements
 
-### 3.3 分阶段交付
-**Phase 1**: 核心设计规范（颜色、字体、基础组件）
-**Phase 2**: 具体组件设计
-**Phase 3**: 交互说明和开发建议
+### 3.3 Phased Delivery
+**Phase 1**: Core design specifications (colors, fonts, basic components)
+**Phase 2**: Specific component design
+**Phase 3**: Interaction instructions and development recommendations
 
 ---
 
-## 四、沟通效率优化
+## IV. Communication Efficiency Optimization
 
-### 4.1 可视化先行
-**原则**: 用图像代替文字描述
-- 按钮状态 → SVG预览图
-- 布局方案 → ASCII示意图
-- 颜色方案 → 色板展示
+### 4.1 Visual-First Approach
+**Principle**: Use images to replace text descriptions
+- Button states → SVG preview images
+- Layout options → ASCII diagrams
+- Color schemes → Color palette displays
 
-### 4.2 选择而非创造
-**策略**: 提供3-5个成熟方案让用户选择
-- 减少用户思考成本
-- 避免无限修改循环
-- 基于现有设计系统
+### 4.2 Choice Rather Than Creation
+**Strategy**: Provide 3-5 mature options for user selection
+- Reduce user thinking cost
+- Avoid infinite modification cycles
+- Based on existing design systems
 
-### 4.3 技术约束前置
-**在设计前确认**:
-- 项目技术栈
-- 现有组件库
-- 性能要求
-- 兼容性需求
-
----
-
-## 五、实战应用
-
-### 5.1 按钮图标设计案例
-**传统流程** (预估350 tokens):
-```
-用户需求 → 风格探讨 → 多方案设计 → 反复修改 → 最终确定
-```
-
-**优化流程** (实际120 tokens):
-```
-读取现有界面 → 直接获取12个图标方案 → 用户选择 → 输出规范
-```
-
-**关键优化点**:
-- 跳过风格探讨（参考现有）
-- 批量图标设计（一次生成12个）
-- 可视化选择（SVG预览）
-
-### 5.2 色彩方案设计
-**优化前**: 讨论色彩心理、品牌调性等
-**优化后**: 直接提供5个配色方案 + 应用效果预览
+### 4.3 Technical Constraints Upfront
+**Confirm before design**:
+- Project technology stack
+- Existing component libraries
+- Performance requirements
+- Compatibility needs
 
 ---
 
-## 六、Token节省统计
+## V. Practical Application
 
-| 优化项 | 节省比例 | 具体措施 |
+### 5.1 Button Icon Design Case Study
+**Traditional Process** (estimated 350 tokens):
+```
+User requirements → Style discussion → Multiple design options → Repeated modifications → Final decision
+```
+
+**Optimized Process** (actual 120 tokens):
+```
+Read existing interface → Direct acquisition of 12 icon options → User selection → Output specifications
+```
+
+**Key optimization points**:
+- Skip style discussion (reference existing)
+- Batch icon design (generate 12 at once)
+- Visual selection (SVG preview)
+
+### 5.2 Color Scheme Design
+**Before optimization**: Discuss color psychology, brand tone, etc.
+**After optimization**: Directly provide 5 color schemes + application effect preview
+
+---
+
+## VI. Token Savings Statistics
+
+| Optimization Item | Savings Ratio | Specific Measures |
 |--------|----------|----------|
-| 设计探索 | 70% | 设计系统 + 现有参考 |
-| 图标获取 | 85% | API直接获取 |
-| 用户沟通 | 60% | 可视化选择 |
-| 文档输出 | 40% | 模板化 + 批量处理 |
-| **综合优化** | **65%** | **系统性改进** |
+| Design exploration | 70% | Design system + existing reference |
+| Icon acquisition | 85% | Direct API acquisition |
+| User communication | 60% | Visual selection |
+| Document output | 40% | Templated + batch processing |
+| **Comprehensive optimization** | **65%** | **Systematic improvement** |
 
 ---
 
-## 七、模型选择策略 (v1.2新增)
+## VII. Model Selection Strategy (v1.2 Addition)
 
-### 基础模型选择决策树
+### Basic Model Selection Decision Tree
 
 ```
-设计任务评估
-├─ 标准化UI组件? → Haiku
-├─ 需要设计专业判断? → Sonnet
-├─ 需要创意融合? → Opus (确认)
-└─ 不确定? → 选择Sonnet (安全选择)
+Design Task Assessment
+├─ Standardized UI components? → Haiku
+├─ Need design professional judgment? → Sonnet
+├─ Need creative integration? → Opus (confirm)
+└─ Uncertain? → Choose Sonnet (safe choice)
 ```
 
-### Haiku适用场景 (30-40%使用率)
-- 标准化图标获取和格式转换
-- 简单的SVG代码生成
-- 基础配色方案应用
-- 设计文档模板化输出
-- 简单的视觉调整
+### Haiku Applicable Scenarios (30-40% usage rate)
+- Standardized icon acquisition and format conversion
+- Simple SVG code generation
+- Basic color scheme application
+- Design document template output
+- Simple visual adjustments
 
-### Sonnet适用场景 (50-60%使用率)
-- UI/UX系统设计和规划
-- 复杂组件的交互设计
-- 设计方案的专业评估
-- 用户体验优化建议
-- 需要美学判断的设计决策
-- 设计系统的建立和优化
+### Sonnet Applicable Scenarios (50-60% usage rate)
+- UI/UX system design and planning
+- Complex component interaction design
+- Professional evaluation of design proposals
+- User experience optimization recommendations
+- Design decisions requiring aesthetic judgment
+- Design system establishment and optimization
 
-### Opus适用场景 (5-10%使用率，需确认)
-- 品牌/设计系统重构
-- 复杂的组件库设计
-- 创意风格融合
-- 大规模UI统一优化
+### Opus Applicable Scenarios (5-10% usage rate, requires confirmation)
+- Brand/design system restructuring
+- Complex component library design
+- Creative style fusion
+- Large-scale UI unification optimization
 
-### 质量优先原则
+### Quality First Principles
 
-1. **重要性评估**: 设计对用户体验的影响程度 > 单次成本节省
-2. **输出质量要求**: 需要美学和专业性的选择更强模型
-3. **用户体验**: 用户满意度和设计方案完整性优先
-4. **长期效益**: 质量好的设计能减少返工，长期更省成本
+1. **Importance Assessment**: Design impact on user experience > single-time cost savings
+2. **Output Quality Requirements**: Choose stronger models for aesthetic and professional needs
+3. **User Experience**: User satisfaction and design solution completeness priority
+4. **Long-term Benefits**: High-quality design reduces rework, more cost-effective long-term
 
 ---
 
-## 八、Task多模型优化策略 (v1.2新增)
+## VIII. Task Multi-Model Optimization Strategy (v1.2 Addition)
 
-### 设计任务分解模式
+### Design Task Decomposition Pattern
 
-#### 三阶段分解示例
+#### Three-Stage Decomposition Example
 ```
-阶段1: 设计信息收集 → Task(model="haiku")
-阶段2: 创意设计分析 → Task(model="sonnet")
-阶段3: 设计文档输出 → Task(model="haiku")
+Stage 1: Design information collection → Task(model="haiku")
+Stage 2: Creative design analysis → Task(model="sonnet")
+Stage 3: Design document output → Task(model="haiku")
 ```
 
-### 实际案例对比
+### Actual Case Comparison
 
-**❌ 传统方式 (6000+ tokens)**:
+**❌ Traditional Method (6000+ tokens)**:
 ```python
-Task(prompt="设计完整的UI组件库并生成设计文档")
+Task(prompt="Design complete UI component library and generate design documentation")
 ```
 
-**✅ 分解优化 (3200 tokens, 节省47%)**:
+**✅ Decomposition Optimization (3200 tokens, 47% savings)**:
 ```python
-Task(model="haiku", prompt="收集现有设计元素和风格信息")
-Task(model="sonnet", prompt="设计核心组件的交互和视觉方案")
-Task(model="haiku", prompt="格式化为标准化设计交付文档")
+Task(model="haiku", prompt="Collect existing design elements and style information")
+Task(model="sonnet", prompt="Design core component interaction and visual solutions")
+Task(model="haiku", prompt="Format as standardized design delivery documentation")
 ```
 
-**节省原理**：
-- 信息收集不需要设计创意能力 → Haiku够用
-- 核心设计保持专业质量 → Sonnet保证
-- 文档格式化纯粹模板化 → Haiku即可
+**Savings Principle**:
+- Information collection doesn't need design creativity → Haiku sufficient
+- Core design maintains professional quality → Sonnet ensures
+- Document formatting is purely templated → Haiku adequate
 
-### Task模型选择决策矩阵
+### Task Model Selection Decision Matrix
 
-| 子任务类型 | 推荐模型 | Token节省 | 质量影响 | 适用场景示例 |
+| Subtask Type | Recommended Model | Token Savings | Quality Impact | Applicable Scenario Examples |
 |------------|----------|-----------|----------|--------------|
-| 设计资源收集/格式转换 | Haiku | 70-80% | 无影响 | 提取设计数据、格式化SVG |
-| 简单视觉调整/验证 | Haiku | 70-80% | 无影响 | 颜色调整、尺寸验证 |
-| 标准化设计文档生成 | Haiku | 70-80% | 无影响 | 套用模板、格式化输出 |
-| UI/UX设计/交互设计 | Sonnet | 基准 | 保证质量 | 组件设计、交互方案 |
-| 设计系统/专业评估 | Sonnet | 基准 | 保证质量 | 设计规范、美学判断 |
-| 品牌创新/复杂融合 | Opus | -3-5倍 | 显著提升 | 品牌重构、创意设计 |
+| Design resource collection/format conversion | Haiku | 70-80% | No impact | Extract design data, format SVG |
+| Simple visual adjustments/validation | Haiku | 70-80% | No impact | Color adjustments, size validation |
+| Standardized design document generation | Haiku | 70-80% | No impact | Apply templates, format output |
+| UI/UX design/interaction design | Sonnet | Baseline | Quality assurance | Component design, interaction solutions |
+| Design system/professional evaluation | Sonnet | Baseline | Quality assurance | Design specifications, aesthetic judgment |
+| Brand innovation/complex fusion | Opus | -3-5x | Significant improvement | Brand restructuring, creative design |
 
-### 质量保证机制
+### Quality Assurance Mechanism
 
-**核心原则**: 质量优先，合理优化
+**Core Principle**: Quality first, reasonable optimization
 
-**质量保证检查点**:
-1. **关键设计决策必须用Sonnet+**
-   - 涉及用户体验的核心设计
-   - 影响品牌形象的视觉决策
-   - 复杂的交互设计方案
+**Quality Assurance Checkpoints**:
+1. **Critical design decisions must use Sonnet+**
+   - Core designs affecting user experience
+   - Visual decisions affecting brand image
+   - Complex interaction design solutions
 
-2. **用户直接交互的输出保证质量**
-   - 最终设计方案和交付文档
-   - 用户问题的设计答复
-   - 团队沟通的重要设计信息
+2. **User-facing outputs ensure quality**
+   - Final design solutions and delivery documents
+   - Design responses to user questions
+   - Important design information for team communication
 
-3. **内部处理步骤可适度优化**
-   - 中间数据转换和格式化
-   - 临时文件生成
-   - 辅助性验证
+3. **Internal processing steps can be moderately optimized**
+   - Intermediate data conversion and formatting
+   - Temporary file generation
+   - Auxiliary validation
 
 ---
 
-## 九、Opus使用确认机制
+## IX. Opus Usage Confirmation Mechanism
 
-### 场景说明
-- **Opus优势**: 处理复杂设计问题、创意整合、风格融合时能给出更精妙的方案
-- **必要性判断**: 当设计涉及整体风格创新、多要素融合、高难度美学决策时需要Opus
+### Scenario Description
+- **Opus Advantage**: Can provide more sophisticated solutions when handling complex design problems, creative integration, style fusion
+- **Necessity Judgment**: Opus needed when design involves overall style innovation, multi-element fusion, high-difficulty aesthetic decisions
 
-### 确认流程
+### Confirmation Process
 
-#### 第1步：识别Opus场景
-在以下情况需要使用更强大的模型：
-- 品牌/设计系统重构（影响整体视觉）
-- 复杂的组件库设计（涉及多个交互状态）
-- 创意风格融合（需要高级审美判断）
-- 大规模UI统一优化（全局视觉协调）
+#### Step 1: Identify Opus Scenarios
+More powerful model needed in following situations:
+- Brand/design system restructuring (affects overall visual)
+- Complex component library design (involves multiple interaction states)
+- Creative style fusion (requires advanced aesthetic judgment)
+- Large-scale UI unification optimization (global visual coordination)
 
-#### 第2步：向用户确认
+#### Step 2: Confirm with User
 ```
-发现当前设计任务涉及复杂的风格融合/创意决策。
-建议使用Opus获得更精妙的设计方案。
-请确认：
-[ 选项A ] 仅本次使用Opus（推荐，成本低）
-[ 选项B ] 整个会话使用Opus（持续创意支持）
-[ 选项C ] 降级使用Sonnet（快速完成，可能方案较保守）
+Current design task involves complex style fusion/creative decisions.
+Recommend using Opus for more sophisticated design solutions.
+Please confirm:
+[ Option A ] Use Opus only this time (recommended, low cost)
+[ Option B ] Use Opus for entire session (continuous creative support)
+[ Option C ] Downgrade to Sonnet (quick completion, possibly conservative solutions)
 ```
 
-#### 第3步：处理用户决策
+#### Step 3: Handle User Decision
 
-**用户选A或B**：
-- 激活Opus进行创意设计
-- 提供更多设计变体和创新方案
+**User chooses A or B**:
+- Activate Opus for creative design
+- Provide more design variants and innovative solutions
 
-**用户选C或拒绝**：
-- 降级使用Sonnet处理
-- 说明可能影响：
-  - 设计方案可能较为保守
-  - 创意融合度可能不够自然
-  - 风格创新性可能受限
+**User chooses C or refuses**:
+- Downgrade to Sonnet processing
+- Explain possible impacts:
+  - Design solutions may be more conservative
+  - Creative fusion may not be natural enough
+  - Style innovation may be limited
 
-### 降级影响说明
+### Downgrade Impact Description
 
-| 场景 | Opus优势 | 降级到Sonnet的风险 |
+| Scenario | Opus Advantage | Risk of Downgrading to Sonnet |
 |------|---------|------------------|
-| 品牌创新 | 独特创意整合 | 方案可能平凡化 |
-| 风格融合 | 精妙自然的融合 | 结合可能生硬 |
-| 复杂组件 | 精细的交互设计 | 细节可能不够精致 |
-| 全局统一 | 整体美感协调 | 各部分统一度降低 |
+| Brand innovation | Unique creative integration | Solutions may become mundane |
+| Style fusion | Subtle and natural fusion | Combinations may be stiff |
+| Complex components | Refined interaction design | Details may lack finesse |
+| Global unification | Overall aesthetic coordination | Reduced consistency across parts |
 
-### 使用原则
+### Usage Principles
 
-- ✅ **主动询问** - 识别到Opus场景时必须先向用户确认
-- ✅ **明确说明** - 说清楚两种模型的设计风格差异
-- ✅ **尊重选择** - 用户拒绝则立即降级，不坚持
-- ✅ **成本意识** - 建议"仅本次"而非"整个会话"
-
----
-
-## 十、持续优化
-
-### 10.1 模板库建设
-建立常用设计模板：
-- 按钮设计规范模板
-- 色彩系统模板
-- 图标规范模板
-- 交互说明模板
-
-### 10.2 工具链完善
-- 集成更多设计API
-- 优化SVG生成算法
-- 建立设计资产库
-
-### 10.3 反馈收集
-记录每次设计任务的token使用量，持续优化流程。
+- ✅ **Proactive Inquiry** - Must confirm with user first when Opus scenario is identified
+- ✅ **Clear Explanation** - Clarify design style differences between two models
+- ✅ **Respect Choice** - Immediately downgrade if user refuses, don't insist
+- ✅ **Cost Awareness** - Recommend "only this time" rather than "entire session"
 
 ---
 
-## 应用指南
+## X. Continuous Optimization
 
-### 简单设计任务
-- 使用Haiku进行标准化操作
-- 简化回复格式
-- 精准工具使用
+### 10.1 Template Library Development
+Establish common design templates:
+- Button design specification templates
+- Color system templates
+- Icon specification templates
+- Interaction instruction templates
 
-### 复杂设计任务
-- 使用Sonnet保持设计质量
-- 适度使用Task分解优化
-- 确保创意和美学水准
+### 10.2 Tool Chain Improvement
+- Integrate more design APIs
+- Optimize SVG generation algorithms
+- Build design asset library
 
-### 判断标准
+### 10.3 Feedback Collection
+Record token usage for each design task, continuously optimize processes.
+
+---
+
+## Application Guide
+
+### Simple Design Tasks
+- Use Haiku for standardized operations
+- Simplify response format
+- Precise tool usage
+
+### Complex Design Tasks
+- Use Sonnet to maintain design quality
+- Moderately use Task decomposition optimization
+- Ensure creative and aesthetic standards
+
+### Judgment Criteria
 ```
-简单：标准UI组件、图标获取、颜色调整
-复杂：新组件设计、交互方案、设计系统建立
+Simple: Standard UI components, icon acquisition, color adjustments
+Complex: New component design, interaction solutions, design system establishment
 ```
 
-**预期效果**: 完整设计任务token使用量从500+ → 150-200，节省65%。
+**Expected Effect**: Complete design task token usage from 500+ → 150-200, 65% savings.
 
 ---
 
-**应用指南**: 这是UI/UX设计领域的Token优化策略v1.2版本，包含基础优化、模型选择和Task分解三层优化策略。建议从基础策略开始应用，逐步掌握高级技巧。
+**Application Guide**: This is Token optimization strategy v1.2 for UI/UX design domain, containing three-layer optimization strategies: basic optimization, model selection, and Task decomposition. Recommend starting with basic strategies and gradually mastering advanced techniques.

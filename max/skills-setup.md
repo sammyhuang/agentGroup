@@ -1,107 +1,107 @@
-# 麦克斯技能配置指南
+# Max Skills Configuration Guide
 
-## 🎯 推荐技能安装
+## 🎯 Recommended Skills Installation
 
-### 核心项目管理技能包
+### Core Project Management Skill Packages
 
-#### 1. 通过Claude Code CLI安装
+#### 1. Install via Claude Code CLI
 ```bash
-# 进入max项目目录
+# Enter max project directory
 claude --project max
 
-# 安装核心技能包
+# Install core skill packages
 /plugin install pm-skills@claude-code-skills
 /plugin install product-skills@claude-code-skills
 /plugin install meeting-notes@claude-code-skills
 /plugin install status-tracking@claude-code-skills
 ```
 
-#### 2. GitHub技能仓库克隆
+#### 2. Clone GitHub Skills Repositories
 ```bash
-# 克隆专业项目管理系统
+# Clone professional project management system
 git clone https://github.com/automazeio/ccpm.git ~/.claude/skills/ccpm
 
-# 克隆产品管理技能集
+# Clone product management skill set
 git clone https://github.com/Sh1n/pm-claude-skills--.git ~/.claude/skills/pm-claude-skills
 
-# 克隆综合技能库
+# Clone comprehensive skills library
 git clone https://github.com/alirezarezvani/claude-skills.git ~/.claude/skills/claude-skills
 ```
 
-### 🔧 技能激活命令
+### 🔧 Skill Activation Commands
 
-在Claude Code中使用以下命令激活技能：
+Use the following commands in Claude Code to activate skills:
 
 ```bash
-# 项目管理核心
+# Project management core
 /skill project-tracking
 /skill risk-analysis
 /skill team-efficiency
 /skill milestone-planning
 
-# 产品顾问增强
+# Product consultant enhancement
 /skill requirements-analysis
 /skill prd-generation
 /skill priority-ranking
 /skill competitive-analysis
 
-# 个人助理功能
+# Personal assistant functions
 /skill meeting-management
 /skill todo-organization
 /skill team-coordination
 /skill reminder-system
 ```
 
-## 📊 技能配置验证
+## 📊 Skills Configuration Verification
 
-安装完成后验证：
+After installation, verify:
 ```bash
-# 检查已安装技能
+# Check installed skills
 /skills list
 
-# 测试核心功能
+# Test core functions
 /skill project-status
 /skill generate-meeting-notes
 /skill analyze-requirements
 ```
 
-## 🚀 使用示例
+## 🚀 Usage Examples
 
-### 项目状态报告
+### Project Status Report
 ```
 /skill project-status --format="weekly" --include="risks,blockers,progress"
 ```
 
-### 会议记录生成
+### Meeting Notes Generation
 ```
 /skill meeting-notes --type="standup" --attendees="team" --duration="30min"
 ```
 
-### PRD生成
+### PRD Generation
 ```
 /skill prd-generation --feature="new-dashboard" --priority="high" --stakeholders="design,dev,qa"
 ```
 
-## 💡 最佳实践
+## 💡 Best Practices
 
-1. **每日使用**：
-   - 晨会：`/skill daily-standup`
-   - 进度跟踪：`/skill track-progress`
-   - 风险检查：`/skill identify-risks`
+1. **Daily Use**:
+   - Morning standup: `/skill daily-standup`
+   - Progress tracking: `/skill track-progress`
+   - Risk checking: `/skill identify-risks`
 
-2. **每周使用**：
-   - 周报生成：`/skill weekly-report`
-   - 团队效率分析：`/skill team-metrics`
-   - 里程碑检查：`/skill milestone-review`
+2. **Weekly Use**:
+   - Report generation: `/skill weekly-report`
+   - Team efficiency analysis: `/skill team-metrics`
+   - Milestone review: `/skill milestone-review`
 
-3. **按需使用**：
-   - PRD撰写：`/skill write-prd`
-   - 竞品分析：`/skill competitive-research`
-   - 需求优先级：`/skill prioritize-backlog`
+3. **On-Demand Use**:
+   - PRD writing: `/skill write-prd`
+   - Competitive analysis: `/skill competitive-research`
+   - Requirements prioritization: `/skill prioritize-backlog`
 
-## ⚠️ 注意事项
+## ⚠️ Important Notes
 
-- 首次使用前请阅读各技能的README文档
-- 部分技能可能需要API密钥配置
-- 建议先在测试项目中试用各技能
-- 定期更新技能库以获得最新功能
+- Please read each skill's README documentation before first use
+- Some skills may require API key configuration
+- Recommend testing skills in a test project first
+- Regularly update skill libraries to get latest features

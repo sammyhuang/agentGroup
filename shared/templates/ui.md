@@ -1,134 +1,134 @@
-# UI 结构化模板
+# UI Structured Template
 
-> 将UI设计稿转化为此格式，供前端开发使用
+> Convert UI design files to this format for frontend development use
 
 ---
 
 ## META
 ```yaml
-页面: [页面名称]
-设计师: [姓名]
-日期: YYYY-MM-DD
-尺寸: [设计稿宽度]px
-链接: [Figma/蓝湖链接]
+Page: [Page name]
+Designer: [Name]
+Date: YYYY-MM-DD
+Size: [Design width]px
+Link: [Figma/LanHu link]
 ```
 
-## 页面结构
-<!-- 用树形结构描述布局 -->
+## Page Structure
+<!-- Use tree structure to describe layout -->
 ```
-页面
-├── 头部 (Header)
-│   ├── Logo [左, 120x40]
-│   ├── 导航 [中, flex]
-│   └── 用户信息 [右, 200px]
-├── 主体 (Main)
-│   ├── 侧边栏 [左, 240px, fixed]
-│   └── 内容区 [右, flex]
-└── 底部 (Footer)
-    └── 版权信息 [居中]
+Page
+├── Header
+│   ├── Logo [left, 120x40]
+│   ├── Navigation [center, flex]
+│   └── User Info [right, 200px]
+├── Main
+│   ├── Sidebar [left, 240px, fixed]
+│   └── Content [right, flex]
+└── Footer
+    └── Copyright [center]
 ```
 
-## 组件清单
+## Component List
 
-| 组件 | 位置 | 尺寸 | 状态 |
-|------|------|------|------|
-| 按钮-主要 | 表单底部 | 120x40 | default/hover/disabled |
-| 输入框 | 表单 | 100%x40 | default/focus/error |
-| 卡片 | 列表 | 280x160 | default/hover |
+| Component | Position | Size | State |
+|-----------|----------|------|-------|
+| Button-Primary | Form bottom | 120x40 | default/hover/disabled |
+| Input | Form | 100%x40 | default/focus/error |
+| Card | List | 280x160 | default/hover |
 
-## 组件详情
+## Component Details
 
-### 按钮-主要
+### Button-Primary
 ```yaml
-尺寸: 120x40 | 圆角: 8px
-字体: 16px medium #FFFFFF
-背景: #1890FF
-状态:
-  hover: 背景 #40A9FF
-  disabled: 背景 #D9D9D9, 字色 #999
+Size: 120x40 | Border-radius: 8px
+Font: 16px medium #FFFFFF
+Background: #1890FF
+States:
+  hover: Background #40A9FF
+  disabled: Background #D9D9D9, Color #999
 ```
 
-### 输入框
+### Input
 ```yaml
-尺寸: 100%x40 | 圆角: 4px
-边框: 1px #D9D9D9
-字体: 14px #333
-placeholder: #999
-状态:
-  focus: 边框 #1890FF
-  error: 边框 #FF4D4F, 提示文字下方
+Size: 100%x40 | Border-radius: 4px
+Border: 1px #D9D9D9
+Font: 14px #333
+Placeholder: #999
+States:
+  focus: Border #1890FF
+  error: Border #FF4D4F, Error text below
 ```
 
-## 颜色规范
+## Color Scheme
 ```yaml
-主色: #1890FF
-成功: #52C41A
-警告: #FAAD14
-错误: #FF4D4F
-文字:
-  主要: #333333
-  次要: #666666
-  辅助: #999999
-背景:
-  页面: #F5F5F5
-  卡片: #FFFFFF
+Primary: #1890FF
+Success: #52C41A
+Warning: #FAAD14
+Error: #FF4D4F
+Text:
+  Primary: #333333
+  Secondary: #666666
+  Auxiliary: #999999
+Background:
+  Page: #F5F5F5
+  Card: #FFFFFF
 ```
 
-## 字体规范
+## Typography
 ```yaml
-字体: PingFang SC, -apple-system, sans-serif
-标题H1: 24px bold
-标题H2: 20px bold
-正文: 14px regular
-辅助: 12px regular
+Font: PingFang SC, -apple-system, sans-serif
+H1: 24px bold
+H2: 20px bold
+Body: 14px regular
+Auxiliary: 12px regular
 ```
 
-## 间距规范
+## Spacing
 ```yaml
-页边距: 24px
-卡片间距: 16px
-组件间距: 12px
-元素间距: 8px
+Page margin: 24px
+Card spacing: 16px
+Component spacing: 12px
+Element spacing: 8px
 ```
 
-## 交互说明
+## Interaction Instructions
 
-### 表单提交
+### Form Submit
 ```
-点击提交
-→ 校验失败 → 高亮错误字段 + 显示提示
-→ 校验成功 → 按钮loading → 请求
-  → 成功 → Toast提示 + 跳转
-  → 失败 → Toast错误信息
-```
-
-### 列表加载
-```
-滚动到底部
-→ 显示加载动画
-→ 加载完成追加数据
-→ 无更多数据显示"没有更多了"
+Click submit
+→ Validation fails → Highlight error fields + Show tooltip
+→ Validation passes → Button loading → Request
+  → Success → Toast message + Navigate
+  → Failure → Toast error message
 ```
 
-## 响应式断点
+### List Loading
+```
+Scroll to bottom
+→ Show loading animation
+→ Loading complete, append data
+→ No more data shows "No more data"
+```
+
+## Responsive Breakpoints
 ```yaml
 PC: >= 1200px
-平板: 768px - 1199px
-手机: < 768px
+Tablet: 768px - 1199px
+Mobile: < 768px
 ```
 
-## 素材清单
-| 名称 | 尺寸 | 格式 | 说明 |
-|------|------|------|------|
-| logo | 120x40 | SVG | 主Logo |
-| icon-xxx | 24x24 | SVG | 图标 |
+## Asset List
+| Name | Size | Format | Description |
+|------|------|--------|-------------|
+| logo | 120x40 | SVG | Main Logo |
+| icon-xxx | 24x24 | SVG | Icon |
 
 ---
 
 <!--
-转换指南:
-1. 截图中的每个区块描述位置+尺寸
-2. 颜色用十六进制，不用"浅蓝色"
-3. 间距用具体像素值
-4. 交互用流程图描述
+Conversion guide:
+1. Describe position + size for each area in screenshot
+2. Use hex colors, not "light blue"
+3. Use specific pixel values for spacing
+4. Describe interactions with flowcharts
 -->

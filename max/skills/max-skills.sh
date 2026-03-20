@@ -1,24 +1,24 @@
 #!/bin/bash
-# 麦克斯技能快速启动
+# Max Skills Quick Launch
 
-echo "🎯 麦克斯技能工具箱"
+echo "🎯 Max Skills Toolkit"
 echo "====================="
-echo "1. 项目状态检查"
-echo "2. 生成会议记录"
-echo "3. 分析团队效率"
-echo "4. 创建PRD文档"
-echo "5. 风险评估"
-echo "6. 待办事项管理"
+echo "1. Project Status Check"
+echo "2. Generate Meeting Notes"
+echo "3. Analyze Team Efficiency"
+echo "4. Create PRD Documents"
+echo "5. Risk Assessment"
+echo "6. Todo Management"
 echo "====================="
 
-read -p "请选择功能 (1-6): " choice
+read -p "Please select function (1-6): " choice
 
 case $choice in
-    1) echo "🔍 执行项目状态检查..." ;;
-    2) echo "📝 生成会议记录..." ;;
-    3) echo "📊 分析团队效率..." ;;
-    4) echo "📋 创建PRD文档..." ;;
-    5) echo "⚠️  执行风险评估..." ;;
-    6) echo "✅ 管理待办事项..." ;;
-    *) echo "❌ 无效选择" ;;
+    1) echo "🔍 Executing project status check..." ;;
+    2) echo "📝 Generating meeting notes..." ;;
+    3) echo "📊 Analyzing team efficiency..." ;;
+    4) echo "📋 Creating PRD documents..." ;;
+    5) echo "⚠️  Executing risk assessment..." ;;
+    6) echo "✅ Managing todo items..." ;;
+    *) echo "❌ Invalid selection" ;;
 esac

@@ -1,127 +1,127 @@
-# 基于文件时间戳的智能通知缓存机制
+# Intelligent Notification Caching Mechanism Based on File Timestamps
 
-**版本**: v1.0.0
-**创建日期**: 2026-02-13
-**作者**: 麦克斯 (Max)
-**适用范围**: aiGroup团队所有AI成员
-
----
-
-## 一、核心设计理念
-
-### 问题背景
-传统通知系统需要每次会话都完整读取通知文件，导致：
-- 重复读取已处理的通知（Token浪费）
-- 无法区分"新通知"和"已读通知"
-- 缺乏通知状态的持久化跟踪
-
-### 解决方案
-基于文件修改时间戳（mtime）的智能缓存机制：
-- 只在文件有变化时才重新读取
-- 持久化每个AI的检查状态
-- 零额外存储成本（利用文件系统原生mtime）
+**Version**: v1.0.0
+**Creation Date**: 2026-02-13
+**Author**: Max
+**Scope**: All AI members of aiGroup team
 
 ---
 
-## 二、文件结构说明
+## I. Core Design Philosophy
 
-### 2.1 `.notification_cache.json`（缓存文件）
+### Problem Background
+Traditional notification systems require complete reading of notification files every session, leading to:
+- Repeated reading of already processed notifications (Token waste)
+- Inability to distinguish between "new notifications" and "read notifications"
+- Lack of persistent tracking of notification status
 
-**位置**: `/Users/yuhao/Desktop/yezannnnn/aiGroup/shared/.notification_cache.json`
+### Solution
+Intelligent caching mechanism based on file modification timestamps (mtime):
+- Only re-read when file has changes
+- Persist each AI's check status
+- Zero additional storage cost (utilizing filesystem native mtime)
 
-**核心字段说明**:
+---
+
+## II. File Structure Description
+
+### 2.1 `.notification_cache.json` (Cache File)
+
+**Location**: `/Users/yuhao/Desktop/yezannnnn/aiGroup/shared/.notification_cache.json`
+
+**Core Field Description**:
 
 ```json
 {
   "ai_agents": {
     "max": {
-      "last_check_timestamp": "会话启动时间（ISO 8601）",
-      "last_notification_mtime": "上次检查时notifications.json的mtime（Unix时间戳）",
-      "unread_count": "未读通知数量",
-      "last_read_notification_id": "最后读取的通知ID"
+      "last_check_timestamp": "Session startup time (ISO 8601)",
+      "last_notification_mtime": "mtime of notifications.json during last check (Unix timestamp)",
+      "unread_count": "Number of unread notifications",
+      "last_read_notification_id": "Last read notification ID"
     }
   },
   "file_mtimes": {
-    "notifications.json": "上次记录的mtime",
-    "status.json": "上次记录的mtime",
-    "tasks/todos.md": "上次记录的mtime"
+    "notifications.json": "Last recorded mtime",
+    "status.json": "Last recorded mtime",
+    "tasks/todos.md": "Last recorded mtime"
   }
 }
 ```
 
-**字段用途**:
-- `last_check_timestamp`: 会话级别的时间戳，用于判断是否需要全量检查
-- `last_notification_mtime`: 文件级别的mtime，用于判断文件是否修改
-- `unread_count`: 快速判断是否有新通知，无需读取完整文件
-- `last_read_notification_id`: 用于增量读取，只处理新增通知
+**Field Purposes**:
+- `last_check_timestamp`: Session-level timestamp, used to determine if full check is needed
+- `last_notification_mtime`: File-level mtime, used to determine if file is modified
+- `unread_count`: Quick determination if new notifications exist, without reading complete file
+- `last_read_notification_id`: For incremental reading, process only new notifications
 
-### 2.2 `notifications.json`（通知文件）
+### 2.2 `notifications.json` (Notification File)
 
-**位置**: `/Users/yuhao/Desktop/yezannnnn/aiGroup/shared/notifications.json`
+**Location**: `/Users/yuhao/Desktop/yezannnnn/aiGroup/shared/notifications.json`
 
-**通知结构**:
+**Notification Structure**:
 
 ```json
 {
   "notifications": [
     {
-      "id": "唯一标识符（notif_YYYYMMDD_序号）",
-      "timestamp": "创建时间（ISO 8601）",
-      "priority": "优先级（high/normal/low）",
-      "type": "通知类型（task_assignment/review_request/information/alert）",
-      "from": "发送者（AI名称或system）",
-      "to": "接收者（AI名称或all）",
-      "subject": "通知标题",
+      "id": "Unique identifier (notif_YYYYMMDD_number)",
+      "timestamp": "Creation time (ISO 8601)",
+      "priority": "Priority (high/normal/low)",
+      "type": "Notification type (task_assignment/review_request/information/alert)",
+      "from": "Sender (AI name or system)",
+      "to": "Recipient (AI name or all)",
+      "subject": "Notification title",
       "content": {
-        "自定义内容结构，根据type不同而变化"
+        "Custom content structure, varies by type"
       },
       "actions": [
         {
-          "label": "操作按钮文本",
-          "action": "操作类型",
-          "target": "操作目标"
+          "label": "Action button text",
+          "action": "Action type",
+          "target": "Action target"
         }
       ],
-      "read_by": ["已读AI列表"],
-      "acknowledged_by": ["已确认AI列表"],
-      "expires_at": "过期时间（ISO 8601）"
+      "read_by": ["List of AIs that have read"],
+      "acknowledged_by": ["List of AIs that have acknowledged"],
+      "expires_at": "Expiration time (ISO 8601)"
     }
   ]
 }
 ```
 
-**通知类型定义**:
+**Notification Type Definitions**:
 
-| type | 说明 | 典型使用场景 | priority建议 |
-|------|------|--------------|--------------|
-| `task_assignment` | 任务分配 | 麦克斯分配任务给成员 | high/normal |
-| `review_request` | 审核请求 | 贾维斯请求凯尔测试 | normal |
-| `information` | 信息通知 | 会议提醒、状态更新 | low |
-| `alert` | 警报提醒 | Token超限、系统错误 | high |
+| type | Description | Typical Use Case | priority Suggestion |
+|------|-------------|------------------|-------------------|
+| `task_assignment` | Task assignment | Max assigns tasks to members | high/normal |
+| `review_request` | Review request | Jarvis requests Kyle to test | normal |
+| `information` | Information notification | Meeting reminders, status updates | low |
+| `alert` | Alert reminder | Token limit exceeded, system errors | high |
 
 ---
 
-## 三、时间戳检查实现（核心）
+## III. Timestamp Check Implementation (Core)
 
-### 3.1 获取文件mtime的Bash命令
+### 3.1 Bash Commands to Get File mtime
 
-#### macOS/BSD系统
+#### macOS/BSD Systems
 ```bash
 stat -f %m /path/to/file
 ```
 
-**输出**: Unix时间戳（秒级，例如：1707825600）
+**Output**: Unix timestamp (second precision, e.g.: 1707825600)
 
-#### Linux系统
+#### Linux Systems
 ```bash
 stat -c %Y /path/to/file
 ```
 
-**输出**: Unix时间戳（秒级）
+**Output**: Unix timestamp (second precision)
 
-#### 跨平台兼容方案（推荐）
+#### Cross-platform Compatible Solution (Recommended)
 ```bash
-# 检测系统类型并使用对应命令
+# Detect system type and use corresponding command
 if [[ "$OSTYPE" == "darwin"* ]]; then
   # macOS
   FILE_MTIME=$(stat -f %m "/path/to/file")
@@ -133,59 +133,59 @@ fi
 echo "$FILE_MTIME"
 ```
 
-### 3.2 完整检查流程的Bash脚本
+### 3.2 Complete Check Flow Bash Script
 
-#### 场景1: AI会话启动时的通知检查
+#### Scenario 1: Notification Check at AI Session Startup
 
 ```bash
 #!/bin/bash
 
-# 配置
-AI_NAME="max"  # 当前AI名称（max/ella/jarvis/kyle）
+# Configuration
+AI_NAME="max"  # Current AI name (max/ella/jarvis/kyle)
 SHARED_DIR="/Users/yuhao/Desktop/yezannnnn/aiGroup/shared"
 CACHE_FILE="$SHARED_DIR/.notification_cache.json"
 NOTIFICATION_FILE="$SHARED_DIR/notifications.json"
 
-# 1. 获取当前notifications.json的mtime
+# 1. Get current notifications.json mtime
 if [[ "$OSTYPE" == "darwin"* ]]; then
   CURRENT_MTIME=$(stat -f %m "$NOTIFICATION_FILE")
 else
   CURRENT_MTIME=$(stat -c %Y "$NOTIFICATION_FILE")
 fi
 
-# 2. 读取缓存中的last_notification_mtime（需要jq工具）
+# 2. Read last_notification_mtime from cache (requires jq tool)
 CACHED_MTIME=$(jq -r ".ai_agents.$AI_NAME.last_notification_mtime" "$CACHE_FILE")
 
-# 3. 比较时间戳
+# 3. Compare timestamps
 if [ "$CURRENT_MTIME" -gt "$CACHED_MTIME" ]; then
-  echo "检测到新通知！文件已修改"
-  echo "缓存mtime: $CACHED_MTIME"
-  echo "当前mtime: $CURRENT_MTIME"
+  echo "New notifications detected! File has been modified"
+  echo "Cached mtime: $CACHED_MTIME"
+  echo "Current mtime: $CURRENT_MTIME"
 
-  # 标记：需要读取notifications.json
+  # Mark: need to read notifications.json
   NEED_READ=true
 else
-  echo "无新通知，跳过读取"
+  echo "No new notifications, skip reading"
   NEED_READ=false
 fi
 
-# 4. 如果需要读取，更新缓存
+# 4. If reading needed, update cache
 if [ "$NEED_READ" = true ]; then
-  # 读取通知内容（使用Read工具）
-  # [在实际AI代码中执行]
+  # Read notification content (using Read tool)
+  # [Execute in actual AI code]
 
-  # 更新缓存（使用jq更新JSON）
+  # Update cache (using jq to update JSON)
   CURRENT_TIMESTAMP=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
   jq ".ai_agents.$AI_NAME.last_check_timestamp = \"$CURRENT_TIMESTAMP\" | \
       .ai_agents.$AI_NAME.last_notification_mtime = $CURRENT_MTIME | \
       .file_mtimes.\"notifications.json\" = $CURRENT_MTIME" \
       "$CACHE_FILE" > "$CACHE_FILE.tmp" && mv "$CACHE_FILE.tmp" "$CACHE_FILE"
 
-  echo "缓存已更新"
+  echo "Cache updated"
 fi
 ```
 
-#### 场景2: 批量检查多个文件
+#### Scenario 2: Batch Check Multiple Files
 
 ```bash
 #!/bin/bash
@@ -194,7 +194,7 @@ AI_NAME="max"
 SHARED_DIR="/Users/yuhao/Desktop/yezannnnn/aiGroup/shared"
 CACHE_FILE="$SHARED_DIR/.notification_cache.json"
 
-# 定义需要监控的文件列表
+# Define list of files to monitor
 declare -A FILES=(
   ["notifications.json"]="$SHARED_DIR/notifications.json"
   ["status.json"]="$SHARED_DIR/status.json"
@@ -202,40 +202,40 @@ declare -A FILES=(
   ["tasks/meetings.md"]="$SHARED_DIR/tasks/meetings.md"
 )
 
-# 检测系统类型
+# Detect system type
 if [[ "$OSTYPE" == "darwin"* ]]; then
   STAT_CMD="stat -f %m"
 else
   STAT_CMD="stat -c %Y"
 fi
 
-# 遍历检查
+# Iterate and check
 for FILE_KEY in "${!FILES[@]}"; do
   FILE_PATH="${FILES[$FILE_KEY]}"
 
-  # 文件存在性检查
+  # File existence check
   if [ ! -f "$FILE_PATH" ]; then
-    echo "警告: $FILE_KEY 不存在，跳过"
+    echo "Warning: $FILE_KEY does not exist, skipping"
     continue
   fi
 
-  # 获取当前mtime
+  # Get current mtime
   CURRENT_MTIME=$($STAT_CMD "$FILE_PATH")
 
-  # 读取缓存mtime
+  # Read cached mtime
   CACHED_MTIME=$(jq -r ".file_mtimes.\"$FILE_KEY\"" "$CACHE_FILE")
 
-  # 比较
+  # Compare
   if [ "$CURRENT_MTIME" -gt "$CACHED_MTIME" ]; then
-    echo "✓ $FILE_KEY 有更新 (mtime: $CACHED_MTIME → $CURRENT_MTIME)"
-    # 在这里触发读取逻辑
+    echo "✓ $FILE_KEY has updates (mtime: $CACHED_MTIME → $CURRENT_MTIME)"
+    # Trigger read logic here
   else
-    echo "✗ $FILE_KEY 无变化"
+    echo "✗ $FILE_KEY no changes"
   fi
 done
 ```
 
-#### 场景3: 检查是否需要全量刷新（24小时检查）
+#### Scenario 3: Check if Full Refresh Needed (24-hour Check)
 
 ```bash
 #!/bin/bash
@@ -243,10 +243,10 @@ done
 AI_NAME="max"
 CACHE_FILE="/Users/yuhao/Desktop/yezannnnn/aiGroup/shared/.notification_cache.json"
 
-# 读取上次检查时间
+# Read last check time
 LAST_CHECK=$(jq -r ".ai_agents.$AI_NAME.last_check_timestamp" "$CACHE_FILE")
 
-# 转换为Unix时间戳
+# Convert to Unix timestamp
 if [[ "$OSTYPE" == "darwin"* ]]; then
   LAST_CHECK_EPOCH=$(date -j -f "%Y-%m-%dT%H:%M:%SZ" "$LAST_CHECK" +%s 2>/dev/null || echo 0)
 else
@@ -256,99 +256,99 @@ fi
 CURRENT_EPOCH=$(date +%s)
 DIFF_HOURS=$(( (CURRENT_EPOCH - LAST_CHECK_EPOCH) / 3600 ))
 
-# 判断是否超过24小时
+# Determine if exceeds 24 hours
 FULL_CHECK_INTERVAL=24
 if [ "$DIFF_HOURS" -ge "$FULL_CHECK_INTERVAL" ]; then
-  echo "距离上次全量检查已 $DIFF_HOURS 小时，执行全量刷新"
+  echo "$DIFF_HOURS hours since last full check, executing full refresh"
   NEED_FULL_CHECK=true
 else
-  echo "上次检查在 $DIFF_HOURS 小时前，使用快速检查"
+  echo "Last check was $DIFF_HOURS hours ago, using quick check"
   NEED_FULL_CHECK=false
 fi
 ```
 
 ---
 
-## 四、AI集成实现流程
+## IV. AI Integration Implementation Flow
 
-### 4.1 会话初始化检查（强制执行）
+### 4.1 Session Initialization Check (Mandatory Execution)
 
-每个AI在会话启动时必须执行以下步骤：
+Each AI must execute the following steps at session startup:
 
 ```
-步骤1: 执行时间戳检查
-├─ 使用Bash工具运行检查脚本
-├─ 获取NEED_READ标志
-└─ 判断是否需要读取文件
+Step 1: Execute Timestamp Check
+├─ Use Bash tool to run check script
+├─ Get NEED_READ flag
+└─ Determine if file reading is needed
 
-步骤2: 条件性读取
-├─ 如果NEED_READ=true
-│   ├─ 使用Read工具读取notifications.json
-│   ├─ 过滤出to="当前AI"或to="all"的通知
-│   ├─ 过滤掉read_by包含当前AI的通知
-│   └─ 输出未读通知摘要
-└─ 如果NEED_READ=false
-    └─ 输出"无新通知"
+Step 2: Conditional Reading
+├─ If NEED_READ=true
+│   ├─ Use Read tool to read notifications.json
+│   ├─ Filter notifications with to="current AI" or to="all"
+│   ├─ Filter out notifications with read_by containing current AI
+│   └─ Output unread notification summary
+└─ If NEED_READ=false
+    └─ Output "No new notifications"
 
-步骤3: 更新缓存
-├─ 使用jq更新.notification_cache.json
-├─ 更新last_check_timestamp为当前时间
-├─ 更新last_notification_mtime为文件当前mtime
-└─ 更新unread_count
+Step 3: Update Cache
+├─ Use jq to update .notification_cache.json
+├─ Update last_check_timestamp to current time
+├─ Update last_notification_mtime to file's current mtime
+└─ Update unread_count
 ```
 
-### 4.2 简化版实现（推荐用于实际集成）
+### 4.2 Simplified Implementation (Recommended for Actual Integration)
 
-在CLAUDE.md的初始化步骤中添加：
+Add to initialization steps in CLAUDE.md:
 
 ```markdown
-## 初始化步骤（必须执行）
+## Initialization Steps (Must Execute)
 
-1. **读取人设文件** `./PERSONA.md`
-2. **读取共享状态** `../shared/status.json`
-3. **【新增】检查通知更新**:
+1. **Read Persona File** `./PERSONA.md`
+2. **Read Shared Status** `../shared/status.json`
+3. **[NEW] Check Notification Updates**:
    ```bash
-   # 快速检查是否有新通知
-   AI_NAME="max"  # 根据实际AI替换
+   # Quick check for new notifications
+   AI_NAME="max"  # Replace with actual AI name
    NOTIFICATION_FILE="../shared/notifications.json"
    CACHE_FILE="../shared/.notification_cache.json"
 
-   # 获取mtime
+   # Get mtime
    CURRENT_MTIME=$(stat -f %m "$NOTIFICATION_FILE" 2>/dev/null || stat -c %Y "$NOTIFICATION_FILE")
    CACHED_MTIME=$(jq -r ".ai_agents.$AI_NAME.last_notification_mtime" "$CACHE_FILE")
 
-   # 如果有更新则读取
+   # Read if there are updates
    if [ "$CURRENT_MTIME" -gt "$CACHED_MTIME" ]; then
-     # 读取notifications.json并过滤
-     # 更新缓存
+     # Read notifications.json and filter
+     # Update cache
    fi
    ```
-4. **检查会议记录** `../shared/tasks/meetings.md`（如存在）
-5. **检查待办事项** `../shared/tasks/todos.md`（如存在）
+4. **Check Meeting Records** `../shared/tasks/meetings.md` (if exists)
+5. **Check Todo Items** `../shared/tasks/todos.md` (if exists)
 ```
 
 ---
 
-## 五、高级功能设计
+## V. Advanced Feature Design
 
-### 5.1 增量读取优化
+### 5.1 Incremental Reading Optimization
 
-**场景**: 当notifications数组非常大（100+条）时，避免每次都读取全部。
+**Scenario**: When notifications array is very large (100+ entries), avoid reading all every time.
 
-**实现方案**:
-1. 在缓存中记录`last_read_notification_id`
-2. 读取时使用jq过滤：
+**Implementation Solution**:
+1. Record `last_read_notification_id` in cache
+2. Use jq filtering when reading:
    ```bash
-   jq '[.notifications[] | select(.id > "notif_上次ID")] |
+   jq '[.notifications[] | select(.id > "notif_last_id")] |
        [.[] | select(.to == "max" or .to == "all") |
        select(.read_by | contains(["max"]) | not)]' \
        notifications.json
    ```
-3. 只处理ID大于上次ID的新通知
+3. Only process new notifications with IDs greater than last ID
 
-### 5.2 通知过期自动清理
+### 5.2 Automatic Notification Expiration Cleanup
 
-**Bash定期任务**（可选，由麦克斯执行）:
+**Bash Scheduled Task** (optional, executed by Max):
 
 ```bash
 #!/bin/bash
@@ -356,175 +356,175 @@ fi
 NOTIFICATION_FILE="/Users/yuhao/Desktop/yezannnnn/aiGroup/shared/notifications.json"
 CURRENT_TIMESTAMP=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
 
-# 使用jq过滤掉已过期的通知
+# Use jq to filter out expired notifications
 jq --arg now "$CURRENT_TIMESTAMP" \
    '.notifications = [.notifications[] | select(.expires_at > $now)]' \
    "$NOTIFICATION_FILE" > "$NOTIFICATION_FILE.tmp" && \
    mv "$NOTIFICATION_FILE.tmp" "$NOTIFICATION_FILE"
 
-echo "已清理过期通知"
+echo "Expired notifications cleaned"
 ```
 
-### 5.3 通知统计仪表盘
+### 5.3 Notification Statistics Dashboard
 
-**快速生成统计报告**:
+**Quick Generation of Statistical Reports**:
 
 ```bash
 #!/bin/bash
 
 CACHE_FILE="/Users/yuhao/Desktop/yezannnnn/aiGroup/shared/.notification_cache.json"
 
-echo "=== 通知系统状态 ==="
+echo "=== Notification System Status ==="
 echo ""
 
-# 各AI未读数量
-echo "未读通知统计:"
+# Unread count for each AI
+echo "Unread notification statistics:"
 for AI in max ella jarvis kyle; do
   UNREAD=$(jq -r ".ai_agents.$AI.unread_count" "$CACHE_FILE")
-  echo "  $AI: $UNREAD 条"
+  echo "  $AI: $UNREAD items"
 done
 
 echo ""
 
-# 文件更新时间
-echo "文件最后修改:"
+# File update times
+echo "Last file modifications:"
 jq -r '.file_mtimes | to_entries[] | "  \(.key): \(.value)"' "$CACHE_FILE" | \
   while read line; do
     FILE=$(echo "$line" | cut -d: -f1)
     MTIME=$(echo "$line" | cut -d: -f2 | xargs)
-    DATE=$(date -r "$MTIME" "+%Y-%m-%d %H:%M:%S" 2>/dev/null || echo "未知")
+    DATE=$(date -r "$MTIME" "+%Y-%m-%d %H:%M:%S" 2>/dev/null || echo "Unknown")
     echo "$FILE: $DATE"
   done
 ```
 
 ---
 
-## 六、Token优化效果分析
+## VI. Token Optimization Effect Analysis
 
-### 传统方式（每次会话）
+### Traditional Method (Every Session)
 ```
-步骤1: 读取notifications.json (1500 tokens)
-步骤2: 读取全部通知内容 (3000 tokens)
-步骤3: 过滤和处理 (500 tokens)
-总计: 5000 tokens/会话
-```
-
-### 缓存优化方式
-```
-步骤1: 执行mtime检查脚本 (200 tokens)
-步骤2: 如果无更新，跳过读取 (0 tokens)
-步骤3: 如果有更新，读取notifications.json (1500 tokens)
-步骤4: 只读取新通知（增量） (800 tokens)
-总计（无更新）: 200 tokens/会话 (节省96%)
-总计（有更新）: 2500 tokens/会话 (节省50%)
+Step 1: Read notifications.json (1500 tokens)
+Step 2: Read all notification content (3000 tokens)
+Step 3: Filter and process (500 tokens)
+Total: 5000 tokens/session
 ```
 
-### 实际使用场景预估
-假设每天4个AI各启动3次会话（共12次会话）：
-- 其中10次无新通知（使用200 tokens）
-- 其中2次有新通知（使用2500 tokens）
+### Cache Optimized Method
+```
+Step 1: Execute mtime check script (200 tokens)
+Step 2: If no update, skip reading (0 tokens)
+Step 3: If updated, read notifications.json (1500 tokens)
+Step 4: Read only new notifications (incremental) (800 tokens)
+Total (no update): 200 tokens/session (96% savings)
+Total (with update): 2500 tokens/session (50% savings)
+```
 
-**日Token消耗**:
-- 传统方式: 12 × 5000 = 60,000 tokens
-- 优化方式: 10 × 200 + 2 × 2500 = 7,000 tokens
-- **节省率: 88%**
+### Actual Usage Scenario Estimation
+Assuming 4 AIs each start 3 sessions daily (total 12 sessions):
+- 10 times no new notifications (using 200 tokens)
+- 2 times with new notifications (using 2500 tokens)
 
-**月Token节省**（按30天计）:
-- 节省: (60,000 - 7,000) × 30 = 1,590,000 tokens
-- **约等于节省 $23.85（按Sonnet价格计算）**
+**Daily Token Consumption**:
+- Traditional method: 12 × 5000 = 60,000 tokens
+- Optimized method: 10 × 200 + 2 × 2500 = 7,000 tokens
+- **Savings rate: 88%**
+
+**Monthly Token Savings** (calculated for 30 days):
+- Savings: (60,000 - 7,000) × 30 = 1,590,000 tokens
+- **Approximately $23.85 in savings (at Sonnet pricing)**
 
 ---
 
-## 七、故障处理和边界情况
+## VII. Fault Handling and Edge Cases
 
-### 7.1 缓存文件损坏
+### 7.1 Cache File Corruption
 
-**问题**: `.notification_cache.json`格式错误或丢失。
+**Problem**: `.notification_cache.json` format error or missing.
 
-**处理**:
+**Handling**:
 ```bash
-# 检查文件有效性
+# Check file validity
 if ! jq empty "$CACHE_FILE" 2>/dev/null; then
-  echo "缓存文件损坏，重新初始化"
-  # 从模板恢复或重建
+  echo "Cache file corrupted, reinitializing"
+  # Restore from template or rebuild
   cp "$CACHE_FILE.template" "$CACHE_FILE"
 fi
 ```
 
-### 7.2 文件mtime异常
+### 7.2 File mtime Anomaly
 
-**问题**: 文件被外部工具修改，mtime异常增大。
+**Problem**: File modified by external tools, mtime abnormally large.
 
-**处理**:
-- 设置最大时间差阈值（例如不超过当前时间）
-- 异常时强制重置缓存并全量读取
+**Handling**:
+- Set maximum time difference threshold (e.g., not exceeding current time)
+- Force reset cache and full read when anomalies occur
 
 ```bash
 CURRENT_EPOCH=$(date +%s)
 if [ "$FILE_MTIME" -gt "$CURRENT_EPOCH" ]; then
-  echo "警告: mtime异常（未来时间），强制重置"
+  echo "Warning: mtime anomaly (future time), forcing reset"
   FILE_MTIME=0
 fi
 ```
 
-### 7.3 多AI并发写入
+### 7.3 Multiple AI Concurrent Writes
 
-**问题**: 多个AI同时更新缓存文件导致冲突。
+**Problem**: Multiple AIs simultaneously updating cache file causing conflicts.
 
-**解决方案**:
-1. 使用文件锁机制（flock）
-2. 或者每个AI只写入自己的字段（使用jq的update操作）
+**Solutions**:
+1. Use file locking mechanism (flock)
+2. Or each AI only writes its own fields (using jq update operations)
 
 ```bash
-# 使用文件锁
+# Using file lock
 (
   flock -x 200
-  # 执行jq更新
+  # Execute jq update
   jq "..." "$CACHE_FILE" > "$CACHE_FILE.tmp" && mv "$CACHE_FILE.tmp" "$CACHE_FILE"
 ) 200>"$CACHE_FILE.lock"
 ```
 
 ---
 
-## 八、快速上手指南
+## VIII. Quick Start Guide
 
-### 对于AI开发者
+### For AI Developers
 
-**最小化实现（3步上手）**:
+**Minimal Implementation (3 Steps)**:
 
 ```bash
-# 步骤1: 在AI启动脚本添加检查
-AI_NAME="你的AI名称"
+# Step 1: Add check to AI startup script
+AI_NAME="your_ai_name"
 SHARED_DIR="/Users/yuhao/Desktop/yezannnnn/aiGroup/shared"
 NOTIFICATION_FILE="$SHARED_DIR/notifications.json"
 CACHE_FILE="$SHARED_DIR/.notification_cache.json"
 
-# 步骤2: 获取mtime并比较
+# Step 2: Get mtime and compare
 CURRENT_MTIME=$(stat -f %m "$NOTIFICATION_FILE" 2>/dev/null || stat -c %Y "$NOTIFICATION_FILE")
 CACHED_MTIME=$(jq -r ".ai_agents.$AI_NAME.last_notification_mtime" "$CACHE_FILE")
 
-# 步骤3: 条件读取
+# Step 3: Conditional reading
 if [ "$CURRENT_MTIME" -gt "$CACHED_MTIME" ]; then
-  # 使用Read工具读取notifications.json
-  # 处理通知
-  # 更新缓存
+  # Use Read tool to read notifications.json
+  # Process notifications
+  # Update cache
   jq ".ai_agents.$AI_NAME.last_notification_mtime = $CURRENT_MTIME" \
      "$CACHE_FILE" > "$CACHE_FILE.tmp" && mv "$CACHE_FILE.tmp" "$CACHE_FILE"
 fi
 ```
 
-### 对于项目管理者（麦克斯）
+### For Project Manager (Max)
 
-**通知发送标准流程**:
+**Standard Notification Sending Process**:
 
-1. 编辑`notifications.json`，添加新通知
-2. 确保通知ID唯一且递增（notif_YYYYMMDD_序号）
-3. 设置合理的`expires_at`（通常30天）
-4. 文件保存后，mtime自动更新，触发AI检查
+1. Edit `notifications.json`, add new notification
+2. Ensure notification ID is unique and incremental (notif_YYYYMMDD_number)
+3. Set reasonable `expires_at` (usually 30 days)
+4. After file save, mtime automatically updates, triggering AI checks
 
-**示例**:
+**Example**:
 ```bash
-# 添加新通知
+# Add new notification
 jq '.notifications += [{
   "id": "notif_20260213_004",
   "timestamp": "2026-02-13T16:00:00Z",
@@ -532,7 +532,7 @@ jq '.notifications += [{
   "type": "task_assignment",
   "from": "max",
   "to": "jarvis",
-  "subject": "紧急任务",
+  "subject": "Urgent Task",
   "content": {...},
   "read_by": [],
   "acknowledged_by": [],
@@ -542,35 +542,35 @@ jq '.notifications += [{
 
 ---
 
-## 九、扩展可能性
+## IX. Extension Possibilities
 
-### 9.1 集成桌面通知
+### 9.1 Desktop Notification Integration
 
-**macOS通知**:
+**macOS Notifications**:
 ```bash
-osascript -e 'display notification "你有新的任务分配" with title "AI团队通知"'
+osascript -e 'display notification "You have a new task assignment" with title "AI Team Notification"'
 ```
 
-### 9.2 邮件/Webhook集成
+### 9.2 Email/Webhook Integration
 
-当检测到高优先级通知时：
+When high priority notifications are detected:
 ```bash
 if [ "$PRIORITY" = "high" ]; then
-  # 发送邮件
-  echo "重要通知: $SUBJECT" | mail -s "AI团队紧急通知" user@example.com
+  # Send email
+  echo "Important notification: $SUBJECT" | mail -s "AI Team Urgent Notification" user@example.com
 
-  # 或调用Webhook
+  # Or call webhook
   curl -X POST https://hooks.example.com/notify \
        -H "Content-Type: application/json" \
        -d "{\"message\": \"$SUBJECT\"}"
 fi
 ```
 
-### 9.3 统计仪表盘
+### 9.3 Statistics Dashboard
 
-使用`jq`生成团队通知效率报告：
+Use `jq` to generate team notification efficiency reports:
 ```bash
-# 计算平均响应时间
+# Calculate average response time
 jq '[.notifications[] |
     select(.read_by | length > 0) |
     {
@@ -585,35 +585,35 @@ jq '[.notifications[] |
 
 ---
 
-## 十、总结
+## X. Summary
 
-### 核心优势
-✅ **零存储成本** - 利用文件系统原生mtime
-✅ **高效检查** - 200 tokens vs 5000 tokens (96%节省)
-✅ **可扩展性** - 支持批量文件监控
-✅ **持久化** - 会话间状态保持
-✅ **简单实现** - 3行Bash即可集成
+### Core Advantages
+✅ **Zero Storage Cost** - Utilizing filesystem native mtime
+✅ **Efficient Checking** - 200 tokens vs 5000 tokens (96% savings)
+✅ **Scalability** - Supports batch file monitoring
+✅ **Persistence** - Maintains state between sessions
+✅ **Simple Implementation** - 3 lines of Bash for integration
 
-### 适用场景
-- 团队协作通知系统
-- 文件变更监控
-- 任务状态同步
-- 日志更新追踪
+### Applicable Scenarios
+- Team collaboration notification systems
+- File change monitoring
+- Task status synchronization
+- Log update tracking
 
-### 维护建议
-- 每月清理一次过期通知
-- 定期备份缓存文件
-- 监控mtime异常情况
-- 收集使用统计优化策略
+### Maintenance Recommendations
+- Clean expired notifications monthly
+- Regularly backup cache files
+- Monitor mtime anomaly situations
+- Collect usage statistics to optimize strategies
 
 ---
 
-**版本历史**:
-- v1.0.0 (2026-02-13): 初始版本，完整实现设计
+**Version History**:
+- v1.0.0 (2026-02-13): Initial version, complete implementation design
 
-**相关文档**:
-- `/shared/notifications.json` - 通知数据文件
-- `/shared/.notification_cache.json` - 缓存状态文件
-- 各AI的`CLAUDE.md` - 集成配置
+**Related Documentation**:
+- `/shared/notifications.json` - Notification data file
+- `/shared/.notification_cache.json` - Cache status file
+- Each AI's `CLAUDE.md` - Integration configuration
 
-**联系人**: 麦克斯 (Max) - 项目经理
+**Contact**: Max - Project Manager
