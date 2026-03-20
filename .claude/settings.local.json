@@ -1,3 +1,26 @@
 {
+  "permissions": {
+    "allow": [
+      "Bash(while read:*)",
+      "Bash(do grep:*)",
+      "Bash(done)",
+      "Bash(grep -r \"claude-\\\\|Opus\\\\|Sonnet\\\\|Haiku\" /Users/samhuang/dev/personal/agentGroup --include=\"*.sh\" --include=\"*.md\" ! -path \"*/.git/*\" ! -path \"*/node_modules/*\")",
+      "Bash(grep -r \"Haiku\\\\|Sonnet\\\\|Opus\" /Users/samhuang/dev/personal/agentGroup/*/CLAUDE.md)",
+      "Bash(find /Users/samhuang/dev/personal/agentGroup -type f -name *.json ! -path */.git/* ! -path */node_modules/* -exec grep -l \"model\\\\|claude\" {})",
+      "Bash(2)",
+      "Bash(grep -r claude- /Users/samhuang/dev/personal/agentGroup --include=*.json --include=*.yml --include=*.yaml ! -path */.git/* ! -path */node_modules/*)",
+      "Bash(grep -r \"20250514\\\\|20251101\\\\|4-5-\\\\|4-20\\\\|4\\\\.5\\\\|4\\\\.6\" /Users/samhuang/dev/personal/agentGroup --include=*.sh --include=*.md --include=*.txt ! -path */.git/* ! -path */node_modules/*)",
+      "Bash(grep -r \"claude-opus\\\\|claude-sonnet\\\\|claude-haiku\" /Users/samhuang/dev/personal/agentGroup --include=*.sh ! -path */.git/*)",
+      "Bash(xargs ls:*)",
+      "Bash(git checkout:*)",
+      "Bash(chmod:*)",
+      "Bash(./scripts/读取模型配置.sh 获取模型ID sonnet)",
+      "Bash(timeout 2 bash start-max.sh)",
+      "Bash(./scripts/生成CLAUDE文档.sh --price)",
+      "Bash(./scripts/生成CLAUDE文档.sh --status)",
+      "Bash(./scripts/验证模型配置.sh)",
+      "Bash(git add:*)"
+    ]
+  },
   "model": "claude-sonnet-4-20250514"
 }
