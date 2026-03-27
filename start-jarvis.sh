@@ -47,4 +47,4 @@ echo "=========================================="
 echo ""
 
 # 默认继承上次会话，如果没有历史则新建
-claude --model $MODEL -c 2>/dev/null || claude --model $MODEL
+claude --dangerously-skip-permissions --model $MODEL -c 2>/dev/null || claude --dangerously-skip-permissions --model $MODEL
